@@ -99,5 +99,5 @@ ENV/
 .idea/
 Apache-2.4_vhost.conf
 myshop/settings.py
-backup/
+backup
 
