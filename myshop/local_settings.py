@@ -155,7 +155,7 @@ STATICFILES_FINDERS = (
 CART_SESSION_ID = 'cart'
 
 # Paypal
-PAYPAL_RECEIVER_EMAIL = 'blazer-05@mail.ru'
+PAYPAL_RECEIVER_EMAIL = 'my_email@mail.ru'
 PAYPAL_TEST = True
 
 # Настройки почтового сервера
