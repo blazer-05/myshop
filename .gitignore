@@ -97,6 +97,6 @@ ENV/
 
 .gitignore
 .idea/
-.backup/
 Apache-2.4_vhost.conf
 myshop/settings.py
+
