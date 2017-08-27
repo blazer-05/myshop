@@ -1,0 +1,220 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ oplata_dostavka }}{% endblock %}
+
+{% block content %}
+
+<div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="faq.html">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+         <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="faq.html">Вопрос-Ответ</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+
+        <main  class="site-main" role="main">
+            <section id="shipping">
+            <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="{% url 'shop:oplata_dostavka' %}">/Оплата и доставка</a></li>
+                </ul>
+             </div>
+        <div class="content">
+            <div class="page-content">
+                <center><h1>Оплата и доставка</h1></center>
+                <div class="shipp-map">
+                <img src="{% static 'img/karta.png' %}" alt="" />
+                </div>
+                <div class="shiiping-wrap">
+                    <div class="ship-box">
+                        <div class="ship-box-img">
+                        <img src="{% static 'img/ship-box1.png' %}" alt=""/>
+                        </div>
+                        <div class="ship-box-title">
+                            <p>Оплачиваете ТОЛЬКО</p>
+                            <p>по факту доставки</p>
+                            <p>и осмотра изделия</p>
+                        </div>
+                        <div class="ship-box-desc">
+                            <p>Мы гарантируем, что Вы</p>
+                            <p>получите свой комплект!</p>
+                            <p>Это абсолютно безопасно!</p>
+                        </div>
+                    </div>
+                    <div class="ship-box">
+                        <div class="ship-box-img">
+                        <img src="{% static 'img/ship-map.png' %}" alt=""/>
+                        </div>
+                        <div class="ship-box-title">
+                            <p>Доставка по России</p>
+                            <p>и СНГ - от 250 руб.</p>
+                        </div>
+                        <div class="ship-box-desc">
+                            <p>Мы отправляем наши товары</p>
+                            <p>из г.Екатеринбург почтой России</p>
+                            <p>наложенным платежом или</p>
+                            <p>транспортной компанией</p>
+                        </div>
+                    </div>
+                    <div class="ship-box">
+                        <div class="ship-box-img">
+                        <img src="{% static 'img/ship-box2.png' %}" alt=""/>
+                        </div>
+                        <div class="ship-box-title">
+                            <p>Гарантия замены</p>
+                            <p>в экстренном случае</p>
+                        </div>
+                        <div class="ship-box-desc">
+                            <p>Что-то пошло не так? Вы всегда</p>
+                            <p>сможете прислать товар обратно</p>
+                            <p>для доработки или замены!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="shipping-desc-wrap">
+                <div class="shipping-desc-l">
+                <p>Желаете оплатить другим способом</p>
+                    <p>или Вам нужна консультация</p>
+                <p>по стоимости доставки?</p>
+                </div>
+                    <div class="shipping-desc-btn">
+                        <a href="#callbackwidget"><img src="{% static 'img/desc-bt.png' %}" alt="" /></a>
+                    </div>
+                  <div class="shipping-desc-r">
+                <p>Свяжитесь с нами, чтобы проконсультироваться</p>
+                <p>БЕСПЛАТНО по любым вопросам об заготовлении</p>
+                <p>и доставки Вашего конуса или комплекта:</p>
+                </div>
+                </div>
+                <h3>ВИНТОВЫЕ КОЛУНЫ ДЛЯ ДРОВ</h3>
+            </div>
+        </div>
+                </section>
+            <section class="comments">
+              <div class="cackle-comments">
+                <div id="mc-container"></div>
+                    <a id="mc-link" href="https://cackle.me">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a>
+               </div>
+     </section>
+        </main>
+
+
+{% endblock %}

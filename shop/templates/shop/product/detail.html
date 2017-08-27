@@ -1,0 +1,362 @@
+{% extends "shop/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+ {{ product.name }}
+{% endblock %}
+
+{% block content %}
+
+<div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+        <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger"class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+               </ul>
+
+              </nav>
+        </div>
+
+ <main  class="site-main" role="main">
+   <section class="single-block-id"><br>
+     <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/catalog/">/Каталог</a></li>
+                    <li><a href="{{ product.category.get_absolute_url }}">/{{ product.category }}</a></li>
+                </ul>
+             </div>
+     <div class="content">
+         <div  class="single-item-wrap">
+              <div class="item-gallery">
+              <a href="{{ product.image.url }}" class="gallery" rel="group" title="{{ product.name }}">
+                  <div class="item-thumb"><img id="mainImage" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" alt="" /></div>
+              </a>
+                  <ul class="item-slider">
+                        {% for albom in alboms %}
+              <a href="{{ albom.images.url }}" class="gallery" rel="group" title="{{ albom.name }}">
+                      <li><img src="{% if albom.images %}{{ albom.images.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" alt="" /></li>
+              </a>
+                    {% endfor %}
+                   </ul>
+                 </div>
+                <div class="item-info">
+                    <h1>{{ product.name }}</h1>
+              <div class="single-item-price">
+                 <div class="single-picelabel">
+                 <img src="{% static 'img/price-label.png' %}" alt=""/>
+                 <div class="single-price">
+                     {% if product.discount %}
+                    <span class="form-single-price-1"></span>
+                    <span class="form-single-price-2">{{ product.get_sale|floatformat }}</span>
+                    <span class="form-single-price-3"> руб.</span>
+                         {% else %}
+                    <span class="form-single-price-1"></span>
+                    <span class="form-single-price-2">{{ product.price|floatformat }}</span>
+                    <span class="form-single-price-3"> руб.</span>
+                     {% endif %}
+                     </div>
+                 </div>
+             </div>
+                <div class="single-video-wrap">
+                    <div class="video-item">
+                        <div class="item-video-inner">{% comment %} Ссылка на ютуб видео в админке должна быть https://www.youtube.com/embed/ozxiOF6trds {% endcomment %}
+                            {% if product.urlyoutube %}
+                            <iframe src="{{ product.urlyoutube }}" frameborder="0" type="application/x-shockwave-flash"  ></iframe>
+                                {% else %}
+                                <iframe src="https://www.youtube.com/embed/KCjybE9WWOY" frameborder="0" allowfullscreen></iframe>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+             <div class="single-item-more">
+              <div class="single-item-more-desc">
+                 <p>Вес - {{ product.massa }} кг</p>
+                 <p>Размеры (ДхШхВ)  - {{ product.netto }} см</p>
+                    {% if product.stock %}
+                 <p>Есть в наличии - {{ product.stock }} шт.</p>
+                        {% else %}
+                        <p>Нет в наличии</p>
+                    {% endif %}
+                  <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+                    {% csrf_token %}
+                    <p>{{ cart_product_form }}</p>
+                 </div>
+                 <div class="single-item-more-action">
+                    <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                 </div>
+                 </form>
+             </div>
+                </div>
+         </div>
+         <div class="item-desc">
+              <div class="item-desc-tabs">
+                                <ul>
+                                    <li>Описание</li>
+                                    <li>Дополнительная информация</li>
+                                </ul>
+                                    <div>
+                                        <div class="tab-content">
+                                          <p><span>{{ product.description | linebreaks}}</span></p>
+                                        </div>
+                                        <div class="tab-content">
+                                            <p>Здесь текст дополнительная информация</p>
+                                        </div>
+                                    </div>
+              </div>
+         </div>
+     </div>
+       </section>
+
+    <section class="comments">
+              <div class="cackle-comments">
+                <div id="mc-container"></div>
+                    <a id="mc-link" href="https://cackle.me">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a>
+               </div>
+     </section>
+
+     <section class="single-block-id"><br>
+         <h2>Другие наши товары</h2>
+                        <div class="katalog-grid">
+                            {% for product in top_five_products %}
+                            <div class="grid-item">
+                               <div class="item-thum">
+                                   <div class="more">
+                                       <a href="{{ product.get_absolute_url }}">Подробнее</a>
+                                   </div>
+                                    {% if product.discount %}
+                                   <div class="sale">
+                                   Скидка - {{ product.discount }}&#37{% comment %}{{ product.discount|floatformat }}₽{% endcomment %}
+                                   </div>
+                                    {% endif %}
+
+                                    {% if product.new %}
+                                   <div class="new">
+                                    Новый
+                                   </div>
+                                    {% endif %}
+
+                                    {% if product.vip %}
+                                   <div class="vip">
+                                    vip
+                                   </div>
+                                    {% endif %}
+
+                               <a href="{{ product.get_absolute_url }}">
+                                   <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" >
+                               </a>
+                               </div>
+                               <div class="item-title">
+                               {{ product.name }}
+                               </div>
+                               <div class="item-price">
+                                   <div class="picelabel">
+                                   <img src="{% static 'img/price-label.png' %}" alt=""/>
+                                   </div>
+                                   <div class="price price-sale">
+                                        {% if product.discount %}
+                                       <div class="old-price">
+                                             <span class="form-single-old-price-1"></span>
+                                             <span class="form-single-old-price-2"></span>
+                                             <span class="form-single-old-price-3"></span>
+                                       </div>
+                                        {% else %}
+                                       <div class="new-price">
+                                            <span class="form-single-new-price-1"></span>
+                                            <span class="form-single-new-price-2">{{ product.price|floatformat }}</span>
+                                            <span class="form-single-new-price-3">₽</span>
+                                       </div>
+                                        {% endif %}
+                                   </div>
+                                   <div class="price price-sale">
+                                       {% if product.discount %}
+                                       <div class="old-price">
+                                             <span class="form-single-old-price-1"></span>
+                                             <span class="form-single-old-price-2">{{ product.price|floatformat }}</span>
+                                             <span class="form-single-old-price-3">₽</span>
+                                       </div>
+
+                                       <div class="new-price">
+                                            <span class="form-single-new-price-1"></span>
+                                            <span class="form-single-new-price-2">{{ product.get_sale|floatformat }}</span>
+                                            <span class="form-single-new-price-3">₽</span>
+                                       </div>
+                                    {% endif %}
+                                   </div>
+                               </div>
+                            <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+                                    {% csrf_token %}
+                                <center>{{ cart_product_form }}</center>
+                                 <div class="item-action-btn">
+                                    <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                                 </div>
+                            </form>
+                            </div>
+                            {% endfor %}
+                        </div>
+     </section>
+   </main>
+
+
+{% endblock %}
+
+{% comment %}
+
+         <h2>Другие товары</h2>
+         <div class="katalog-grid">
+             <div class="grid-item">
+                               <div class="item-thum">
+                               <a href="katalog-item.html"><img src="{% static 'img/grid-home-1.jpg' %}" alt=""/></a>
+                               </div>
+                               <div class="item-title">
+                               Полный комплект
+                               </div>
+                               <div class="item-price">
+                                   <div class="picelabel">
+                                   <img src="{% static 'img/price-label.png' %}" alt=""/>
+                                   </div>
+                                   <div class="price"><span class="red">5257</span> руб</div>
+                                    </div>
+                               <div class="item-action-btn">
+                               <img src="{% static 'img/item-action-btn.png' %}" alt=""/>
+                               </div>
+
+                            </div>
+
+         </div>
+
+  <div class="product-detail">
+    <div class="col-sm-4">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" class="img-responsive">
+    </div>
+    <div class="col-sm-8">
+      <h1>{{ product.name }}</h1>
+      <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+      <p class="price">{{ product.price }} руб.</p>
+      <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Добавить в корзину">
+      </form>
+      <span>{{ product.description | linebreaks}}</span>
+    </div>
+  </div>
+
+{% endcomment %}
+
+

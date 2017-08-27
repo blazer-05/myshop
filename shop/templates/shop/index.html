@@ -1,0 +1,502 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+
+        <section id="home-top">
+            <header>
+                <div class="header-wrap-main">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                             </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                      </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}" >
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </header>
+        <div class="monitor-1">
+            <h1>КОНУС-КОЛУН</h1>
+            <h2>ДЛЯ ВИНТОВОГО ДРОВОКОЛА</h2>
+            <div class="home-desc">
+               <p> доставка в любой дом почтой России наложеным платежом или транспортной         компанией,<br> оплата при получении после осмотра содержимого посылки.<br> Доставка от 250 рублей
+                </p>
+                </div>
+            <div class="monitor-1-wrap">
+                <div class="mt_1_left">
+                    <div class="mt1-img-top">
+                    <div class="mt1-img-desc">Колите дрова легко и быстро,
+                        экономьте время и силы!</div>
+                    <div class="mt2-img-desc">Оптимальные размеры,
+                        шаг и глубина резьбы</div>
+                    <div class="mt3-img-desc">Сталь повышенной твердости!
+                        Российское производство!</div>
+                    </div>
+                    <div class="mt1-img-bootm">
+                    <p>ЕДИНСТВЕННЫЙ ПРОИЗВОДИТЕЛЬ
+                        КОНУСА ДЛЯ ДРОВОКОЛА
+                        С ДВУХЗАХОДНОЙ РЕЗЬБОЙ</p>
+                        <p class="more">УЗНАЙТЕ БОЛЬШЕ</p>
+                        <p class="more-img"><img src="{% static 'img/mouse-down.png' %}" alt=""/></p>
+                    </div>
+                </div>
+                <div class="mt_1_right">
+                    <div class="mt1-form">
+                    <p class="form-desc">
+                        Закажите конус</p>
+                    <p class="form-desc">для лёгкой колки дров</p>
+                    <p class="form-desc">по цене всего</p>
+                    <p class="form-desc-price">
+                        <span class="form-desc-price-1">2</span>
+                        <span class="form-desc-price-2">450</span>
+                        <span class="form-desc-price-3"> руб.</span>
+                    </p>
+                        <div class="action-btn"><img src="{% static 'img/send-req.png' %}" alt=""></div>
+                    </div>
+                    <div class="mt1-phone">
+                    <p>Или закажите по телефону:</p>
+                    <p> 8 922 035 28 87</p>
+                    </div>
+                </div>
+             </div>
+            </div>
+            </section>
+         <section id="home-top-m">
+             <header>
+             <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                    <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+
+              </nav>
+                 <div class="monotor-1-m">
+                 <h1>КОНУС-КОЛУН</h1>
+                 <h2>ДЛЯ ВИНТОВОГО ДРОВОКОЛА</h2>
+                    <div class="home-desc">
+                    <p> доставка в любой дом почтой России наложеным платежом или транспортной         компанией,<br> оплата при получении после осмотра содержимого посылки.<br> Доставка от 250 рублей
+                </p>
+                </div>
+
+                 <div class="monitor-m-wrap">
+                <div class="monitor-m-top">
+                    <div class="mt1-top-wrap">
+                        <div class="mt1-m-img">
+                        <img src="{% static 'img/faq-img-1.png' %}" alt="" />
+                        </div>
+                    <div class="mt1-top">Колите дрова легко и быстро,
+                        экономьте время и силы!</div>
+                    <div class="mt1-top">Оптимальные размеры,
+                        шаг и глубина резьбы</div>
+                    <div class="mt1-top">Сталь повышенной твердости!
+                        Российское производство!</div>
+                    </div>
+
+                </div>
+                <div class="mt_m_right">
+                    <div class="mt1-form">
+                    <p class="form-desc">
+                        Закажите конус</p>
+                    <p class="form-desc">для лёгкой колки дров</p>
+                    <p class="form-desc">по цене всего</p>
+                    <p class="form-desc-price">
+                        <span class="form-desc-price-1">2</span>
+                        <span class="form-desc-price-2">450</span>
+                        <span class="form-desc-price-3"> руб.</span>
+                    </p>
+                        <div class="action-btn"><img src="{% static 'img/send-req.png' %}" alt=""></div>
+                    </div>
+                    <div class="mt1-phone">
+                    <p>Или закажите по телефону:</p>
+                    <p> 8 922 035 28 87</p>
+                    </div>
+                </div>
+             </div>
+                 </div>
+        </div>
+             </header>
+         </section>
+            <section id="our-partner">
+                <h4>Наши клиенты говорят нам, что колоть дрова теперь</h4>
+                <h2>в 10 раз быстрее и в 100 раз легче!</h2>
+                <div class="preimushestva-wrap-top">
+                 <div class="preimushestva-block">
+                     <div class="preimushestva-icon">
+                     <img src="{% static 'img/p-1.png' %}" alt=""/>
+                     </div>
+                     <div class="preimushestva-title">
+                         Работает быстро
+                     </div>
+                     <div class="preimushestva-desc">
+                         <p>Экономит Ваше время,</p>
+                         <p>которые Вы тратите на колку дров.</p>
+                         <p>Вы ещё никогда не кололи</p>
+                         <p>дрова так быстро!</p>
+                     </div>
+                    </div>
+                    <div class="preimushestva-block">
+                     <div class="preimushestva-icon">
+                     <img src="{% static 'img/p-2.png' %}" alt=""/>
+                     </div>
+                     <div class="preimushestva-title">
+                         Сохраняет здоровье
+                     </div>
+                     <div class="preimushestva-desc">
+                         <p>Болит спина от топора? </p>
+                         <p>Нет сил и опускаются руки?</p>
+                         <p> Сохраните здоровье и хорошее </p>
+                         <p>настроение, ведь Вам больше</p>
+                         <p>не придётся прикладывать</p>
+                         <p>массу усилий, всё легко!</p>
+                     </div>
+                    </div>
+                    <div class="preimushestva-block">
+                     <div class="preimushestva-icon">
+                     <img src="{% static 'img/p-3.png' %}" alt=""/>
+                     </div>
+                     <div class="preimushestva-title">
+                         Колет чурбаки и плахи
+                     </div>
+                     <div class="preimushestva-desc">
+                         <p>По 60 см и больше!</p>
+                         <p>То, что Вы не могли быстро</p>
+                         <p>расколоть топором, теперь</p>
+                         <p>делается за считанные минуты!</p>
+                     </div>
+                    </div>
+                </div>
+                <div class="preimushestva-wrap-bottom">
+                    <div class="preimushestva-block">
+                     <div class="preimushestva-icon">
+                     <img src="{% static 'img/p-4.png' %}" alt=""/>
+                     </div>
+                     <div class="preimushestva-title">
+                         Очень быстрая окупаемость
+                     </div>
+                     <div class="preimushestva-desc">
+                         <p>Окупится уже после</p>
+                         <p>первой колки дров!</p>
+                         <p>Автоматизируйте и ускорьте</p>
+                         <p>процесс заготовки дров!
+                     </div>
+                    </div>
+                    <div class="preimushestva-block">
+                     <div class="preimushestva-icon">
+                     <img src="{% static 'img/p-5.png' %}" alt=""/>
+                     </div>
+                     <div class="preimushestva-title">
+                         Прослужит долго
+                     </div>
+                     <div class="preimushestva-desc">
+                         <p>В отличии от топоров</p>
+                         <p>и даже других колунов</p>
+                         <p>наш прослужит десятилетия </p>
+                         <p>и окупится моментально!</p>
+                     </div>
+                    </div>
+
+                </div>
+
+
+            </section>
+            <section id="video">
+                <h3>УБЕДИТЕСЬ, ЧТО КОЛОТЬ ДРОВА<br>
+                    <p>С ПОМОЩЬЮ КОНУСА - БЫСТРО И УДОБНО:</p></h3>
+
+                <div class="video-wrap">
+                    <div class="video-inner">
+                        <iframe width="567" height="425" src="https://www.youtube.com/embed/a0yzUmGoN6s" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                </div>
+                <div class="video-btn-wrap">
+                 <div class="video-btn-l"><img src="{% static 'img/video-btn-char.png' %}" alt="" /></div>
+                 <div class="video-btn-r"><a href="/catalog/komplekty/"><img src="{% static 'img/video-btn-choose.png' %}" alt="" /></a></div>
+                </div>
+            </section>
+            <section id="techical-char">
+                <h3>ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</h3>
+                <div class="th-wrap">
+                  <div class="th-block">
+
+                       <div class="th-block-img">
+                       <div class="arrows-size">
+                          <img src="{% static 'img/arrows-size.png' %}" alt="" />
+                          </div>
+                          <div class="drovokol-img">
+                          <img src="{% static 'img/kolun2.png' %}" alt="" />
+                          </div>
+                            </div>
+
+                    </div>
+                  <div class="th-block">
+                      <div class="th-block-right">
+                      <div class="th-desc-1">
+                          <p>Двухзаходная левая упорная резьба</p>
+                          <p> (по вашему заданию, изготовим правую)</p>
+                          <p class="pd20">шаг резьбы 5 мм, глубина резьбы 3 мм</p>
+                          <div class="th-line-1"><img src="{% static 'img/th-line-2.png' %}" alt=""></div>
+                        </div>
+                      <div class="th-desc-2">
+                           <p>Оптимальный наружный диаметр 75 мм,</p>
+                           <p>длина 300 мм (легко колет 60 см чурбаки и более)</p>
+                           <p class="pd20">длина резьбовой части 230 мм</p>
+                           <div class="th-line-2"><img src="{% static 'img/th-line-1.png' %}" alt=""></div>
+                        </div>
+                      <div class="th-desc-3">
+                          <div class="th-more">Узнай <a href="#">ЗДЕСЬ</a>, чем отличается</div>
+                          <div class="th-more-desc">двухзаходная резьба от однозаходной обыкновенной</div>
+                        </div>
+                      <div class="th-desc-4">
+                          <p>Внутреннее посадочное отверстие в колуне</p>
+                          <p>сделаем по размерам вашего вала</p>
+                          <p class="pd20">стандартное отверстие 30 мм</p>
+                          <div class="th-line-3"><img src="{% static 'img/th-line-3.png' %}" alt=""></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="home-photo-wrap">
+                    <div class="photo-text">
+                        <div class="photo-text-row">
+                            <div class="hand-up">
+                            <img src="{% static 'img/hand-up.png' %}" alt="" />
+                            </div>
+                            <div class="photo-text-content">
+                                <p>Выполнено из стали СТ 40Х</p>
+                                <p>повышенной твёрдости</p>
+                            </div>
+                        </div>
+                        <div class="photo-text-row">
+                            <div class="hand-up">
+                            <img src="{% static 'img/hand-up.png' %}" alt="" />
+                            </div>
+                            <div class="photo-text-content">
+                                <p>Кончик колуна</p>
+                                <p><span class="bold">двухзаходный</span> (отлично цепляет)</p>
+                                <p>и термообработан (подкален)</p>
+                            </div>
+                        </div>
+                        <div class="photo-text-row">
+                            <div class="hand-up">
+                            <img src="{% static 'img/hand-up.png' %}" alt="" />
+                            </div>
+                            <div class="photo-text-content">
+                                <p>Производится в Екатеринбурге</p>
+                                <p>на заводе "УЗХР-ЕОЦМ"</p>
+                                <p><a href="https://www.google.ru/maps/place/%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D1%80%D0%BE%D1%81%D0%BF.,+131,+%D0%92%D0%B5%D1%80%D1%85%D0%BD%D1%8F%D1%8F+%D0%9F%D1%8B%D1%88%D0%BC%D0%B0,+%D0%A1%D0%B2%D0%B5%D1%80%D0%B4%D0%BB%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB.,+624090/@56.9776148,60.5567689,17z/data=!3m1!4b1!4m5!3m4!1s0x43c173800e94cfcd:0xa9f07b31fdfab90f!8m2!3d56.9776148!4d60.5589576"><span class="bold">смотреть на карте</span></a></p>
+                            </div>
+                        </div>
+                        <div class="photo-text-row">
+                            <div class="hand-up">
+                            <img src="{% static 'img/hand-up.png' %}" alt="" />
+                            </div>
+                            <div class="photo-text-content">
+                                <p>Доставка по всей России и СНГ</p>
+                                <p>в среднем 3-10 дней,</p>
+                                <p>250-750 рублей</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="home-slider">
+                        <h4>Товары:</h4>
+                       <!-- Set up your HTML -->
+                        <div class="owl-carousel owl-theme">
+                            {% for product in products %}
+                            <div class="grid-item">
+                               <div class="item-thum">
+                                   <div class="more">
+                                       <a href="{{ product.get_absolute_url }}">Подробнее</a>
+                                   </div>
+                                    {% if product.discount %}
+                                   <div class="sale">
+                                   Скидка - {{ product.discount }}&#37{% comment %}{{ product.discount|floatformat }}₽{% endcomment %}
+                                   </div>
+                                    {% endif %}
+
+                                    {% if product.new %}
+                                   <div class="new">
+                                    Новый
+                                   </div>
+                                    {% endif %}
+
+                                    {% if product.vip %}
+                                   <div class="vip">
+                                    vip
+                                   </div>
+                                    {% endif %}
+
+                               <a href="{{ product.get_absolute_url }}">
+                                   <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" >
+                               </a>
+                               </div>
+                               <div class="item-title">
+                               {{ product.name }}
+                               </div>
+                               <div class="item-price">
+                                   <div class="picelabel">
+                                   <img src="{% static 'img/price-label.png' %}" alt=""/>
+                                   </div>
+                                   <div class="price price-sale">
+                                        {% if product.discount %}
+                                       <div class="old-price">
+                                             <span class="form-single-old-price-1"></span>
+                                             <span class="form-single-old-price-2"></span>
+                                             <span class="form-single-old-price-3"></span>
+                                       </div>
+                                        {% else %}
+                                       <div class="new-price">
+                                            <span class="form-single-new-price-1"></span>
+                                            <span class="form-single-new-price-2">{{ product.price|floatformat }}</span>
+                                            <span class="form-single-new-price-3">₽</span>
+                                       </div>
+                                        {% endif %}
+                                   </div>
+                                   <div class="price price-sale">
+                                       {% if product.discount %}
+                                       <div class="old-price">
+                                             <span class="form-single-old-price-1"></span>
+                                             <span class="form-single-old-price-2">{{ product.price|floatformat }}</span>
+                                             <span class="form-single-old-price-3">₽</span>
+                                       </div>
+
+                                       <div class="new-price">
+                                            <span class="form-single-new-price-1"></span>
+                                            <span class="form-single-new-price-2">{{ product.get_sale|floatformat }}</span>
+                                            <span class="form-single-new-price-3">₽</span>
+                                       </div>
+                                    {% endif %}
+                                   </div>
+                               </div>
+                            <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+                                    {% csrf_token %}
+                                <center>{{ cart_product_form }}</center>
+                                 <div class="item-action-btn">
+                                    <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                                 </div>
+                            </form>
+                            </div>
+                            {% endfor %}
+                        <!-- Set up your HTML -->
+                        </div>
+                    </div>
+                </div>
+              </section>
+        <section class="comments">
+              <div class="cackle-comments">
+                <div id="mc-container"></div>
+                    <a id="mc-link" href="https://cackle.me">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a>
+               </div>
+     </section>
+
+
+
+
+{% endblock %}

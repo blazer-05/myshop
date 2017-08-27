@@ -1,0 +1,181 @@
+{% extends "shop/base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}
+  Спасибо за заказ
+{% endblock %}
+
+{% block content %}
+
+           <div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                        Корзина пустая
+                        </div>
+                    </div>
+           </div>
+            <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                        Корзина
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+ <main  class="site-main" role="main">
+     <section class="order-start">
+         <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/order/create/">/Заказ принят</a></li>
+
+                </ul>
+             </div>
+             <div class="content">
+                    <div class="page-content katalog-order-result">
+{#                        <h1>Заказ принят</h1>#}
+                        <h2>Спасибо. Ваш заказ принят</h2>
+                        <h3>Мы свяжемся с Вам в блжайщее время</h3>
+                        <div class="order-result-info">
+                            <div class="order-detail">
+                                <p>Номер заказа</p>
+                                <p>ID {{ order.id }}</p>
+                            </div>
+                            <div class="order-detail">
+                                <p>Дата</p>
+                                <p>{{ order.created }}</p>
+                            </div>
+                            <div class="order-detail">
+                                <p>Всего</p>
+                                <p>{{ cart.get_total_price|floatformat }}</p>
+                            </div>
+                            <div class="order-detail">
+                                <p>Способ оплаты</p>
+                                <p>Перевод на карту</p>
+                            </div>
+                        </div>
+                        <table class="order-desc" cellspacing="0" cellpadding="0">
+                             <thead>
+                             <tr><th>Товар</th><th>Итого</th></tr>
+                             </thead>
+                             <tbody>
+                             {% for item in cart  %}
+                             <tr><td>{{ item.product.name }}</td><td>{{ item.total_price|floatformat }} руб</td></tr>
+                             {% endfor %}
+                             </tbody>
+                         </table>
+                 </div>
+             </div>
+     </section>
+        </main>
+
+<script type="text/javascript">
+setTimeout('location.replace("/")', 10000);
+/*Изменить текущий адрес страницы через 3 секунды (3000 миллисекунд)*/
+</script>
+
+{% endblock %}
+
+
+
+
+{% comment %}
+
+
+<script type="text/javascript">
+setTimeout('location.replace("/")', 3000);
+/*Изменить текущий адрес страницы через 3 секунды (3000 миллисекунд)*/
+</script>
+
+{% endcomment %}

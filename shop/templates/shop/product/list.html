@@ -1,0 +1,392 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Каталог товаров {% endif %}
+{% endblock %}
+
+{% block content %}
+
+                <div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+         <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+
+        <main  class="site-main" role="main">
+            <section id="katalog">
+                <div class="pagination">
+                    <ul id="paginate">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/catalog/">/Каталог</a></li>
+                        <li><a href="">/{{ category.name }}</a></li>
+                    </ul>
+                 </div>
+                <br>
+                <div class="content">
+                    <div class="page-content katalog">
+                        {% if category %}
+                            <h1>{{ category.name }}</h1>
+                        {% else %}
+                            <h1>Каталог наших товаров</h1><br>
+                                <div class="katalog-desc">
+                                    {% for cat in desc %}
+                                        {{ cat.desc_catalog }}
+                                    {% endfor %}
+                                </div>
+                        {% endif %}
+                        <br>
+                        <div class="katalog-desc">
+                        {% if category %}
+                            {{ category.description }}
+                        {% endif %}
+                        </div>
+
+                        <div class="katalog-grid">
+                            {% for product in products %}
+                            <div class="grid-item">
+                               <div class="item-thum">
+                                   <div class="more">
+                                       <a href="{{ product.get_absolute_url }}">Подробнее</a>
+                                   </div>
+                                    {% if product.discount %}
+                                   <div class="sale">
+                                   Скидка - {{ product.discount }}&#37{% comment %}{{ product.discount|floatformat }}₽{% endcomment %}
+                                   </div>
+                                    {% endif %}
+
+                                    {% if product.new %}
+                                   <div class="new">
+                                    Новый
+                                   </div>
+                                    {% endif %}
+
+                                    {% if product.vip %}
+                                   <div class="vip">
+                                    vip
+                                   </div>
+                                    {% endif %}
+
+                               <a href="{{ product.get_absolute_url }}">
+                                   <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" >
+                               </a>
+                               </div>
+                               <div class="item-title">
+                               {{ product.name }}
+                               </div>
+                               <div class="item-price">
+                                   <div class="picelabel">
+                                   <img src="{% static 'img/price-label.png' %}" alt=""/>
+                                   </div>
+                                   <div class="price price-sale">
+                                        {% if product.discount %}
+                                       <div class="old-price">
+                                             <span class="form-single-old-price-1"></span>
+                                             <span class="form-single-old-price-2"></span>
+                                             <span class="form-single-old-price-3"></span>
+                                       </div>
+                                        {% else %}
+                                       <div class="new-price">
+                                            <span class="form-single-new-price-1"></span>
+                                            <span class="form-single-new-price-2">{{ product.price|floatformat }}</span>
+                                            <span class="form-single-new-price-3">₽</span>
+                                       </div>
+                                        {% endif %}
+                                   </div>
+                                   <div class="price price-sale">
+                                       {% if product.discount %}
+                                       <div class="old-price">
+                                             <span class="form-single-old-price-1"></span>
+                                             <span class="form-single-old-price-2">{{ product.price|floatformat }}</span>
+                                             <span class="form-single-old-price-3">₽</span>
+                                       </div>
+
+                                       <div class="new-price">
+                                            <span class="form-single-new-price-1"></span>
+                                            <span class="form-single-new-price-2">{{ product.get_sale|floatformat }}</span>
+                                            <span class="form-single-new-price-3">₽</span>
+                                       </div>
+                                    {% endif %}
+                                   </div>
+                               </div>
+                            <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+                                    {% csrf_token %}
+                                <center>{{ cart_product_form }}</center>
+                                 <div class="item-action-btn">
+                                    <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                                 </div>
+                            </form>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            <section class="pagination-wrap">
+
+            {% if products.has_other_pages %}
+                  <ul class="pagination">
+                    {% if products.has_previous %}
+                      <li><a href="?page={{ products.previous_page_number }}">&laquo;Назад</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in products.paginator.page_range %}
+                      {% if products.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                      <li><a href="?page={{ products.next_page_number }}">&raquo;Вперед</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+            {% endif %}
+
+            </section>
+            <section class="comments">
+              <div class="cackle-comments">
+                <div id="mc-container"></div>
+                    <a id="mc-link" href="https://cackle.me">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a>
+               </div>
+             </section>
+                <section id="shipping">
+            <div class="content">
+            <div class="page-content">
+                <h2>О доставке и оплате</h2>
+                <div class="shipp-map">
+                <img src="{% static 'img/karta.png' %}" alt="" />
+                </div>
+                <div class="shiiping-wrap">
+                    <div class="ship-box">
+                        <div class="ship-box-img">
+                        <img src="{% static 'img/ship-box1.png' %}" alt=""/>
+                        </div>
+                        <div class="ship-box-title">
+                            <p>Оплачиваете ТОЛЬКО</p>
+                            <p>по факту доставки</p>
+                            <p>и осмотра изделия</p>
+                        </div>
+                        <div class="ship-box-desc">
+                            <p>Мы гарантируем, что Вы</p>
+                            <p>получите свой комплект!</p>
+                            <p>Это абсолютно безопасно!</p>
+                        </div>
+                    </div>
+                    <div class="ship-box">
+                        <div class="ship-box-img">
+                        <img src="{% static 'img/ship-map.png' %}" alt=""/>
+                        </div>
+                        <div class="ship-box-title">
+                            <p>Доставка по России</p>
+                            <p>и СНГ - от 250 руб.</p>
+                        </div>
+                        <div class="ship-box-desc">
+                            <p>Мы отправляем наши товары</p>
+                            <p>из г.Екатеринбург почтой России</p>
+                            <p>наложенным платежом или</p>
+                            <p>транспортной компанией</p>
+                        </div>
+                    </div>
+                    <div class="ship-box">
+                        <div class="ship-box-img">
+                        <img src="{% static 'img/ship-box2.png' %}" alt=""/>
+                        </div>
+                        <div class="ship-box-title">
+                            <p>Гарантия замены</p>
+                            <p>в экстренном случае</p>
+                        </div>
+                        <div class="ship-box-desc">
+                            <p>Что-то пошло не так? Вы всегда</p>
+                            <p>сможете прислать товар обратно</p>
+                            <p>для доработки или замены!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="shipping-desc-wrap">
+                <div class="shipping-desc-l">
+                <p>Желаете оплатить другим способом</p>
+                    <p>или Вам нужна консультация</p>
+                <p>по стоимости доставки?</p>
+                </div>
+                    <div class="shipping-desc-btn">
+                        <a href="#callbackwidget"><img src="{% static 'img/desc-bt.png' %}" alt="" /></a>
+                    </div>
+                  <div class="shipping-desc-r">
+                <p>Свяжитесь с нами, чтобы проконсультироваться</p>
+                <p>БЕСПЛАТНО по любым вопросам об заготовлении</p>
+                <p>и доставки Вашего конуса или комплекта:</p>
+                </div>
+                </div>
+                <h3>ВИНТОВЫЕ КОЛУНЫ ДЛЯ ДРОВ</h3>
+            </div>
+        </div>
+                </section>
+        </main>
+
+
+
+{% endblock %}
+
+{% comment %}
+
+<div class="katalog-grid">
+                            {% for product in products %}
+                           <div class="grid-item">
+                               <div class="item-thum">
+                                   <div class="more">
+                                       <a href="{{ product.get_absolute_url }}">Подробнее</a>
+                                   </div>
+                                   <div class="sale">
+                                   Скидка 50%
+                                   </div>
+                                   <div class="new">
+                                    Новый
+                                   </div>
+                               <a href="{{ product.get_absolute_url }}">
+                                   <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" height="150" width="150" class="img-responsive">
+                               </a>
+                               </div>
+                               <div class="item-title">
+                                {{ product.name }}
+                               </div>
+                               <div class="item-price">
+                                   <div class="picelabel">
+                                   <img src="{% static 'img/price-label.png' %}" alt=""/>
+                                   </div>
+                                   <div class="price">
+{#                                     <span class="form-single-price-1">2</span>#}
+                                     <span class="form-single-price-2">{{ product.price|floatformat }}</span>
+                                     <span class="form-single-price-3">₽</span>
+                                   </div>
+                                    </div>
+                               <div class="item-action-btn">
+                                   <a href="katalog-item.html"><img src="{% static 'img/item-action-btn.png' %}" alt=""/></a>
+                               </div>
+
+                            </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+
+{% endcomment %}

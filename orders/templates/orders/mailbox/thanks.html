@@ -1,0 +1,21 @@
+
+{% load staticfiles %}
+
+{% block title %} Заказ принят {% endblock %}
+
+{% block thanks %}
+
+    <div align="center">
+<style type="text/css">
+body {
+    background: #22BFF7 url({% static 'img/zakaz.jpg' %})top 250px center no-repeat;
+
+}
+</style>
+<script type="text/javascript">
+setTimeout('location.replace("/")', 3000);
+/*Изменить текущий адрес страницы через 3 секунды (3000 миллисекунд)*/
+</script>
+</div>
+
+{% endblock %}

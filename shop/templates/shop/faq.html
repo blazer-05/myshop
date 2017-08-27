@@ -1,0 +1,334 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ fag }}{% endblock %}
+
+{% block content %}
+
+<div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+         <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+
+<main  class="site-main" role="main">
+   <section id="faq-block">
+     <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="{% url 'shop:faq' %}">/Вопрос - Ответ</a></li>
+                </ul>
+             </div>
+     <div class="content">
+         <h1>ОЗНАКОМЬТЕСЬ С ПОЛЕЗНОЙ ИНФОРМАЦИЕЙ:</h1>
+         <h2>Что необходимо для установки и использования винтового дровокола
+                и другие ответы на Ваши вопросы.</h2>
+                <div class="faq-content">
+                    <h3>ДЛЯ ЗАГОТОВКИ ДРОВ ВИНТОВЫМ ДРОВОКОЛОМ "МОРКОВКОЙ"<br>
+                     НЕОБХОДИМО:</h3>
+
+
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="show">
+<div class="acc-img" style="background-position-x: 1px; background-color: rgb(233, 102, 86);"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">1. Какой нужен двигатель?</div>
+</div>
+<div class="acc-faq-block-text" style="display: block">
+    <p>1. <span class="fag-bold">Двигатель желателен</span> не менее 2 кВт или более.</p>
+    </div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-color: rgb(188, 9, 9); background-position-x: -24px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: -24px;">2. Какие должны быть обороты двигателя?</div>
+</div>
+<div class="acc-faq-block-text">
+ <p>2. <span class="fag-bold">Обороты двигателя</span> не критичны, рекомендуются  в диапазоне от 300 до 1000 оборотов в минуту. Обороты можно снизить и увеличить (крутящий момент - "силу вкручивания") установкой шкивов маховиков.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-color: rgb(233, 102, 86); background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">3. Как закрепить двигатель?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>3. <span class="fag-bold">Плоскость для закрепления двигателя</span> с конусом морковкой посмотрите на наших видео. Можно просто использовать лист металла и работать подкатывая чурбаки к колуну, либо использовать любой подходящий стол или даже широкую доску дюймовку.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">4. Какой должен быть диаметр двигателя?</div>
+</div>
+<div class="acc-faq-block-text" >
+ <p>4. <span class="fag-bold">Для заказа требуется замерить</span> диаметр двигателя  вала и сообщить нам  Мы изготовим посадочное отверстие в колуне под нужный диаметр, если не имеем требуемого в наличии. Или в ведущем шкиве при заказе комплекта на шкивах.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">5. На сколько хватает колуна?</div>
+</div>
+<div class="acc-faq-block-text" >
+  <p>5. <span class="fag-bold">Колуна хватает</span> на 250-300 кубов дров сырой древесины.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">6. Как повысить производительность?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>6. <span class="fag-bold">Если заказать дровокол на шкивах</span> из наших комплектующих, то у вас увеличится крутящий момент и, за счёт этого,   вырастет производительность и скорость заготовки дров.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">7. В чем плюс колуна с резьбой?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>7. <span class="fag-bold">Основные плюсы двухзаходной резьбы:</span> не нужно толкать и упираться в чурабак, со всей мощи при насаживании чурбака на винтовой колун как например при использовании однозаходной. Нужно только подносить к кончику и забирать плахи и поленья! Это прекрасно демонстрируют наши видео! Посмотрите!</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">8. Какие подшипники используются?</div>
+</div>
+<div class="acc-faq-block-text" >
+  <p>8. В наших комплектах применяются только <span class="fag-bold">высококачественные, импортного производства, самоцентрирующиеся подшипники на лапах</span>, с пресс-масленками (тавотницы) для смазки подшипников. Мы даём также гарантию на год с начала эксплуатации.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">9. Какой шкив использовать?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>9. <span class="fag-bold">При использовании двухзаходной резьбы на винтовом колуне для увеличения крутящего момента</span> достаточно шкива диаметром 250 мм - наши эсперименты показали , что диаметр  более 250 мм ведет к дисбалансу и последующей поломке любых самых крепких подшипников  и не оправданному удорожанию всей конструкции. Двухзаходная резьба не коим образом не увеличивает шаг резьбы и не требует более мощного мотора.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">10. Какая используется сталь?</div>
+</div>
+<div class="acc-faq-block-text" >
+ <p>10. Мы применяем <span class="fag-bold">только высококачественную сталь особой твердости 40X</span> и термообратываем кончик носик колуна на ТВЧ установке.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">11. Какой оптимальный размер колуна?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>11.Опытным путем и зарубежным опытом десятилетий доказано, что <span class="fag-bold">оптимальный диаметр колуна</span> 70-75 мм при мощности привода  от 2 кВт до 7 кВт и длиной 30 см, что позволяет колоть чурбаки 60 см и более. Большие диаметры 80мм и 100 мм и даже 120 мм целесообразно применять на мощностях 7 кВт и более или на валу отбора мощности ВОМ трактора.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">12. Где находится ваше предприятие?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>12. <span class="fag-bold">Наше предприятие базируется</span> на мощностях завода ЕОЦМ УЗХР. Вся металлопродукция изготавливается на высокоточном металлообрабатывающем оборудовании, наши станки управляются компьютером ЧПУ. Изделия - заводского качества и серийны, т.е одинаковы.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">13. Как просто заказать колун?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>13. <span class="fag-bold">Для заказа достаточно просто позвонить 8 922 035 28 87 КРУГЛОСУТОЧНО</span> и сообщить необходимый диаметр посадочного отверстия либо в колуне, либо в маленьком ведущем шкиве при заказе комплекта. и ваш адрес доставки.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">14. Как происходит отправка товара?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p>14. <span class="fag-bold">Мы отправляем колуны (5 кг) и комплекты от 10 до 25 кг</span> в крупные города транспортной компанией DPD.RU, оплата за колун при получении посылки и после осмотра содержимого посылки. Стоимость доставки от 250 руб. Если у вас небольшой населенный пункт, то Почтой России наложенным платежом, оплата также при получении посылки.</p>
+</div>
+</div>
+<div class="acc-faq-block">
+<div class="acc-faq-block-title" rel="hide">
+<div class="acc-img" style="background-position-x: 1px;"></div>
+<div class="acc-faq-block-title-text" style="background-position-x: 1px;">15. После отправки товара вы даете трек код?</div>
+</div>
+<div class="acc-faq-block-text" >
+<p><span class="fag-bold">После отправки вы получите трек (номер посылки)</span> для отслеживания нахождения на сайте почты России или транспортной компании.</p>
+    </div>
+</div>
+
+
+
+
+
+                    <p>Важно: <span class="fag-bold">при поломке носика кончика дровокола</span> при использовании однозаходной резьбы колун не пригоден к дальнейшей эксплуатации. Зато двухзаходная резьба при обломе кончика пригодна к восстановлению, необходимо лишь заточить две ленты резьбы (как у сверла) и продолжить эксплуатацию дровокола.</p>
+
+                    <div class="faq-img-wrap">
+                        <div class="faq-img">
+                            <img src="{% static 'img/faq-img-1.png' %}" alt=""/>
+                        </div>
+                        <div class="faq-img">
+                            <img src="{% static 'img/faq-img-2.png' %}" alt=""/>
+                        </div>
+                    </div>
+
+
+
+
+                    </div>
+
+
+
+
+
+             <div class="youtube-box">
+                <div class="yotube-text">
+                    Еще больше отзывов на нашем канале:
+                </div>
+                <div class="youtube-btn">
+                 <a href="https://www.youtube.com/channel/UCI9rBB6TUHE-XZ_elwOi-cg" target="_blank"><img src="{% static 'img/yotube-btn.png' %}" alt="" /></a>
+                </div>
+            </div>
+            <div class="social-box">
+                <div class="social-text">
+                    Мы в социальных сетях:
+                </div>
+                <div class="social-list" id="social">
+                   <ul class="social-icons">
+                      <li><a href="https://vk.com/odrova8" title="Вконтакте" target="_blank"><img src="{% static 'img/soc-i-vk.png' %}" alt=""/></a></li>
+                      <li><a href="https://www.facebook.com/groups/132544753956741/" title="Фейсбук" target="_blank"><img src="{% static 'img/soc-i-fac.png' %}" alt=""/></a></li>
+                      <li><a href="https://m.ok.ru/group/53238553706648" title="Одноклассники" target="_blank"><img src="{% static 'img/soc-i-ok.png' %}" alt=""/></a></li>
+                    </ul>
+                </div>
+            </div>
+           </div>
+     </section>
+    </main>
+
+
+{% endblock %}

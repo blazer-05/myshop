@@ -1,0 +1,258 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{#<link rel="stylesheet" id='style-css' href="{% static "css/bootstrap.min.css" %}">#}
+
+{% block title %}
+  Ваша корзина товаров
+{% endblock %}
+
+{% block content %}
+
+                <div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger"class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+               </ul>
+
+              </nav>
+        </div>
+
+ <main  class="site-main" role="main">
+     <section class="order-start">
+         <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/cart/">/Корзина</a></li>
+
+                </ul>
+             </div>
+             <div class="content">
+                    <div class="page-content katalog-cart ">
+                        <center><h1>Корзина</h1></center>
+
+                         <table class="order-desc" cellspacing="0" cellpadding="0">
+                             <thead>
+                                 <tr><th></th><th>Изображение</th><th>Наименование</th><th>Цена</th><th>Кол-во</th><th>Итого</th><th>Удалить</th></tr>
+                             </thead>
+                             <tbody>
+                             {% for item in cart %}
+                                 {% with product=item.product %}
+                                 <tr>
+                                     <td></td>
+                                     <td><div class="cart-thumb">
+                                              <a href="{{ product.get_absolute_url }}">
+                                                <img src="{{ product.image.url }}" width="150" height="150" alt="" />
+                                              </a>
+                                         </div>
+                                     </td>
+                                     <td>{{ product.name }}</td>
+                                     <td>{{ item.price|floatformat }}</td>
+                                     <td>
+                                        <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+                                            {{ item.update_quantity_form.quantity }}
+                                            {{ item.update_quantity_form.update }}
+                                            {% csrf_token %}
+                                        <input type="image" src="{% static 'img/reload.png' %}" title="Обновить">
+                                        </form>
+                                     </td>
+                                     <td>{{ item.total_price|floatformat }} ₽</td>
+                                     <td><a href="{% url "cart:CartRemove" product.id %}"><img src="{% static 'img/remove2.png' %}"></a></td>
+                                 </tr>
+                                 {% endwith %}
+                             {% endfor %}
+                             </tbody>
+                         </table>
+                       <div class="cart-order-wrap">
+                           <div class="back-btn">
+                           <a href="{% url "shop:ProductList"%}">Продолжить</a>
+                           </div>
+                           <div class="order-total">
+                               <p>Сумма в корзине</p>
+                               <div class="order-total-wrap">
+                                <div class="order-total-text">Всего</div>
+                                <div class="order-total-sum">{{ cart.get_total_price|floatformat }} ₽</div>
+                               </div>
+                           </div>
+                           <div class="order-btn">
+                           <a href="{% url "orders:OrderCreate" %}">Заказать</a>
+                           </div>
+
+                        </div>
+                 </div>
+             </div>
+     </section>
+        </main>
+
+{% endblock %}
+
+{% comment %}
+
+{% endcomment %}
+
+
+{% comment %}
+
+  <h1>Ваша корзина товаров</h1>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Изображение</th>
+        <th>Продукт</th>
+        <th>Количество</th>
+        <th>Удалить</th>
+        <th>Цена</th>
+        <th>Полная цена</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+        {% with product=item.product %}
+          <tr>
+            <td>
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.image.url }}" width="150" height="150" alt="" />
+              </a>
+            </td>
+            <td>{{ product.name }}</td>
+            <td><form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+    {{ item.update_quantity_form.quantity }}
+    {{ item.update_quantity_form.update }}
+    {% csrf_token %}
+    <input type="submit" value="Обновить">
+</form></td>
+            <td><a href="{% url "cart:CartRemove" product.id %}">Удалить</a></td>
+            <td class="num">{{ item.price }} руб.</td>
+            <td class="num">{{ item.total_price }} руб.</td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+        <tr class="total">
+          <td>Всего</td>
+          <td colspan="4"></td>
+          <td class="num">{{ cart.get_total_price }} руб.</td>
+        </tr>
+    </tbody>
+  </table>
+  <p class="text-right">
+    <a href="{% url "shop:ProductList"%}" class="btn btn-light">Продолжить Шопинг</a>
+    <a href="{% url "orders:OrderCreate" %}" class="btn">Оформить заказ</a>
+  </p>
+
+
+{% endcomment %}
