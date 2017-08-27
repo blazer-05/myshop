@@ -99,5 +99,4 @@ ENV/
 .idea/
 Apache-2.4_vhost.conf
 myshop/settings.py
-backup/myshop-4.07.2017.sql
-
+backup/
