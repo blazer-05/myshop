@@ -54,6 +54,7 @@ class Product(models. Model):
     def get_absolute_url(self):
         return reverse('shop:ProductDetail', args=[self.id, self.slug])
 
+    # Расчет скидки
     def get_sale(self):
         '''Расчитать стоимость со скидкой'''
         price = int(self.price * (100 - self.discount) / 100)
