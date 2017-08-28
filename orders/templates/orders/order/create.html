@@ -164,32 +164,22 @@
                         <input type="text" id="email" name="email" placeholder="Ваш email" required />
                         <input type="text" id="postal_code" name="postal_code" placeholder="Ваш почтовый индекс" required />
                         <input type="text" id="addres" name="addres" placeholder="Ваш адрес" required />
-                        </form>
 
-                        <div class="oder-ship-tabs">
-                            <div class="tabs">
-                                <ul>
-                                <li>Оплата при получении</li>
-                                <li>Перевод на карту или кошелек</li>
-                                <li>Robokassa (онлайн)</li>
-                                </ul>
-                                    <div>
-                                    <div class="tab-content">
-                                        <p>Оплата при получении</p><p><input id="payment_method_nal" type="radio" class="input-radio" name="payment_method" value="nal" data-order_button_text="Оплатить"></p>	</div>
-                                        <div class="tab-content"><p>Перевод на карту Сбербанка, кошелек Яндекс Деньги или Webmoney</p>
-                                            <p><input id="payment_method_bank" type="radio" class="input-radio" name="payment_method" value="bank" data-order_button_text="Оплатить"></p></div>
-                                        <div class="tab-content"> <p>Оплатить онлайн с помощью Робокассы</p>
-                                            <p><input id="payment_method_robokassa" type="radio" class="input-radio" name="payment_method" value="robokassa" data-order_button_text="Оплатить"></p></div>
-                                </div>
-                            </div>
-                        </div>
+                        <ul class="flat-radio-wrapper">
+                            <li><input id="payment_method_nal" type="radio" class="flat-input-radio" name="payment_method" value="nal"><label for="payment_method_nal">Наличными при получении</label></li>
+                            <li><input id="payment_method_bank" type="radio" class="flat-input-radio" name="payment_method" value="bank"><label for="payment_method_bank">Оплата картой банка</label></li>
+                            <li><input id="payment_method_robokassa" type="radio" class="flat-input-radio" name="payment_method" value="robokassa"><label for="payment_method_robokassa">Онлайн оплата</label></li>
+                        </ul>
                         <div class="cart-oder-action-wrap">
-                        <div class="order-btn"><a href="cart-result.html">Заказать</a></div>
+                        <input type="submit" value="Отправить">
+{#                        <div class="order-btn"><a href="cart-result.html">Заказать</a></div>#}
                         </div>
+                        </form>
                  </div>
              </div>
      </section>
         </main>
+
 
 {% endblock %}
 

@@ -4,6 +4,11 @@ from __future__ import unicode_literals
 from django.db import models
 from shop.models import Product
 
+PAYMENT_CHOICES = (
+("nal", "Наличными при получении"),
+("bank", "Оплата картой банка"),
+("interkassa", "Онлайн оплата(Interkassa)")
+)
 class Order(models.Model):
     first_name = models.CharField(max_length=50, verbose_name='Имя')
     last_name = models.CharField(max_length=50, verbose_name='Фамилия')
@@ -13,6 +18,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлен')
     paid = models.BooleanField(default=False, verbose_name='Оплачен')
+    payment_method = models.CharField(max_length=100, verbose_name='Способ оплаты', choices=PAYMENT_CHOICES)
 
     class Meta:
         ordering = ('-created', )

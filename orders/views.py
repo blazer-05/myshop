@@ -25,6 +25,7 @@ def OrderCreate(request):
             addres = form.cleaned_data['addres']
             postal_code = form.cleaned_data['postal_code']
             recepients = ['blazer-05@mail.ru']
+            payment_method = form.cleaned_data['payment_method']
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'],
@@ -40,6 +41,7 @@ def OrderCreate(request):
                 'order': order,
                 'cart': cart,
                 'form': form,
+                'payment_method': payment_method,
             }
 
             message = render_to_string('orders/mailbox/email-2.html', context)

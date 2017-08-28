@@ -2920,3 +2920,31 @@ ul#mobile-menu li a{
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
 }
+
+ul.flat-radio-wrapper {
+    margin: 0px;
+    padding: 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+ul.flat-radio-wrapper li {
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    display: block;
+    width: 33.33%;
+}
+.flat-input-radio {
+    display: none
+}
+.flat-input-radio + label {
+    background-color: #e9eaeb;
+    color: #707070;
+    display: block;
+    height: 60px;
+}
+.flat-input-radio:checked + label {
+    background-color: #46c765;
+    color: #ffffff;
+}
