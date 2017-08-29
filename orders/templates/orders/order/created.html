@@ -10,8 +10,7 @@
 
 {% if form %}
 
-    <form role="form" method="post" action="">
-          accept-charset="UTF-8" name="payment" id="merchant-form">
+    <form role="form" method="post" action="{% url 'orders:success' %}" accept-charset="UTF-8" name="payment" id="merchant-form">
         <h3>Сумма пополнения</h3>
         <input type="number" min="1" max="100000"
                name="amount" value="{{ default_amount }}">
