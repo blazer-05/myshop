@@ -8,8 +8,9 @@
 
 {% block content %}
 
+{% if form %}
 
-    <form role="form" method="post" action=""
+    <form role="form" method="post" action="">
           accept-charset="UTF-8" name="payment" id="merchant-form">
         <h3>Сумма пополнения</h3>
         <input type="number" min="1" max="100000"
@@ -19,15 +20,20 @@
             Пополнить</button>
         {% csrf_token %}
     </form>
+
+{% endif %}
+
 {% endblock %}
-{% block jquery_scripts %}
+
+<script type="text/javascript">
+
     if($("#id_ik_co_id").val().length>0){
         $("#merchant-form").attr('action', 'https://sci.interkassa.com/').submit();
     }
+</script>
 
 
 
-{% endblock %}
 
 
 

@@ -56,7 +56,7 @@ def OrderCreate(request):
             # Асинхронная отправка сообщения
             OrderCreated.delay(order.id)
             request.session['order_id'] = order.id
-            return redirect('/order/kassa/')
+            return redirect('/order/success/')
             # return render(request, 'orders/order/created.html', {'order': order,
             #                                                      'cart': cart,
             #                                                      'form': form,})
@@ -128,23 +128,18 @@ def thanks(request):
 
 def kassa(request):
     order = Order.objects.get(id=request.session['order_id'])
-    default_amount = 300
-    if request.method == 'POST':
-        amount = request.POST.get('amount')
-        if amount:
-            try:
-                amount = int(amount)
-            except Exception:
-                amount = default_amount
-        else:
-            amount = default_amount
-        inv = Invoice.objects.create(amount=amount, user=request.user,
-                                     payment_info='Пополнение баланса')
-        initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=inv.payment_no,
-                       ik_am=inv.amount, ik_desc=inv.payment_info)
+    if order.payment_method == 'interkassa':
+        amount = sum([item.price * item.quantity for item in order.Items.all()])
+        defaults = {
+            'user': request.user,
+            'payment_info': 'Заказ номер %s' % order.id,
+            'amount': amount
+        }
+        inv = Invoice.objects.get_or_create(payment_no=order.id, defaults=defaults)
+        initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=inv.payment_no, ik_am=inv.amount, ik_desc=inv.payment_info)
         form = PaymentRequestForm(initial=initial)
     else:
-        form = PaymentRequestForm()
+        form = None
     return render(request, 'orders/order/created.html', {'order': order, 'form': form})
 
 '''
