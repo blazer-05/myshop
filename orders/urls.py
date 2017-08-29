@@ -9,4 +9,5 @@ urlpatterns = [
     # url(r'^admin/order/(?P<order_id>\d+)/pdf/$', views.AdminOrderPDF, name='AdminOrderPDF'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^thanks/$', views.thanks, name='thanks'),
+    url(r'^success/$', views.kassa, name='success'),
 ]

@@ -243,7 +243,7 @@ width:auto!important;
             </p>
             <p class="callout">{% for item in cart %}<br>
             Товар: {{ item.product.name }}<br>
-            Количество: {{ item.quantity }} руб<br>
+            Количество: {{ item.quantity }} шт.<br>
             Итого: {{ item.total_price|floatformat }} руб<br>
             {% endfor %}&nbsp;</p>
             <p class="callout">На сумму всего: {{cart.get_total_price|floatformat }} руб<br>

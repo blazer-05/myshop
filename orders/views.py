@@ -7,10 +7,13 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+
+from interkassa_merchant.forms import PaymentRequestForm
 from .models import OrderItem, Order, MailBox
 from .forms import OrderCreateForm, ContactForm
 from cart.cart import Cart
 from .tasks import OrderCreated
+from interkassa_merchant.models import *
 # import weasyprint
 
 
@@ -53,9 +56,10 @@ def OrderCreate(request):
             # Асинхронная отправка сообщения
             OrderCreated.delay(order.id)
             request.session['order_id'] = order.id
-            return render(request, 'orders/order/created.html', {'order': order,
-                                                                 'cart': cart,
-                                                                 'form': form,})
+            return redirect('/order/kassa/')
+            # return render(request, 'orders/order/created.html', {'order': order,
+            #                                                      'cart': cart,
+            #                                                      'form': form,})
     form = OrderCreateForm()
     return render(request, 'orders/order/create.html', {'cart': cart,
                                                         'form': form,})
@@ -121,6 +125,27 @@ def contact(request):
 def thanks(request):
     thanks = 'thanks'
     return render(request, 'orders/mailbox/thanks.html', {'thanks': thanks})
+
+def kassa(request):
+    order = Order.objects.get(id=request.session['order_id'])
+    default_amount = 300
+    if request.method == 'POST':
+        amount = request.POST.get('amount')
+        if amount:
+            try:
+                amount = int(amount)
+            except Exception:
+                amount = default_amount
+        else:
+            amount = default_amount
+        inv = Invoice.objects.create(amount=amount, user=request.user,
+                                     payment_info='Пополнение баланса')
+        initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=inv.payment_no,
+                       ik_am=inv.amount, ik_desc=inv.payment_info)
+        form = PaymentRequestForm(initial=initial)
+    else:
+        form = PaymentRequestForm()
+    return render(request, 'orders/order/created.html', {'order': order, 'form': form})
 
 '''
 

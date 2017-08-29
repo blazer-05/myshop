@@ -3,12 +3,39 @@
 
 
 {% block title %}
-  Спасибо за заказ
+  Пополнить баланс
 {% endblock %}
 
 {% block content %}
 
-           <div id="header-wrap" class="header-wrap">
+
+    <form role="form" method="post" action=""
+          accept-charset="UTF-8" name="payment" id="merchant-form">
+        <h3>Сумма пополнения</h3>
+        <input type="number" min="1" max="100000"
+               name="amount" value="{{ default_amount }}">
+        {{ form }}
+        <br><button type="submit" class="btn pre-footer-btn">
+            Пополнить</button>
+        {% csrf_token %}
+    </form>
+{% endblock %}
+{% block jquery_scripts %}
+    if($("#id_ik_co_id").val().length>0){
+        $("#merchant-form").attr('action', 'https://sci.interkassa.com/').submit();
+    }
+
+
+
+{% endblock %}
+
+
+
+
+{% comment %}
+
+
+<div id="header-wrap" class="header-wrap">
                     <div class="hd-block">
                         <div class="logo-inner">
                             <div id="logo">
@@ -164,13 +191,6 @@
 {#setTimeout('location.replace("/")', 10000);#}
 {#/*Изменить текущий адрес страницы через 3 секунды (3000 миллисекунд)*/#}
 {#</script>#}
-
-{% endblock %}
-
-
-
-
-{% comment %}
 
 
 <script type="text/javascript">

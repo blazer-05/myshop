@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^order/', include('orders.urls', namespace='orders')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^payment/', include('payment.urls', namespace='payment')),
+    url(r'^merchant/', include('interkassa_merchant.urls')),
 ]
 
 if settings.DEBUG:
