@@ -1890,7 +1890,7 @@ font-family: '__Marmelad_5';
 .katalog-order-result table td:first-child{
     text-align: left;
 }
-.cart-order input{
+.cart-order input[type="text"]{
     border: 1px solid silver;
     height: 2em;
     outline: none;
@@ -2084,13 +2084,8 @@ padding-bottom: 15px;
 .cart-oder-action-wrap{
     width: 70%;
     margin: 2em auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    
-    display: flex;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
+    text-align: center;
+}
 }
 .order-result-info{
     display: grid;
@@ -2921,12 +2916,16 @@ ul#mobile-menu li a{
     transform: rotate(360deg);
 }
 
+
+/*Радио кнопки*/
 ul.flat-radio-wrapper {
     margin: 0px;
     padding: 0px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+
+
 }
 ul.flat-radio-wrapper li {
     margin: 0px;
@@ -2934,6 +2933,7 @@ ul.flat-radio-wrapper li {
     cursor: pointer;
     display: block;
     width: 33.33%;
+
 }
 .flat-input-radio {
     display: none
@@ -2943,8 +2943,15 @@ ul.flat-radio-wrapper li {
     color: #707070;
     display: block;
     height: 60px;
+    padding: 5px;
+    margin: 1px;
+
 }
 .flat-input-radio:checked + label {
     background-color: #46c765;
     color: #ffffff;
+
+}
+.flat-input-radio + label:hover {
+    cursor: pointer;
 }

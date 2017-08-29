@@ -138,7 +138,7 @@
          <div class="pagination">
                 <ul id="paginate">
                     <li><a href="/">Главная</a></li>
-                    <li><a href="/order/create/">/Оформление</a></li>
+                    <li><a href="{% url 'orders:OrderCreate' %}">/Оформление</a></li>
 
                 </ul>
              </div>
@@ -157,7 +157,7 @@
                          </table>
 
                         <center><h1>Оформление заказа</h1></center>
-                        <form action="." class="cart-order" method="post">
+                        <form action="{% url 'orders:OrderCreate' %}" class="cart-order" method="post">
                         {% csrf_token %}
                         <input type="text" id="first_name" name="first_name" placeholder="Ваше имя" required />
                         <input type="text" id="last_name" name="last_name" placeholder="Ваша Фамилия" required />
@@ -166,12 +166,12 @@
                         <input type="text" id="addres" name="addres" placeholder="Ваш адрес" required />
 
                         <ul class="flat-radio-wrapper">
-                            <li><input id="payment_method_nal" type="radio" class="flat-input-radio" name="payment_method" value="nal"><label for="payment_method_nal">Наличными при получении</label></li>
-                            <li><input id="payment_method_bank" type="radio" class="flat-input-radio" name="payment_method" value="bank"><label for="payment_method_bank">Оплата картой банка</label></li>
-                            <li><input id="payment_method_interkassa" type="radio" class="flat-input-radio" name="payment_method" value="interkassa"><label for="payment_method_interkassa">Онлайн (interkassa)</label></li>
+                            <li><input id="payment_method_nal" type="radio" class="flat-input-radio" name="payment_method" value="nal" checked ><label for="payment_method_nal" >Оплата<br> при получении</label></li>
+                            <li><input id="payment_method_bank" type="radio" class="flat-input-radio" name="payment_method" value="bank"><label for="payment_method_bank">Перевод на карту<br> или кошелек</label></li>
+                            <li><input id="payment_method_interkassa" type="radio" class="flat-input-radio" name="payment_method" value="interkassa"><label for="payment_method_interkassa">Interkassa <br>(Онлайн)</label></li>
                         </ul>
                         <div class="cart-oder-action-wrap">
-                        <input type="submit" value="Отправить">
+                        <input type="image" src="{% static 'img/item-action-btn.png' %}">
 {#                        <div class="order-btn"><a href="cart-result.html">Заказать</a></div>#}
                         </div>
                         </form>
