@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
@@ -127,19 +128,17 @@ def thanks(request):
     return render(request, 'orders/mailbox/thanks.html', {'thanks': thanks})
 
 def kassa(request):
+    form = None
     order = Order.objects.get(id=request.session['order_id'])
     if order.payment_method == 'interkassa':
-        amount = sum([item.price * item.quantity for item in order.Items.all()])
-        defaults = {
-            'user': request.user,
-            'payment_info': 'Заказ номер %s' % order.id,
-            'amount': amount
-        }
-        inv = Invoice.objects.get_or_create(payment_no=order.id, defaults=defaults)
-        initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=inv.payment_no, ik_am=inv.amount, ik_desc=inv.payment_info)
-        form = PaymentRequestForm(initial=initial)
-    else:
-        form = None
+        if not order.invoice:
+            amount = sum([item.price * item.quantity for item in order.Items.all()])
+            defaults = {'user': User.objects.first(), 'payment_info': 'Заказ номер %s' % order.id, 'amount': amount}
+            order.invoice = Invoice.objects.create(**defaults)
+            order.save()
+        if not order.invoice.is_payed:
+            initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=order.invoice.payment_no, ik_am=order.invoice.amount, ik_desc=order.invoice.payment_info)
+            form = PaymentRequestForm(initial=initial)
     return render(request, 'orders/order/created.html', {'order': order, 'form': form})
 
 '''

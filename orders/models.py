@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+
+from interkassa_merchant.models import Invoice
 from shop.models import Product
 
 PAYMENT_CHOICES = (
@@ -19,6 +21,7 @@ class Order(models.Model):
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлен')
     paid = models.BooleanField(default=False, verbose_name='Оплачен')
     payment_method = models.CharField(max_length=100, verbose_name='Способ оплаты', choices=PAYMENT_CHOICES)
+    invoice = models.OneToOneField(Invoice, blank=True, null=True, related_name='order', verbose_name='Invoice')
 
     class Meta:
         ordering = ('-created', )
