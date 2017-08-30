@@ -3,7 +3,7 @@
 
 
 {% block title %}
-  Пополнить баланс
+  Заказ принят
 {% endblock %}
 
 {% block content %}
@@ -126,7 +126,15 @@
                     <div class="page-content katalog-order-result">
 {#                        <h1>Заказ принят</h1>#}
                         <h2>Спасибо. Ваш заказ принят</h2>
-                        <h3>Мы свяжемся с Вам в блжайщее время</h3>
+                        {% if form %}
+                            <h3>Вы можете оплатить ваш заказ нажав кнопку "Оплатить"</h3>
+                            {% else %}
+                            <h3>Мы свяжемся с Вам в блжайщее время</h3>
+                            <script type="text/javascript">
+                            setTimeout('location.replace("/")', 10000);
+                            /*Изменить текущий адрес страницы через 3 секунды (3000 миллисекунд)*/
+                            </script>
+                        {% endif %}
                         <div class="order-result-info">
                             <div class="order-detail">
                                 <p>Номер заказа</p>
@@ -155,23 +163,23 @@
                              {% endfor %}
                              </tbody>
                          </table>
-{% if form %}
 
-    <form role="form" method="post" action="https://sci.interkassa.com/"
-          accept-charset="UTF-8" name="payment" id="merchant-form">
-        {% csrf_token %}
-        {{ form }}
-        <br><button type="submit" class="btn pre-footer-btn">Оплатить</button>
-
-    </form>
-
-{% endif %}
+                {% if form %}
+                    <form role="form" method="post" action="https://sci.interkassa.com/"
+                          accept-charset="UTF-8" name="payment" id="merchant-form">
+                        {% csrf_token %}
+                        {{ form }}
+{#                        <br><button type="submit" ><img src="{% static 'img/payment.jpg' %}" width="200" ></button>#}
+                    <input type="image" src="{% static 'img/payment.jpg' %}" width="200">
+                    </form>
+                {% endif %}
 
                  </div>
              </div>
      </section>
         </main>
 
+{#<link rel="stylesheet" id='style-css' href="{% static "css/bootstrap.min.css" %}">#}
 
 {% endblock %}
 
@@ -184,6 +192,8 @@
 
 
 {% comment %}
+
+<br><button type="submit" class="btn pre-footer-btn">Оплатить</button>
 
 
 <div id="header-wrap" class="header-wrap">
@@ -337,12 +347,6 @@
              </div>
      </section>
         </main>
-
-{#<script type="text/javascript">#}
-{#setTimeout('location.replace("/")', 10000);#}
-{#/*Изменить текущий адрес страницы через 3 секунды (3000 миллисекунд)*/#}
-{#</script>#}
-
 
 <script type="text/javascript">
 setTimeout('location.replace("/")', 3000);
