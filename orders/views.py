@@ -132,7 +132,7 @@ def kassa(request):
     order = Order.objects.get(id=request.session['order_id'])
     if order.payment_method == 'interkassa':
         if not order.invoice:
-            amount = sum([item.price * item.quantity for item in order.Items.all()])
+            amount = order.get_total_cost()
             defaults = {'user': User.objects.first(), 'payment_info': 'Заказ номер %s' % order.id, 'amount': amount}
             order.invoice = Invoice.objects.create(**defaults)
             order.save()
