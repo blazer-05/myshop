@@ -7,4 +7,4 @@ class CartAddProductForm(forms.Form):
     quantity = forms.IntegerField(label='Количество', initial=1)
     # quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES, coerce=int, label='Количество')
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
-    diametr = forms.IntegerField(label='Ø Укажите ваш диаметр вала')
+    diameter = forms.IntegerField(label='Ø Укажите ваш диаметр вала')
