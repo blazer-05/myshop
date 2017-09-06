@@ -482,7 +482,7 @@
                                </div>
                             <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
                                     {% csrf_token %}
-                                <center class="single-item-more-desc">{{ cart_product_form }}</center><br>
+                                <center class="single-item-more-desc">{{ product.get_form }}</center><br>
                                  <div class="item-action-btn">
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>

@@ -63,6 +63,11 @@ class Product(models. Model):
         price = int(self.price * (100 - self.discount) / 100)
         return price
 
+    def get_form(self):
+        from cart.forms import CartAddProductForm
+        initial = {'diameter': self.diameter_default}
+        return CartAddProductForm(initial=initial)
+
     # Вывод картинок в админке!
     def image_img(self):
         if self.image:

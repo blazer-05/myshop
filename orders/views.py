@@ -35,6 +35,7 @@ def OrderCreate(request):
                 OrderItem.objects.create(order=order, product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'],
+                                         diameter=item['diameter'],
                                          )
             context = {
                 'first_name': first_name,
