@@ -39,6 +39,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, related_name='order_items')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     quantity = models.PositiveIntegerField(default=1, verbose_name='Количество')
+    diameter = models.IntegerField(default=0, verbose_name='Ø ваш диаметр вала')
 
     def __unicode__(self):
         return '{}'.format(self.id)
