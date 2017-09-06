@@ -18,14 +18,15 @@
                         </div>
                             <div class="site-description">
                             <p>Комплектующие для винтового</p>
-                                <p>конусного дровокола</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
                             </div>
                     </div>
                     <div class="hd-block">
                         <nav id="main-nav">
                             <ul id="main-menu">
                                 <li><a href="{% url 'shop:video' %}">Видео</a></li>
-                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
                                     <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
@@ -37,7 +38,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
                             </ul>
                         </nav>
                       </div>
@@ -79,14 +80,14 @@
                     <div class="mt2-img-desc">Оптимальные размеры,
                         шаг и глубина резьбы</div>
                     <div class="mt3-img-desc">Сталь повышенной твердости!
-                        Российское производство!</div>
+                        Российское производство СТ40Х!</div>
                     </div>
                     <div class="mt1-img-bootm">
                     <p>ЕДИНСТВЕННЫЙ ПРОИЗВОДИТЕЛЬ
                         КОНУСА ДЛЯ ДРОВОКОЛА
                         С ДВУХЗАХОДНОЙ РЕЗЬБОЙ</p>
-                        <p class="more">УЗНАЙТЕ БОЛЬШЕ</p>
-                        <p class="more-img"><img src="{% static 'img/mouse-down.png' %}" alt=""/></p>
+                        <p class="more"><a href="#video">УЗНАЙТЕ БОЛЬШЕ</a></p>
+                        <p class="more-img"><a href="#video"><img src="{% static 'img/mouse-down.png' %}" alt=""/></a></p>
                     </div>
                 </div>
                 <div class="mt_1_right">
@@ -105,6 +106,8 @@
                     <div class="mt1-phone">
                     <p>Или закажите по телефону:</p>
                     <p> 8 922 035 28 87</p>
+                    <p>Или мы вам сами перезвоним</p>
+{#                    <p><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></p>#}
                     </div>
                 </div>
              </div>
@@ -122,8 +125,9 @@
                  </div>
                </div>
                <div class="site-description">
-                   <p>Комплектующие для винтового</p>
-                   <p>конусного дровокола</p>
+                <p>Комплектующие для винтового</p>
+                    <p>конусного дровокола.</p>
+                    <p>Конуса для дров</p>
                 </div>
                 <div id="menu-button">
                     <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
@@ -162,7 +166,7 @@
             <nav class="mobile-navigation">
                <ul id="mobile-menu">
                                 <li><a href="{% url 'shop:video' %}">Видео</a></li>
-                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
                                     <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
@@ -174,7 +178,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
                             </ul>
 
               </nav>
@@ -217,6 +221,7 @@
                     <div class="mt1-phone">
                     <p>Или закажите по телефону:</p>
                     <p> 8 922 035 28 87</p>
+                    <p>Или мы вам сами перезвоним</p>
                     </div>
                 </div>
              </div>
@@ -308,9 +313,9 @@
 
             </section>
             <section id="video">
+              <div id="mc-container2"></div>
                 <h3>УБЕДИТЕСЬ, ЧТО КОЛОТЬ ДРОВА<br>
                     <p>С ПОМОЩЬЮ КОНУСА - БЫСТРО И УДОБНО:</p></h3>
-
                 <div class="video-wrap">
                     <div class="video-inner">
                         <iframe width="567" height="425" src="https://www.youtube.com/embed/a0yzUmGoN6s" frameborder="0" allowfullscreen></iframe>
@@ -318,7 +323,7 @@
                 </div>
                 <div class="video-btn-wrap">
                  <div class="video-btn-l"><img src="{% static 'img/video-btn-char.png' %}" alt="" /></div>
-                 <div class="video-btn-r"><a href="/catalog/komplekty/"><img src="{% static 'img/video-btn-choose.png' %}" alt="" /></a></div>
+                 <div class="video-btn-r"><a href="/catalog/komplekty-drovokola/"><img src="{% static 'img/video-btn-choose.png' %}" alt="" /></a></div>
                 </div>
             </section>
             <section id="techical-char">
@@ -341,7 +346,7 @@
                       <div class="th-desc-1">
                           <p>Двухзаходная левая упорная резьба</p>
                           <p> (по вашему заданию, изготовим правую)</p>
-                          <p class="pd20">шаг резьбы 5 мм, глубина резьбы 3 мм</p>
+                          <p class="pd20">шаг резьбы 7 мм, глубина резьбы 4 мм</p>
                           <div class="th-line-1"><img src="{% static 'img/th-line-2.png' %}" alt=""></div>
                         </div>
                       <div class="th-desc-2">
@@ -351,7 +356,7 @@
                            <div class="th-line-2"><img src="{% static 'img/th-line-1.png' %}" alt=""></div>
                         </div>
                       <div class="th-desc-3">
-                          <div class="th-more">Узнай <a href="#">ЗДЕСЬ</a>, чем отличается</div>
+                          <div class="th-more">Узнай <a href="https://drovo.ru/" target="_blank">ЗДЕСЬ</a>, чем отличается</div>
                           <div class="th-more-desc">двухзаходная резьба от однозаходной обыкновенной</div>
                         </div>
                       <div class="th-desc-4">
@@ -477,7 +482,7 @@
                                </div>
                             <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
                                     {% csrf_token %}
-                                <center>{{ cart_product_form }}</center>
+                                <center class="single-item-more-desc">{{ cart_product_form }}</center><br>
                                  <div class="item-action-btn">
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>

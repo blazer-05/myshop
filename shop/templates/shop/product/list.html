@@ -18,14 +18,15 @@
                         </div>
                             <div class="site-description">
                             <p>Комплектующие для винтового</p>
-                                <p>конусного дровокола</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
                             </div>
                     </div>
                     <div class="hd-block">
                         <nav id="main-nav">
                             <ul id="main-menu">
                                 <li><a href="{% url 'shop:video' %}">Видео</a></li>
-                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
                                     <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
@@ -37,7 +38,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -73,8 +74,9 @@
                  </div>
                </div>
                <div class="site-description">
-                   <p>Комплектующие для винтового</p>
-                   <p>конусного дровокола</p>
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
                 </div>
                 <div id="menu-button">
                     <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
@@ -113,7 +115,7 @@
             <nav class="mobile-navigation">
                <ul id="mobile-menu">
                                 <li><a href="{% url 'shop:video' %}">Видео</a></li>
-                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
                                     <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
@@ -125,7 +127,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
                             </ul>
 
               </nav>
@@ -136,7 +138,7 @@
                 <div class="pagination">
                     <ul id="paginate">
                         <li><a href="/">Главная</a></li>
-                        <li><a href="/catalog/">/Каталог</a></li>
+                        <li><a href="/catalog/">/Товары</a></li>
                         <li><a href="">/{{ category.name }}</a></li>
                     </ul>
                  </div>
@@ -229,7 +231,7 @@
                                </div>
                             <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
                                     {% csrf_token %}
-                                <center>{{ cart_product_form }}</center>
+                                <center class="single-item-more-desc">{{ cart_product_form }}</center><br>
                                  <div class="item-action-btn">
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>

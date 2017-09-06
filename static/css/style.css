@@ -132,6 +132,7 @@ a:link {
 }
 .site-description{
     color: #fff;
+    font-size: 17px;
 }
 #main-nav ul{
     list-style: none;
@@ -178,12 +179,12 @@ ul.sub-menu{
     flex-direction: column;
     -webkit-box-align:center;
     -ms-flex-align:center;
-    align-items:center;
+    align-items:left;
     list-style: none;
     position: absolute;
    top:100%;
-    left:-50px;
-    min-width: 90px;
+    left:-40px;
+    min-width: 250px;
     margin-top: -2px;
     cursor: pointer;
 }
@@ -323,7 +324,7 @@ font-weight: 400;
     display: inline-flex;
     -ms-flex-item-align:end;
     align-self:flex-end ;
-    width: 280px;
+    width: 290px;
     min-height: 30px; 
     position: relative;
     top:195px;
@@ -1945,13 +1946,21 @@ table.order-desc input, .single-item-more-desc input{
     display: block;
     width: auto;
     margin: 0 auto;
-    height: 48px;
+    height: 30px;
     /*border: 1px solid silver;*/
     outline: none;
     border-radius: 3px;
     text-align: center;
     /*background: url(../img/reload.png);*/
 }
+/*Виджет выбора количества товара*/
+.single-item-more-desc input[type="number"] {
+    display: initial;
+    height: initial;
+    width: 40px;
+    margin-left: 10px;
+}
+
 .katalog-order{
     width: 70%;
     margin: 0 auto;
@@ -2219,7 +2228,7 @@ ul.pagination li{
    
 }
 .back-btn, .order-btn {
-    width: 50%;
+    /*width: 50%;*/
     margin: 0 auto;
 }
 .order-total{
@@ -2762,7 +2771,7 @@ ul#mobile-menu li a{
     -webkit-transition-delay: 0.075s;
     transition-delay: 0.075s; }
     
-    .site-description p{
+.site-description p{
     text-align: center;
 }
 .mobile-navigation{

@@ -65,6 +65,21 @@ def OrderCreate(request):
     return render(request, 'orders/order/create.html', {'cart': cart,
                                                         'form': form,})
 
+def kassa(request):
+    form = None
+    order = Order.objects.get(id=request.session['order_id'])
+    if order.payment_method == 'interkassa':
+        if not order.invoice:
+            amount = order.get_total_cost()
+            defaults = {'user': User.objects.first(), 'payment_info': 'Заказ номер %s' % order.id, 'amount': amount}
+            order.invoice = Invoice.objects.create(**defaults)
+            order.save()
+        if not order.invoice.is_payed:
+            initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=order.invoice.payment_no, ik_am=order.invoice.amount, ik_desc=order.invoice.payment_info)
+            form = PaymentRequestForm(initial=initial)
+    return render(request, 'orders/order/created.html', {'order': order, 'form': form})
+
+
 @staff_member_required
 def AdminOrderDetail(request, order_id):
     order = get_object_or_404(Order, id=order_id)
@@ -127,19 +142,6 @@ def thanks(request):
     thanks = 'thanks'
     return render(request, 'orders/mailbox/thanks.html', {'thanks': thanks})
 
-def kassa(request):
-    form = None
-    order = Order.objects.get(id=request.session['order_id'])
-    if order.payment_method == 'interkassa':
-        if not order.invoice:
-            amount = order.get_total_cost()
-            defaults = {'user': User.objects.first(), 'payment_info': 'Заказ номер %s' % order.id, 'amount': amount}
-            order.invoice = Invoice.objects.create(**defaults)
-            order.save()
-        if not order.invoice.is_payed:
-            initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=order.invoice.payment_no, ik_am=order.invoice.amount, ik_desc=order.invoice.payment_info)
-            form = PaymentRequestForm(initial=initial)
-    return render(request, 'orders/order/created.html', {'order': order, 'form': form})
 
 '''
 

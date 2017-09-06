@@ -16,14 +16,15 @@
                         </div>
                             <div class="site-description">
                             <p>Комплектующие для винтового</p>
-                                <p>конусного дровокола</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
                             </div>
                     </div>
                     <div class="hd-block">
                         <nav id="main-nav">
                             <ul id="main-menu">
                                 <li><a href="{% url 'shop:video' %}">Видео</a></li>
-                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
                                     <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
@@ -35,7 +36,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -71,8 +72,9 @@
                  </div>
                </div>
                <div class="site-description">
-                   <p>Комплектующие для винтового</p>
-                   <p>конусного дровокола</p>
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
                 </div>
                 <div id="menu-button">
                     <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
@@ -111,7 +113,7 @@
             <nav class="mobile-navigation">
                <ul id="mobile-menu">
                                 <li><a href="{% url 'shop:video' %}">Видео</a></li>
-                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
                                     <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
@@ -123,7 +125,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопрос-Ответ</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
                             </ul>
 
               </nav>

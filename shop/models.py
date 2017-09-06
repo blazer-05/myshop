@@ -39,6 +39,9 @@ class Product(models. Model):
     vip = models.BooleanField(default=False, verbose_name='vip товар')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    diameter_default = models.IntegerField(default=30, verbose_name='Ø по умолчанию')
+    diameter_min = models.IntegerField(default=0, verbose_name='Ø минимальный')
+    diameter_max = models.IntegerField(default=0, verbose_name='Ø максимальный')
 
     class Meta:
         ordering = ['name']
