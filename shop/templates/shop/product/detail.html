@@ -197,7 +197,7 @@
                     {% endif %}
                   <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
                     {% csrf_token %}
-                    <p>{{ cart_product_form }}</p>
+                    <p>{{ cart_product_form.as_p }}</p>
                  </div>
                  <div class="single-item-more-action">
                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
@@ -217,7 +217,11 @@
                                           <p><span>{{ product.description | linebreaks}}</span></p>
                                         </div>
                                         <div class="tab-content">
-                                            <p>Пока нет дополнительной информации.</p>
+                                            {% if product.description_two %}
+                                                <p>{{ product.description_two | linebreaks }}</p>
+                                                    {% else %}
+                                                <p>Пока нет дополнительной информации.</p>
+                                            {% endif %}
                                         </div>
                                     </div>
               </div>
@@ -303,7 +307,7 @@
                                </div>
                             <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
                                     {% csrf_token %}
-                                <center class="single-item-more-desc">{{ cart_product_form }}</center><br>
+                                <center class="single-item-more-desc">{{ cart_product_form.as_p }}</center><br>
                                  <div class="item-action-btn">
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>

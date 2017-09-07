@@ -243,12 +243,12 @@ width:auto!important;
             </p>
             <p class="callout">{% for item in cart %}<br>
             Товар: {{ item.product.name }}<br>
+            Диаметр: {{ item.diameter }}<br>
             Количество: {{ item.quantity }} шт.<br>
             Итого: {{ item.total_price|floatformat }} руб<br>
-            Диаметр: {{ item.diameter }}<br>
             {% endfor %}&nbsp;</p>
             <p class="callout">На сумму всего: {{cart.get_total_price|floatformat }} руб<br>
-                Способ оплаты: {{ order.get_payment_method_display }}<br>
+                Способ оплаты: <b>{{ order.get_payment_method_display }}</b><br>
             Дата заказа: {{ order.created }}<br>
             <a href="https://odrova.ru/admin/">Перейти в административную часть магазина</a>
             </p>

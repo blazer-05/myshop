@@ -41,8 +41,9 @@ def ProductDetail(request, id, slug):
     top_five_products = Product.objects.all().exclude(id=id).order_by()[:10]
     alboms = Albom.objects.filter(product=id)
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    limits = {'diameter_min': product.diameter_min, 'diameter_max': product.diameter_max}
     initial = {'diameter': product.diameter_default}
-    cart_product_form = CartAddProductForm(initial=initial)
+    cart_product_form = CartAddProductForm(initial=initial, **limits)
     return  render(request, 'shop/product/detail.html', {'product': product,
                                                          'cart_product_form': cart_product_form,
                                                          'alboms': alboms,

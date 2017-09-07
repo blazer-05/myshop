@@ -25,7 +25,7 @@ class Cart(object):
         else:
             self.cart[product_id]['quantity'] += quantity
         if diameter:
-            self.cart[product_id]['diameter'] += diameter
+            self.cart[product_id]['diameter'] = diameter
         self.save()
 
     # Сохранение данных в сессию

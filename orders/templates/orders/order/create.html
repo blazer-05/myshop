@@ -153,6 +153,7 @@
                                     <tr>
                                         <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Товар</th>
                                         <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Количество</th>
+                                        <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Диаметр</th>
                                         <th scope="col" style="background-color: rgb(192, 192, 192); text-align: right;">Итого</th>
                                     </tr>
                                 </thead>
@@ -161,6 +162,7 @@
                                     <tr>
                                         <td style="text-align: left;">{{ item.product.name }}</td>
                                         <td style="text-align: left;">{{ item.quantity }}</td>
+                                        <td style="text-align: left;">{{ item.diameter }}</td>
                                         <td style="text-align: right;">{{ item.total_price|floatformat }} ₽</td>
                                     </tr>
                                     {% endfor %}

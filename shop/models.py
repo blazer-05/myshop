@@ -28,6 +28,7 @@ class Product(models. Model):
     slug = models.SlugField(max_length=200, db_index=True, verbose_name='Транслит')
     image = models.ImageField(upload_to='products/%y/%m/%d/', blank=True, verbose_name='Изображение товара')
     description = models.TextField(blank=True, verbose_name='Описание')
+    description_two = models.TextField(blank=True, verbose_name='Доп.информация')
     urlyoutube = models.URLField(blank=True, verbose_name='Ссылка на видео')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     discount = models.IntegerField(default=0, verbose_name='Скидка')
@@ -65,8 +66,9 @@ class Product(models. Model):
 
     def get_form(self):
         from cart.forms import CartAddProductForm
+        limits = {'diameter_min': self.diameter_min, 'diameter_max': self.diameter_max}
         initial = {'diameter': self.diameter_default}
-        return CartAddProductForm(initial=initial)
+        return CartAddProductForm(initial=initial, **limits)
 
     # Вывод картинок в админке!
     def image_img(self):
