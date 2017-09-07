@@ -11,13 +11,15 @@ def CartAdd(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     limits = {'diameter_min': product.diameter_min, 'diameter_max': product.diameter_max}
-    form = CartAddProductForm(request.POST, **limits)
+    form = CartAddProductForm(data=request.POST, **limits)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product, quantity=cd['quantity'],
                                   update_quantity=cd['update'],
                                   diameter=cd['diameter'],
                                    )
+    print(form.is_valid())
+    print(form.errors)
     return redirect('cart:CartDetail')
 
 def CartRemove(request, product_id):
