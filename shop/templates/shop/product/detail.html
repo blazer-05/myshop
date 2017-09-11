@@ -189,7 +189,7 @@
              <div class="single-item-more">
               <div class="single-item-more-desc">
                  <p>Вес - {{ product.massa }} кг</p>
-                 <p>Размеры (ØхL)  - {{ product.netto }} мм.</p>
+                 <p>Размеры (Диаметр х Длина)  - {{ product.netto }} мм.</p>
                     {% if product.stock %}
                  <p>Есть в наличии - {{ product.stock }} шт.</p>
                         {% else %}
@@ -214,7 +214,7 @@
                                 </ul>
                                     <div>
                                         <div class="tab-content">
-                                          <p><span>{{ product.description | linebreaks}}</span></p>
+                                          <p><span><strong>{{ product.description | linebreaks}}</strong></span></p>
                                         </div>
                                         <div class="tab-content">
                                             {% if product.description_two %}

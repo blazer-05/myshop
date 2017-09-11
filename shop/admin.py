@@ -38,7 +38,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [AlbomInLine]
 
 class AlbomAdmin(admin.ModelAdmin):
-    list_display = ['name', 'image_img']
+    list_display = ['name', 'image_img', 'images']
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)

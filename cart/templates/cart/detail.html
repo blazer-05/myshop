@@ -150,7 +150,7 @@
 
                          <table class="order-desc" cellspacing="0" cellpadding="0">
                              <thead>
-                                 <tr><th></th><th>Изображение</th><th>Наименование</th><th>Цена</th><th>Кол-во</th><th>Диаметр</th><th>Итого</th><th>Удалить</th></tr>
+                                 <tr><th></th><th>Изображение</th><th>Наименование</th><th>Цена</th><th>Кол-во</th><th>Посадочное отверстие</th><th>Итого</th><th>Удалить</th></tr>
                              </thead>
                              <tbody>
                              {% for item in cart %}
@@ -170,6 +170,7 @@
                                             {% csrf_token %}
                                             {{ item.update_quantity_form.quantity }}
                                             {{ item.update_quantity_form.update }}
+                                            <div style='display: none'>{{ item.update_quantity_form.diameter }}</div>
                                         <input type="image" src="{% static 'img/reload.png' %}" title="Обновить количество">
 {#                                            <button type="submit" value="Обновить" title="Обновить количество"></button>#}
                                         </form>

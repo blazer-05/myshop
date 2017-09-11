@@ -1754,8 +1754,9 @@ font-weight: 400;
 .item-desc p{
     margin: 0.5em;
     font-family: 'BeauSansPro_5';
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: bold;
+
 }
 .single-item-more-desc p{
     color: #1F1F1F;
@@ -1954,10 +1955,10 @@ table.order-desc input, .single-item-more-desc input{
     /*background: url(../img/reload.png);*/
 }
 /*Виджет выбора количества товара*/
-.single-item-more-desc input[type="number"] {
+.single-item-more-desc input[type="number"], .single-item-more-desc select {
     display: initial;
-    height: initial;
-    width: 40px;
+    height: 25px;
+    width: 60px;
     margin-left: 10px;
 }
 
@@ -2087,7 +2088,7 @@ padding-bottom: 15px;
 }
 
 .order-start{
-    width: 75%;
+    width: 85%;
     margin: 2em auto;
 }
 .cart-oder-action-wrap{

@@ -151,18 +151,25 @@
                             <table class="order-desc" align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Товар</th>
+                                        <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Изображение</th>
+                                        <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Наименование</th>
                                         <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Количество</th>
-                                        <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Диаметр</th>
+                                        <th scope="col" style="background-color: rgb(192, 192, 192); text-align: left;">Посадочное отверстие</th>
                                         <th scope="col" style="background-color: rgb(192, 192, 192); text-align: right;">Итого</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for item in cart  %}
                                     <tr>
+                                     <td><div class="cart-thumb">
+                                              <a href="{{ item.product.get_absolute_url }}">
+                                                <img src="{{ item.product.image.url }}" width="150" height="150" alt="" />
+                                              </a>
+                                         </div>
+                                     </td>
                                         <td style="text-align: left;">{{ item.product.name }}</td>
-                                        <td style="text-align: left;">{{ item.quantity }}</td>
-                                        <td style="text-align: left;">{{ item.diameter }}</td>
+                                        <td style="text-align: center;">{{ item.quantity }}</td>
+                                        <td style="text-align: center;">{{ item.diameter }}</td>
                                         <td style="text-align: right;">{{ item.total_price|floatformat }} ₽</td>
                                     </tr>
                                     {% endfor %}
