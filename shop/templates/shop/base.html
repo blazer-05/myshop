@@ -20,7 +20,6 @@
 
 <script src="{% static 'fancybox/jquery.fancybox-1.2.1.pack.js' %}" type="text/javascript"></script>
 
-
 <script type="text/javascript">
 $(document).ready(function() {
     $("a.gallery").fancybox();
@@ -57,11 +56,12 @@ $(document).ready(function() {
          <input type="text" id="adress" name="adress" placeholder="Адрес доставки посылки"/>
          <input type="text" id="diametr" name="diament" placeholder="Ваш диаметр Ø вала мм" />
          <textarea id="description" name="description" placeholder="Примечание"></textarea>
-            <input type="submit" value="Отправить" class="action-btn">
+         <input type="submit" value="Отправить" class="action-btn" />
             </form>
     </div>
 {% block content %}{% endblock %}
 {% block thanks %}{% endblock %}
+{% block meta %}{% endblock %}
 {% block jquery_scripts %}{% endblock %}
     <footer>
         <div class="foter-wrap">
@@ -102,6 +102,40 @@ $(document).ready(function() {
 </html>
 
 {% comment %}
+
+            <form class="form-pop" action="{% url 'orders:contact' %}" method="post">
+                {% csrf_token %}
+            <p>Заказать колун</p>
+         <input type="text" id="fio" name="subject" placeholder="Введите Ваше фио для заказа"/>
+         <input type="text" id="phone" name="phone" placeholder="Ваш телефон"/>
+         <input type="text" id="mail" name="sender" placeholder="Ваш e-mail"/>
+         <input type="text" id="adress" name="adress" placeholder="Адрес доставки посылки"/>
+         <input type="text" id="diametr" name="diament" placeholder="Ваш диаметр Ø вала мм" />
+         <textarea id="description" name="description" placeholder="Примечание"></textarea>
+         <input name="md5" id="md5" type="hidden" value="">
+         <span id="aspm"></span>
+                    <script language="javascript">
+
+                    // функция для генерации случайных чисел в диапазоне от m до n
+                    function randomNumber(m,n){
+                        m = parseInt(m);
+                        n = parseInt(n);
+                        return Math.floor( Math.random() * (n - m + 1) ) + m;
+                    };
+
+                    var aspmA = randomNumber(1,23); // генерируем число
+                    var aspmB = randomNumber(1,23); // генерируем число
+                    var sumAB = aspmA + aspmB;  // вычисляем сумму
+                    document.getElementById('aspm').innerHTML = aspmA + ' + ' + aspmB + ' = ';  // показываем пользователю выражение
+                    document.formName.md5.value = md5(sumAB);  // присваиваем скрытому полю name="md5" контрольную сумму
+
+                    </script>
+         <input name="md5" type="text" style="width:120px;">Антиспам<font color="#cc0000">*</font>
+         <input type="submit" value="Отправить" class="action-btn" onclick="document.getElementById('md5').value = 'stopSpam';" />
+            </form>
+
+
+
 
 {% load staticfiles %}
 <!DOCTYPE html>

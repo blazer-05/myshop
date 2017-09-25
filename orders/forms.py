@@ -7,7 +7,7 @@ from .models import Order, MailBox
 class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['first_name', 'last_name', 'email', 'addres', 'postal_code', 'payment_method']
+        fields = ['myname', 'email', 'phone', 'addres', 'postal_code', 'payment_method']
 
 class ContactForm(ModelForm):
     class Meta:

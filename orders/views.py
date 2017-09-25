@@ -23,9 +23,9 @@ def OrderCreate(request):
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
+            myname = form.cleaned_data['myname']
             email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
             addres = form.cleaned_data['addres']
             postal_code = form.cleaned_data['postal_code']
             recepients = ['blazer-05@mail.ru']
@@ -38,19 +38,19 @@ def OrderCreate(request):
                                          diameter=item['diameter'],
                                          )
             context = {
-                'first_name': first_name,
-                'last_name': last_name,
+                'myname': myname,
                 'email': email,
                 'addres': addres,
                 'postal_code': postal_code,
                 'order': order,
                 'cart': cart,
                 'form': form,
+                'phone': phone,
                 'payment_method': payment_method,
             }
 
             message = render_to_string('orders/mailbox/email-2.html', context)
-            email = EmailMessage('Поступил новый заказ на конус   odrova.ru ! ', message, 'blazer-05@mail.ru', recepients)
+            email = EmailMessage((myname), message, 'blazer-05@mail.ru', recepients)
             email.content_subtype = 'html'
             email.send()
 

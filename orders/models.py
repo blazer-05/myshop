@@ -12,10 +12,11 @@ PAYMENT_CHOICES = (
 ("interkassa", "Онлайн оплата(Interkassa)")
 )
 class Order(models.Model):
-    first_name = models.CharField(max_length=50, verbose_name='Имя')
-    last_name = models.CharField(max_length=50, verbose_name='Фамилия')
+    name_tems = models.CharField(max_length=150, verbose_name='Заголовок темы', blank=True)
+    myname = models.CharField(max_length=150, verbose_name='ФИО')
     email = models.EmailField(verbose_name='Email')
     addres = models.CharField(max_length=200, verbose_name='Адрес')
+    phone = models.CharField(max_length=20, verbose_name='Телефон', blank=True)
     postal_code = models.CharField(max_length=20, verbose_name='Почтовый код')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлен')

@@ -38,6 +38,7 @@ class Product(models. Model):
     available = models.BooleanField(default=True, verbose_name='Доступен')
     new = models.BooleanField(default=False, verbose_name='Новый товар')
     vip = models.BooleanField(default=False, verbose_name='vip товар')
+    akciya = models.BooleanField(default=False, verbose_name='Акция')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     diameter_default = models.IntegerField(default=30, verbose_name='Ø по умолчанию')

@@ -1270,6 +1270,20 @@ font-weight: 400;
     /*text-decoration: underline;*/
     border-radius: 0 0 0 7px;
 }
+.item-thum .akciya{
+  position: absolute;
+    right: 0;
+    top:0;
+    background: red;
+    padding: 3px 5px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    font-family: 'BeauSansPro_4';
+    font-weight: normal;
+    /*text-decoration: underline;*/
+    border-radius: 0 0 0 7px;
+}
 .old-price{
     width: 30%;
     color: #1F1F1F;
@@ -1672,7 +1686,7 @@ font-weight: 400;
 }
 .item-thumb{
     position: relative;
-    width: 50%;
+    width: 80%;
     margin: 0 auto 2% auto;
     background: #fff;
     padding: 1% 10px;
@@ -1697,7 +1711,7 @@ font-weight: 400;
    
 }
 .item-slider {
-      width: 50%;
+      width: 60%;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 31.5% 31.5% 31.5%;

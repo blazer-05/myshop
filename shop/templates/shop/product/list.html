@@ -187,6 +187,12 @@
                                    </div>
                                     {% endif %}
 
+                                   {% if product.akciya %}
+                                   <div class="akciya">
+                                    Акция
+                                   </div>
+                                    {% endif %}
+
                                <a href="{{ product.get_absolute_url }}">
                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" >
                                </a>
