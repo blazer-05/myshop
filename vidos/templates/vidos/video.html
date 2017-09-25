@@ -1,0 +1,387 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ video }}{% endblock %}
+
+{% block content %}
+
+<div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+<div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger"class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+        <main  class="site-main" role="main">
+             <section id="video-block">
+            <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="{% url 'shop:video' %}">/Видео</a></li>
+                </ul>
+             </div>
+        <div class="content">
+            <h1>ОТЗЫВЫ О КОЛУНЕ ОТ НАШИХ ПОКУПАТЕЛЕЙ - ред:</h1>
+            <h2>Желаете оставить свой отзыв?</h2>
+            <h3><a class="nonblock" href="#mc-container">Жмите сюда для отзывов и предложений</a></h3>
+            {% for vid in video %}
+            <div class="video-page-wrap">
+                <div class="video-item" >
+                    <div class="item-video-inner">
+                    <iframe src="{{ vid.links }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="youtube-box">
+                <div class="yotube-text">
+                    Еще больше отзывов на нашем канале:
+                </div>
+                <div class="youtube-btn">
+                 <a href="https://www.youtube.com/channel/UCI9rBB6TUHE-XZ_elwOi-cg" target="_blank"><img src="{% static 'img/yotube-btn.png' %}" alt="" /></a>
+                </div>
+            </div>
+            <div class="social-box">
+                <div class="social-text">
+                    Мы в социальных сетях:
+                </div>
+                <div class="social-list" id="social">
+                    <ul class="social-icons">
+                      <li><a href="https://vk.com/odrova8" title="Вконтакте" target="_blank"><img src="{% static 'img/soc-i-vk.png' %}" alt=""/></a></li>
+                      <li><a href="https://www.facebook.com/groups/132544753956741/" title="Фейсбук" target="_blank"><img src="{% static 'img/soc-i-fac.png' %}" alt=""/></a></li>
+                      <li><a href="https://m.ok.ru/group/53238553706648" title="Одноклассники" target="_blank"><img src="{% static 'img/soc-i-ok.png' %}" alt=""/></a></li>
+                    </ul>
+                </div>
+            </div>
+         </div>
+        </section>
+            <section class="comments">
+              <div class="cackle-comments">
+                <div id="mc-container"></div>
+                    <a id="mc-link" href="https://cackle.me">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a>
+               </div>
+     </section>
+    </main>
+
+{% endblock %}
+
+
+{% comment %}
+
+
+ <div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола</p>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="oplata_dostavka.html">Оплата и доставка</a></li>
+                                <li><a href="otzivi.html">Отзывы</a></li>
+                                <li><a href="faq.html">Вопрос-Ответ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+<div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <p>Комплектующие для винтового</p>
+                   <p>конусного дровокола</p>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger"class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li class="has-children"><a href="katalog.html">Каталог</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="oplata_dostavka.html">Оплата и доставка</a></li>
+                                <li><a href="otzivi.html">Отзывы</a></li>
+                                <li><a href="faq.html">Вопрос-Ответ</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+        <main  class="site-main" role="main">
+             <section id="video-block">
+            <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="{% url 'shop:video' %}">/Видео</a></li>
+                </ul>
+             </div>
+        <div class="content">
+            <h1>ОТЗЫВЫ О КОЛУНЕ ОТ НАШИХ ПОКУПАТЕЛЕЙ:</h1>
+            <h2>Желаете оставить свой отзыв?</h2>
+            <h3><a class="nonblock" href="#mc-container">Жмите сюда для отзывов и предложений</a></h3>
+            <div class="video-page-wrap">
+                <div class="video-item" >
+                    <div class="item-video-inner">
+	                   <iframe src="https://www.youtube.com/embed/Yr2UbE_cUlU" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                     </div>
+                <div class="video-item">
+                    <div class="item-video-inner">
+                    <iframe src="https://www.youtube.com/embed/kF0gxjyMS_A" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-item" >
+                    <div class="item-video-inner">
+                    <iframe src="https://www.youtube.com/embed/Fg1L5mdPF1g" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-item" >
+                    <div class="item-video-inner">
+                    <iframe src="https://www.youtube.com/embed/Mo1bfkvk-Lw" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-item" >
+                    <div class="item-video-inner">
+                    <iframe src="https://www.youtube.com/embed/_Y2h2hqkSqM" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-item" >
+                    <div class="item-video-inner">
+                    <iframe src="https://www.youtube.com/embed/ew2n3rHnADY" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="youtube-box">
+                <div class="yotube-text">
+                    Еще больше отзывов на нашем канале:
+                </div>
+                <div class="youtube-btn">
+                 <a href="https://www.youtube.com/channel/UCI9rBB6TUHE-XZ_elwOi-cg" target="_blank"><img src="{% static 'img/yotube-btn.png' %}" alt="" /></a>
+                </div>
+            </div>
+            <div class="social-box">
+                <div class="social-text">
+                    Мы в социальных сетях:
+                </div>
+                <div class="social-list">
+                    <ul class="social-icons">
+                      <li><a href="https://vk.com/odrova8" title="Вконтакте" target="_blank"><img src="{% static 'img/soc-i-vk.png' %}" alt=""/></a></li>
+                      <li><a href="https://www.facebook.com/groups/132544753956741/" title="Фейсбук" target="_blank"><img src="{% static 'img/soc-i-fac.png' %}" alt=""/></a></li>
+                      <li><a href="https://m.ok.ru/group/53238553706648" title="Одноклассники" target="_blank"><img src="{% static 'img/soc-i-ok.png' %}" alt=""/></a></li>
+                    </ul>
+                </div>
+            </div>
+         </div>
+        </section>
+            <section class="comments">
+              <div class="cackle-comments">
+                <div id="mc-container"></div>
+                    <a id="mc-link" href="https://cackle.me">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a>
+               </div>
+     </section>
+    </main>
+
+{% endcomment %}
