@@ -8,6 +8,6 @@ urlpatterns = [
     # url(r'^catalog/(?P<category_slug>[-\w]+)/$', views.ProductList, name='ProductListByCategory'),
     # url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.ProductDetail, name='ProductDetail'),
 
-    url(r'^', views.video, name='video'),
+    url(r'^$', views.video, name='youtube'),
 
 ]

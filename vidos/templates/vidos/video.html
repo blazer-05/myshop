@@ -23,7 +23,7 @@
                     <div class="hd-block">
                         <nav id="main-nav">
                             <ul id="main-menu">
-                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
                                 <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
@@ -112,7 +112,7 @@
             </div>
             <nav class="mobile-navigation">
                <ul id="mobile-menu">
-                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
                                 <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
@@ -135,7 +135,7 @@
             <div class="pagination">
                 <ul id="paginate">
                     <li><a href="/">Главная</a></li>
-                    <li><a href="{% url 'shop:video' %}">/Видео</a></li>
+                    <li><a href="{% url 'vidos:youtube' %}">/Видео</a></li>
                 </ul>
              </div>
         <div class="content">
@@ -179,29 +179,28 @@
         </section>
             <section class="pagination-wrap">
             <ul class="pagination">
-            {% if video.has_other_pages %}
-                  <ul class="pagination">
-                    {% if video.has_previous %}
-                      <li><a href="?page={{ video.previous_page_number }}">&laquo;Назад</a></li>
-                    {% else %}
-                      <li class="disabled"><span>&laquo;</span></li>
-                    {% endif %}
-                    {% for i in video.paginator.page_range %}
-                      {% if video.number == i %}
-                        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
-                      {% else %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
-                      {% endif %}
-                    {% endfor %}
-                    {% if video.has_next %}
-                      <li><a href="?page={{ video.next_page_number }}">&raquo;Вперед</a></li>
-                    {% else %}
-                      <li class="disabled"><span>&raquo;</span></li>
-                    {% endif %}
-                  </ul>
-            {% endif %}
+                {% if video.has_other_pages %}
+                      <ul class="pagination">
+                        {% if video.has_previous %}
+                          <li><a href="?page={{ video.previous_page_number }}">&laquo;Назад</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in video.paginator.page_range %}
+                          {% if video.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if video.has_next %}
+                          <li><a href="?page={{ video.next_page_number }}">&raquo;Вперед</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                      </ul>
+                {% endif %}
             </section>
-        </section>
             <section class="comments">
               <div class="cackle-comments">
                 <div id="mc-container"></div>
@@ -233,7 +232,7 @@
                     <div class="hd-block">
                         <nav id="main-nav">
                             <ul id="main-menu">
-                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
                                 <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
@@ -321,7 +320,7 @@
             </div>
             <nav class="mobile-navigation">
                <ul id="mobile-menu">
-                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
                                 <li class="has-children"><a href="katalog.html">Каталог</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
@@ -344,7 +343,7 @@
             <div class="pagination">
                 <ul id="paginate">
                     <li><a href="/">Главная</a></li>
-                    <li><a href="{% url 'shop:video' %}">/Видео</a></li>
+                    <li><a href="{% url 'vidos:youtube' %}">/Видео</a></li>
                 </ul>
              </div>
         <div class="content">
