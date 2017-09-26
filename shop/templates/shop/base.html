@@ -20,6 +20,8 @@
 
 <script src="{% static 'fancybox/jquery.fancybox-1.2.1.pack.js' %}" type="text/javascript"></script>
 
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
     $("a.gallery").fancybox();
@@ -56,6 +58,7 @@ $(document).ready(function() {
          <input type="text" id="adress" name="adress" placeholder="Адрес доставки посылки"/>
          <input type="text" id="diametr" name="diament" placeholder="Ваш диаметр Ø вала мм" />
          <textarea id="description" name="description" placeholder="Примечание"></textarea>
+         <div class="g-recaptcha" data-sitekey="6Ldq9jEUAAAAAM0bqU7rOTTtsCKVJbope4LPfHQQ"></div>
          <input type="submit" value="Отправить" class="action-btn" />
             </form>
     </div>

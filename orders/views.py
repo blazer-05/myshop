@@ -9,6 +9,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 
+from g_recaptcha.validate_recaptcha import validate_captcha
+
 from interkassa_merchant.forms import PaymentRequestForm
 from .models import OrderItem, Order, MailBox
 from .forms import OrderCreateForm, ContactForm
@@ -97,6 +99,7 @@ def AdminOrderDetail(request, order_id):
 #     return response
 
 # Функция формы обратной связи
+@validate_captcha
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -136,7 +139,7 @@ def contact(request):
     else:
         form = ContactForm()
     # Выводим форму в шаблон
-    return render(request, 'shop/index.html', {'form': form})
+    return render(request, 'shop/index.html', {'form': form, 'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY,})
 
 # Функция формы обратной связи - релирект на страницу /thanks/
 def thanks(request):

@@ -142,15 +142,19 @@
             <h1>ОТЗЫВЫ О КОЛУНЕ ОТ НАШИХ ПОКУПАТЕЛЕЙ - ред:</h1>
             <h2>Желаете оставить свой отзыв?</h2>
             <h3><a class="nonblock" href="#mc-container">Жмите сюда для отзывов и предложений</a></h3>
-            {% for vid in video %}
             <div class="video-page-wrap">
+            {% for vid in video %}
                 <div class="video-item" >
+                    <div class="video-info">
+                        <div class="video-info--title">{{ vid.title }}</div>
+                        <div class="video-info--description">{{ vid.text }}</div>
+                    </div>
                     <div class="item-video-inner">
                     <iframe src="{{ vid.links }}" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
-            </div>
             {% endfor %}
+            </div>
             <div class="youtube-box">
                 <div class="yotube-text">
                     Еще больше отзывов на нашем канале:
@@ -172,6 +176,31 @@
                 </div>
             </div>
          </div>
+        </section>
+            <section class="pagination-wrap">
+            <ul class="pagination">
+            {% if video.has_other_pages %}
+                  <ul class="pagination">
+                    {% if video.has_previous %}
+                      <li><a href="?page={{ video.previous_page_number }}">&laquo;Назад</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in video.paginator.page_range %}
+                      {% if video.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if video.has_next %}
+                      <li><a href="?page={{ video.next_page_number }}">&raquo;Вперед</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+            {% endif %}
+            </section>
         </section>
             <section class="comments">
               <div class="cackle-comments">
