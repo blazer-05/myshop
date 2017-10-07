@@ -60,7 +60,7 @@ div#fancy_outer {
 	position: absolute;
     top: 0;
     left: 0;
-    z-index: 999999;
+    z-index: 90;
     padding: 18px 18px 33px 18px;
     margin: 0;
     overflow: hidden;

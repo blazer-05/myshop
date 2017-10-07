@@ -293,6 +293,7 @@ div#fancy_title table {
 }
 
 div#fancy_title table td {
+	margin: 0 auto;
 	padding: 0;
 	vertical-align: middle;
 }

@@ -27,7 +27,7 @@
                     <div class="hd-block">
                         <nav id="main-nav">
                             <ul id="main-menu">
-                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
                                 <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
@@ -116,7 +116,7 @@
             </div>
             <nav class="mobile-navigation">
                <ul id="mobile-menu">
-                                <li><a href="{% url 'shop:video' %}">Видео</a></li>
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
                                 <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
                                 <ul class="sub-menu">
                                   {% for cat in categories %}
