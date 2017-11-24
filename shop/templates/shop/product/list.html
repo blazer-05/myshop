@@ -17,9 +17,11 @@
                             </div>
                         </div>
                             <div class="site-description">
+                                <a href="/">
                             <p>Комплектующие для винтового</p>
                                 <p>конусного дровокола.</p>
                                 <p>Конуса для дров</p>
+                                </a>
                             </div>
                     </div>
                     <div class="hd-block">
@@ -38,7 +40,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -74,9 +76,11 @@
                  </div>
                </div>
                <div class="site-description">
+                   <a href="/">
                             <p>Комплектующие для винтового</p>
                                 <p>конусного дровокола.</p>
                                 <p>Конуса для дров</p>
+                   </a>
                 </div>
                 <div id="menu-button">
                     <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
@@ -127,7 +131,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
                             </ul>
 
               </nav>
@@ -139,7 +143,7 @@
                     <ul id="paginate">
                         <li><a href="/">Главная</a></li>
                         <li><a href="/catalog/">/Товары</a></li>
-                        <li><a href="">/{{ category.name }}</a></li>
+                        <li><a href="">{{ category.name }}</a></li>
                     </ul>
                  </div>
                 <br>
@@ -148,7 +152,7 @@
                         {% if category %}
                             <h1>{{ category.name }}</h1>
                         {% else %}
-                            <h1>Каталог наших товаров</h1><br>
+                            <h1>Каталог наших товаров с Бесплатной доставкой по России.</h1><br>
                                 <div class="katalog-desc">
                                     {% for cat in desc %}
                                         {{ cat.desc_catalog }}
@@ -239,6 +243,7 @@
                                     {% csrf_token %}
                                 <center class="single-item-more-desc">{{ product.get_form.as_p }}</center><br>
                                  <div class="item-action-btn">
+                                     <p><script src="http://megatimer.ru/s/4b8eb0c40c36b499d107a6ff7774621a.js"></script></p><br>
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>
                             </form>
@@ -306,13 +311,13 @@
                         </div>
                         <div class="ship-box-title">
                             <p>Доставка по России</p>
-                            <p>и СНГ - от 250 руб.</p>
+                            <p></p>
                         </div>
                         <div class="ship-box-desc">
                             <p>Мы отправляем наши товары</p>
-                            <p>из г.Екатеринбург почтой России</p>
-                            <p>наложенным платежом или</p>
-                            <p>транспортной компанией</p>
+                            <p>из г.Екатеринбург почтой России <b>(POCHTA.RU)</b></p>
+                            <p>и Транспортными компаниями <b>CDEK.ru</b> и <b>DPD.ru</b> с 20 Ноября 2017г</p>
+                            <p>доставка БЕСПЛАТНО!   Оплата при по получении, после  осмотра изделия.</p>
                         </div>
                     </div>
                     <div class="ship-box">

@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^payment/', include('payment.urls', namespace='payment')),
     url(r'^merchant/', include('interkassa_merchant.urls')),
     url(r'^youtube/', include('vidos.urls', namespace='vidos')),
+    url(r'^faq/', include('faq.urls', namespace='faq')),
 ]
 
 if settings.DEBUG:

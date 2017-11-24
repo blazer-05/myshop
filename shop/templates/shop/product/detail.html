@@ -18,9 +18,11 @@
                             </div>
                         </div>
                             <div class="site-description">
+                                <a href="/">
                             <p>Комплектующие для винтового</p>
                                 <p>конусного дровокола.</p>
                                 <p>Конуса для дров</p>
+                                </a>
                             </div>
                     </div>
                     <div class="hd-block">
@@ -39,7 +41,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -75,9 +77,11 @@
                  </div>
                </div>
                <div class="site-description">
+                   <a href="/">
                             <p>Комплектующие для винтового</p>
                                 <p>конусного дровокола.</p>
                                 <p>Конуса для дров</p>
+                   </a>
                 </div>
                 <div id="menu-button">
                     <div id="hamburger"class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
@@ -128,7 +132,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="{% url 'shop:faq' %}">Вопросы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
                </ul>
 
               </nav>
@@ -147,12 +151,12 @@
          <div  class="single-item-wrap">
               <div class="item-gallery">
               <a href="{{ product.image.url }}" class="gallery" rel="group" title="{{ product.name }}">
-                  <div class="item-thumb"><img id="mainImage" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" alt="" /></div>
+                  <div class="item-thumb"><img id="mainImage" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" alt="{{ product.name }}" /></div>
               </a>
                   <ul class="item-slider">
                         {% for albom in alboms %}
               <a href="{{ albom.images.url }}" class="gallery" rel="group" title="{{ albom.name }}">
-                      <li><img src="{% if albom.images %}{{ albom.images.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" alt="" /></li>
+                      <li><img src="{% if albom.images %}{{ albom.images.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" alt="{{ albom.name }}" /></li>
               </a>
                     {% endfor %}
                    </ul>
@@ -187,24 +191,24 @@
                     </div>
                 </div>
              <div class="single-item-more">
-              <div class="single-item-more-desc">
-                 <p>Вес - {{ product.massa }} кг</p>
-                 <p>Размеры (Диаметр х Длина)  - {{ product.netto }} мм.</p>
-                    {% if product.stock %}
-                 <p>Есть в наличии - {{ product.stock }} шт.</p>
-                        {% else %}
-                        <p>Нет в наличии</p>
-                    {% endif %}
-                  <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
-                    {% csrf_token %}
-                    <p>{{ cart_product_form.as_p }}</p>
-                 </div>
-                 <div class="single-item-more-action">
-                    <input type="image" src="{% static 'img/item-action-btn.png' %}">
-                 </div>
-                 </form>
+                  <div class="single-item-more-desc-2">
+                     <p>Вес - {{ product.massa }} кг</p>
+                     <p>Размеры (Диаметр х Длина)  - {{ product.netto }} мм.</p>
+                        {% if product.stock %}
+                     <p>Есть в наличии - {{ product.stock }} шт.</p>
+                            {% else %}
+                            <p>Нет в наличии</p>
+                        {% endif %}
+                      <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+                        {% csrf_token %}
+                        <p>{{ cart_product_form.as_p }}</p>
+                     </div>
+                     <div class="single-item-more-action">
+                        <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                     </div>
+                     </form>
+                  </div>
              </div>
-                </div>
          </div>
          <div class="item-desc">
               <div class="item-desc-tabs">
@@ -262,6 +266,12 @@
                                    </div>
                                     {% endif %}
 
+                                    {% if product.akciya %}
+                                   <div class="akciya">
+                                    Акция
+                                   </div>
+                                    {% endif %}
+
                                <a href="{{ product.get_absolute_url }}">
                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" >
                                </a>
@@ -308,6 +318,7 @@
                                     {% csrf_token %}
                                 <center class="single-item-more-desc">{{ cart_product_form.as_p }}</center><br>
                                  <div class="item-action-btn">
+                                     <p><script src="http://megatimer.ru/s/4b8eb0c40c36b499d107a6ff7774621a.js"></script></p><br>
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>
                             </form>

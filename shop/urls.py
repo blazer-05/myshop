@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^videos/', views.video, name='video'),
     url(r'^oplata_dostavka/', views.oplata_dostavka, name='oplata_dostavka'),
     url(r'^otzivi/', views.otzivi, name='otzivi'),
-    url(r'^faq/', views.faq, name='faq'),
+    #url(r'^faq/', views.faq, name='faq'),
+
 ]

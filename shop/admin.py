@@ -28,9 +28,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
-    list_display = ['name', 'image_img', 'slug', 'price', 'discount', 'stock', 'netto', 'massa', 'available', 'new', 'vip', 'akciya', 'created', 'updated']
+    list_display = ['name', 'image_img', 'slug', 'price', 'discount', 'stock', 'netto', 'massa', 'available', 'new', 'vip', 'akciya', 'timer', 'created', 'updated']
     list_filter = ['available', 'created', 'updated']
-    list_editable = ['price', 'discount', 'stock', 'netto', 'massa', 'available', 'new', 'vip', 'akciya']
+    list_editable = ['price', 'discount', 'stock', 'netto', 'massa', 'available', 'new', 'vip', 'akciya', 'timer',]
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
     list_per_page = 10  # Вывод количества новостей в админке

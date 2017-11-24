@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from shop.models import Category, Product, Description, Albom
 from cart.forms import CartAddProductForm
+from vidos.models import Video_slider
 
 # Выводим товары
 
@@ -56,14 +57,17 @@ def index(request, category_slug=None):
     categories = Category.objects.all()
     cart_product_form = CartAddProductForm()
     products = Product.objects.filter(available=True)
+    v_slider = Video_slider.objects.filter(is_activ=True)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
+        v_slider = v_slider.filter(is_activ=True)
     return render(request, 'shop/index.html', {
         'category': category,
         'categories': categories,
         'products': products,
         'cart_product_form': cart_product_form,
+        'v_slider': v_slider,
     })
 
 def video(request):

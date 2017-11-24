@@ -15,9 +15,11 @@
                             </div>
                         </div>
                             <div class="site-description">
+                                <a href="/">
                             <p>Комплектующие для винтового</p>
                                 <p>конусного дровокола.</p>
                                 <p>Конуса для дров</p>
+                                </a>
                             </div>
                     </div>
                     <div class="hd-block">
@@ -36,7 +38,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="faq.html">Вопросы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -72,9 +74,11 @@
                  </div>
                </div>
                <div class="site-description">
+                   <a href="/">
                             <p>Комплектующие для винтового</p>
                                 <p>конусного дровокола.</p>
                                 <p>Конуса для дров</p>
+                   </a>
                 </div>
                 <div id="menu-button">
                     <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
@@ -125,7 +129,7 @@
                                 </li>
                                 <li><a href="{% url 'shop:oplata_dostavka' %}">Оплата и доставка</a></li>
                                 <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
-                                <li><a href="faq.html">Вопросы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
                             </ul>
 
               </nav>
@@ -167,13 +171,13 @@
                         </div>
                         <div class="ship-box-title">
                             <p>Доставка по России</p>
-                            <p>и СНГ - от 250 руб.</p>
+                            <p></p>
                         </div>
                         <div class="ship-box-desc">
                             <p>Мы отправляем наши товары</p>
-                            <p>из г.Екатеринбург почтой России</p>
-                            <p>наложенным платежом или</p>
-                            <p>транспортной компанией</p>
+                            <p>из г.Екатеринбург почтой России <b>(POCHTA.RU)</b></p>
+                            <p>и Транспортными компаниями <b>CDEK.ru</b> и <b>DPD.ru</b> с 20 Ноября 2017г</p>
+                            <p>доставка БЕСПЛАТНО!   Оплата при по получении, после  осмотра изделия.</p>
                         </div>
                     </div>
                     <div class="ship-box">
