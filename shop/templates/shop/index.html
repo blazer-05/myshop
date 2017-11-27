@@ -378,13 +378,14 @@
 
                                             </div>
                                         </div>
-                                       {% if slider.need_timer %}
-                                       {#  Таймер для сайта http://e-timer.ru/#}
-                                        {% include 'vidos/etimer.html' %}
-                                             {% else %}
-                                           <div class="slide-else-text">
-                                           На данный момент акции нет.
-                                           </div>
+                                        {% if slider.need_timer %}
+                                            <div class="slide-timer">
+                                                <div class="eTimer" data-etDate='{{ slider.timer_before|date:"Y.m.d.H.i"}}'></div>
+                                            </div>
+                                        {% else %}
+                                            <div class="slide-else-text">
+                                                На данный момент акции нет.
+                                            </div>
                                         {% endif %}
                                         <div class="slide-btn">
                                             <a href="/"> Заказать</a>
@@ -427,7 +428,7 @@
 {#               </div>#}
 {#     </section>#}
 
-
+{% include 'vidos/etimer.html' %}
 
 
 {% endblock %}

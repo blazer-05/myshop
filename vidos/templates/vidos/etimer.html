@@ -1,13 +1,8 @@
 {#  Таймер для сайта http://e-timer.ru/#}
-<div class="slide-timer">
-    <div class="eTimer">
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery(".eTimer").eTimer({
-            etType: 0, etDate: "28.11.2017.0.0", etTitleText: "До окончания акции осталось:", etTitleSize: 20, etShowSign: 1, etSep: " ", etFontFamily: "Trebuchet MS", etTextColor: "#0d0505", etPaddingTB: 0, etPaddingLR: 0, etBackground: "white", etBorderSize: 0, etBorderRadius: 0, etBorderColor: "white", etShadow: " 0px 0px 10px 0px white", etLastUnit: 4, etNumberFontFamily: "Impact", etNumberSize: 30, etNumberColor: "white", etNumberPaddingTB: 0, etNumberPaddingLR: 5, etNumberBackground: "#0d9b32", etNumberBorderSize: 0, etNumberBorderRadius: 0, etNumberBorderColor: "white", etNumberShadow: "inset 0px 0px 10px 0px rgba(0, 0, 0, 0.5)"
+            etType: 0, etDate: $(this).data('etDate'), etTitleText: "До окончания акции осталось:", etTitleSize: 20, etShowSign: 1, etSep: " ", etFontFamily: "Trebuchet MS", etTextColor: "#0d0505", etPaddingTB: 0, etPaddingLR: 0, etBackground: "white", etBorderSize: 0, etBorderRadius: 0, etBorderColor: "white", etShadow: " 0px 0px 10px 0px white", etLastUnit: 4, etNumberFontFamily: "Impact", etNumberSize: 30, etNumberColor: "white", etNumberPaddingTB: 0, etNumberPaddingLR: 5, etNumberBackground: "#0d9b32", etNumberBorderSize: 0, etNumberBorderRadius: 0, etNumberBorderColor: "white", etNumberShadow: "inset 0px 0px 10px 0px rgba(0, 0, 0, 0.5)"
         });
     });
 </script>
-<div class="eTimer"></div>
-        </div>
-</div>

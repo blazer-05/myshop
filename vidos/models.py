@@ -40,5 +40,5 @@ class Video_slider(models.Model):
         return self.title
 
     def need_timer(self):
-        return self.v_timer and self.timer_before and self.timer_before < timezone.now()
+        return self.v_timer and self.timer_before and timezone.now() < self.timer_before
 
