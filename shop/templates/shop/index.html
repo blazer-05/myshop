@@ -323,7 +323,7 @@
                                  <div class="item-action-btn">
                                        {% if product.timer %}
                                     {#  Таймер для сайта http://e-timer.ru/#}
-                                        {% include 'vidos/etimer.html' %}
+{#                                        {% include 'vidos/etimer.html' %}#}
                                        {% endif %}
 
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
@@ -380,7 +380,7 @@
                                         </div>
                                         {% if slider.need_timer %}
                                             <div class="slide-timer">
-                                                <div class="eTimer" data-etDate='{{ slider.timer_before|date:"Y.m.d.H.i"}}'></div>
+                                                <div class="eTimer" data-etDate='{{ slider.timer_before|date:"d.m.Y.H.i"}}'></div>
                                             </div>
                                         {% else %}
                                             <div class="slide-else-text">
@@ -427,6 +427,7 @@
 {#                {% include 'shop/cacle.html' %}#}
 {#               </div>#}
 {#     </section>#}
+
 
 {% include 'vidos/etimer.html' %}
 
