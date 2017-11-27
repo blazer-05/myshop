@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
+
 
 class Video_tube(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок', blank=True)
@@ -25,6 +27,7 @@ class Video_slider(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Цена', blank=True)
     v_timer = models.BooleanField(default=False, verbose_name='Таймер')
     is_activ = models.BooleanField(default=False, verbose_name='Модерация')
+    timer_before = models.DateTimeField(null=True, blank=True, verbose_name='Дата таймера')
     create = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлен')
 
@@ -35,3 +38,7 @@ class Video_slider(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def need_timer(self):
+        return self.v_timer and self.timer_before and self.timer_before < timezone.now()
+
