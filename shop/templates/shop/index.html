@@ -71,7 +71,7 @@
             <h1>КОНУС-КОЛУН</h1>
             <h2>ДЛЯ ВИНТОВОГО ДРОВОКОЛА</h2>
             <div class="home-desc">
-                <p> Доставка по России <br> Транспортными компаниями CDEK.ru и DPD.ru и почтой России доставка БЕСПЛАТНО! <br>  Оплата при по получении, после  осмотра изделия <br>
+                <p> Доставка по России <br> Транспортными компаниями CDEK.ru и DPD.ru и почтой России <span style="color: red; font-weight: bold;">доставка БЕСПЛАТНО!</span> <br>  Оплата при по получении, после  осмотра изделия <br>
                 </p>
                 </div>
             <div class="monitor-1-wrap">
@@ -192,7 +192,7 @@
                  <h1>КОНУС-КОЛУН</h1>
                  <h2>ДЛЯ ВИНТОВОГО ДРОВОКОЛА</h2>
                     <div class="home-desc">
-                <p> Доставка по России <br> Транспортными компаниями CDEK.ru и DPD.ru и почтой России доставка БЕСПЛАТНО! <br>  Оплата при по получении, после  осмотра изделия <br>
+                <p> Доставка по России <br> Транспортными компаниями CDEK.ru и DPD.ru и почтой России <span style="color: red; font-weight: bold;">доставка БЕСПЛАТНО!</span> <br>  Оплата при по получении, после  осмотра изделия <br>
                 </p>
                 </div>
 
@@ -323,16 +323,7 @@
                                  <div class="item-action-btn">
                                        {% if product.timer %}
                                     {#  Таймер для сайта http://e-timer.ru/#}
-                                    <script src="{% static 'js/etimer.js' %}"></script>
-                                    <script type="text/javascript">
-                                        jQuery(document).ready(function() {
-                                            jQuery(".eTimer").eTimer({
-                                                etType: 0, etDate: "28.11.2017.0.0", etTitleText: "До окончания акции осталось:", etTitleSize: 20, etShowSign: 1, etSep: " ", etFontFamily: "Trebuchet MS", etTextColor: "#0d0505", etPaddingTB: 0, etPaddingLR: 0, etBackground: "white", etBorderSize: 0, etBorderRadius: 0, etBorderColor: "white", etShadow: " 0px 0px 10px 0px white", etLastUnit: 4, etNumberFontFamily: "Impact", etNumberSize: 30, etNumberColor: "white", etNumberPaddingTB: 0, etNumberPaddingLR: 5, etNumberBackground: "#0d9b32", etNumberBorderSize: 0, etNumberBorderRadius: 0, etNumberBorderColor: "white", etNumberShadow: "inset 0px 0px 10px 0px rgba(0, 0, 0, 0.5)"
-                                            });
-                                        });
-                                    </script>
-                                    <div class="eTimer"></div>
-
+                                        {% include 'vidos/etimer.html' %}
                                        {% endif %}
 
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
@@ -341,9 +332,9 @@
                             </div>
                             {% endfor %}
                         <!-- Set up your HTML -->
-                        </div>
+                        </div><br><br><br>
                             <div class="homeh2-slider">
-                                <h2>Доставка по России бесплатно!</h2>
+                                <h2>Доставка по России - <span style="color: red; font-weight: bold;">БЕСПЛАТНО!</span></h2>
                             </div>
                     </div>
                 </div>
@@ -357,58 +348,67 @@
               <div id="mc-container2"></div>
                 <h3>УБЕДИТЕСЬ, ЧТО КОЛОТЬ ДРОВА<br>
                     <p>С ПОМОЩЬЮ КОНУСА - БЫСТРО И УДОБНО:</p></h3>
-
-{#                        <iframe width="567" height="425" src="https://www.youtube.com/embed/a0yzUmGoN6s" frameborder="0" allowfullscreen></iframe><br>#}
-
+                            {% if v_slider %}
                             <section id="slider-one">
                                 <div id="owl-one" class="owl-carousel owl-theme">
                                     {% for slider in v_slider %}
                                     <div class="slide-wrap">
+                                        <div class="slide-video">
+                                            <div class="item-video"><a class="owl-video" href="{{ slider.links }}"></a></div>
+                                        </div>
                                         <div class="slide-title">
                                             {{ slider.title }}
-                                        </div>
-                                        <div class="slide-video">
-                                            <iframe width="100%" height="220" src="{{ slider.links }}" frameborder="0" allowfullscreen></iframe>
-                        {#                        <iframe width="567" height="425" src="{{ slider.links }}" frameborder="0" allowfullscreen  ></iframe>#}
                                         </div>
                                         <div class="item-price">
                                             <div class="picelabel">
                                                 <img src="{% static 'img/price-label.png' %}" alt="">
                                             </div>
                                             <div class="price price-sale">
-{#                                                {% if slider.product.discount %}#}
+                                                {% if slider.price %}
                                                 <div class="new-price">
                                                     <span class="form-single-new-price-1"></span>
-                                                    <span class="form-single-new-price-2">{{ slider.product.price|floatformat }}</span>
+                                                    <span class="form-single-new-price-2">{{ slider.price|floatformat }}</span>
                                                     <span class="form-single-new-price-3">₽</span>
                                                 </div>
-{#                                                {% endif %}#}
+                                                    {% else %}
+                                                   Нет пока цены
+                                                {% endif %}
                                             </div>
                                             <div class="price price-sale">
 
                                             </div>
                                         </div>
-                                        <div class="slide-timer">
-                                            <div class="eTimer">
                                        {% if slider.v_timer %}
-                                           Тут должен быть слайдер!
+                                       {#  Таймер для сайта http://e-timer.ru/#}
                                         {% include 'vidos/etimer.html' %}
-
-                                       {% endif %}
-                                            </div>
-                                        </div>
+                                             {% else %}
+                                           <div class="slide-else-text">
+                                           На данный момент акции нет.
+                                           </div>
+                                        {% endif %}
                                         <div class="slide-btn">
-                                            заказать
+                                            <a href="/"> Заказать</a>
                                         </div>
                                         <div class="slide-link">
-                                            смотреть товар
+                                            {% if slider.link_tovar %}
+                                            <a href="{{ slider.link_tovar }}">Смотреть товар</a>
+                                                {% else %}
+                                                <div class="slide-else-text">
+                                                Подробней о товаре
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 {% endfor %}
                                 </div>
                             </section>
-
-
+                                {% else %}
+                                <div class="video-wrap">
+                                    <div class="video-inner">
+                                        <iframe width="567" height="425" src="https://www.youtube.com/embed/K9sM2o6tzrU?rel=0" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                </div>
+                        {% endif %}
 
 
 

@@ -21,6 +21,8 @@ class Video_tube(models.Model):
 class Video_slider(models.Model):
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     links = models.URLField(verbose_name='Ссылка на ролик')
+    link_tovar = models.URLField(verbose_name='Ссылка на товар', blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Цена', blank=True)
     v_timer = models.BooleanField(default=False, verbose_name='Таймер')
     is_activ = models.BooleanField(default=False, verbose_name='Модерация')
     create = models.DateTimeField(auto_now_add=True, verbose_name='Создан')

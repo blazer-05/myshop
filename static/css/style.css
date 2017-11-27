@@ -122,7 +122,7 @@ p.form-desc-price{line-height:22px;color:#ffffff;font-size:18px;text-align:cente
 .pd20{padding-top:20px;}
 .th-more{font-size:24px;line-height:29px;color:#FFFFFF;text-align:center;font-family:'__Marmelad_5';font-weight:400;position:relative;}
 .th-more a{color:#FFFFFF;text-decoration:underline;}
-.home-photo-wrap{padding:15px;width:70%;margin:1% auto 0 auto;position:relative;}
+.home-photo-wrap{width:70%;margin:1% auto 0 auto;position:relative;}
 .th-more-desc{text-align:center;}
 .photo-text{display:grid;grid-template-columns:25% 25% 25% 25%;}
 .hand-up{padding:0 35px 0 15px;}
@@ -383,7 +383,13 @@ table.order-desc{padding:0;}
 .photo-text{grid-template-columns:100%;padding:0 5px;}
 .home-photo-wrap{padding:0;}
 .photo-text-row{padding:10px 15px;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;}
-.home-slider{width:90%;margin:0 auto;padding:0;}
+@media screen and (max-width: 1024px){
+        .home-slider, #slider-one, #slider-two {
+            width: 90%!important;
+            margin: 0 auto!important;
+            padding: 0!important;
+        }
+    }
 .order-result-info{grid-template-columns:50% 50%;}
 .yotube-text, .social-text, .page-content h1, .cart-oder-action-wrap{width:auto;padding:0;text-align:center;}
 .youtube-btn, .social-list{width:50%;padding:0;margin:0 auto;}
@@ -520,7 +526,7 @@ body {
     padding: 2% 0;
 }
 .slide-wrap{
-    padding: 5px;
+    padding: 1.5%;
     background: #ffffff;
     border-radius: 5px;
 }
@@ -619,18 +625,56 @@ body {
     color: #000000;
 }
 .slide-btn{
-    width: 80%;
-    margin: 2% auto;
-    background: #0d9b32;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    border-radius: 15px;
-    color: #ffffff;
-}
+        width: 80%;
+        margin: 2% auto;
+        background: #0d9b32;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 15px;
+        text-align:center;
+
+    }
+    .slide-btn a{
+        text-align: center;
+        font-family: '__Marmelad_5';
+        font-weight: 400;
+        color: #FFFFFF;
+        font-size: 24px;
+        text-decoration: none;
+    }
 .slide-title{
     font-size: 21px;
     text-align: center;
     font-family: '__Marmelad_5';
     font-weight: 400;
 }
+.slide-link  a{
+        font-size: 21px;
+        text-align: center;
+        /*font-family: '__Marmelad_5';*/
+        font-weight: 700;
+        color: #000000;
+        text-decoration: none;
+    }
+.slide-else-text{
+    color: #000000;
+    font-size: 21px;
+    text-align: center;
+    font-family: '__Marmelad_5';
+}
+@media screen and (max-width: 750px) and (min-width: 415px)
+    {
+        #slider-one, #slider-two {
+            width: 60%!important;
+            margin: 0 auto 1em auto;
+            padding: 1.5%!important;
+        }
+    }
+@media screen and (max-width: 1024px) and (min-width: 751px) {
+
+        #slider-one, #slider-two {
+            width: 75%!important;
+            margin: 0 auto 1em auto;
+            padding: 1.5%!important;
+        }
+    }

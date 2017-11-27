@@ -152,7 +152,7 @@
                         {% if category %}
                             <h1>{{ category.name }}</h1>
                         {% else %}
-                            <h1>Каталог наших товаров с Бесплатной доставкой по России.</h1><br>
+                            <h1>Каталог наших товаров с <span style="color: red; font-weight: bold;"><u>Бесплатной доставкой</u></span> по России.</h1><br>
                                 <div class="katalog-desc">
                                     {% for cat in desc %}
                                         {{ cat.desc_catalog }}

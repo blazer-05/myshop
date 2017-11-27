@@ -7,8 +7,8 @@ class Video_tubeAdmin(admin.ModelAdmin):
     list_display = ['title', 'text', 'links', 'is_active', 'create', 'update']
 
 class Video_sliderAdmin(admin.ModelAdmin):
-    list_display = ['title', 'links', 'v_timer', 'is_activ', 'create', 'update']
-    list_editable = ['v_timer', 'is_activ']
+    list_display = ['title', 'price', 'v_timer', 'is_activ', 'create', 'update']
+    list_editable = ['price', 'v_timer', 'is_activ']
 
 
 admin.site.register(Video_tube, Video_tubeAdmin)

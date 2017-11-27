@@ -4,8 +4,10 @@ from __future__ import unicode_literals
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 from vidos.models import Video_tube
+from shop.models import Product
 
 def video(request):
+    products = Product.objects.all()
     video = Video_tube.objects.filter(is_active=True)
     paginator = Paginator(video, 4)
     page = request.GET.get('page')
@@ -17,4 +19,6 @@ def video(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         video = paginator.page(paginator.num_pages)
-    return render(request, 'vidos/video.html', {'video': video, 'page': page})
+    return render(request, 'vidos/video.html', {'video': video,
+                                                'page': page,
+                                                'products': products})

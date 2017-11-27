@@ -106,44 +106,48 @@ $(document).ready(function() {
     </footer>
     </div>
     <script src="{% static 'plugins/owl/owl.carousel.min.js' %}"></script>
-{#    <script>#}
-{#        $(document).ready(function() {#}
-{#            var one = $("#owl-one");#}
-{#            var two = $("#owl-two");#}
-{#        one.owlCarousel({#}
-{#            loop:true,#}
-{#            autoplay:true,#}
-{#            nav:false,#}
-{#            margin:35,#}
-{#            responsive:{#}
-{#                0:{#}
-{#                    items:1,#}
-{#                    nav:false#}
-{#                },#}
-{#                1000:{#}
-{#                    items:3,#}
-{#                    nav:false#}
-{#                }#}
-{#            }#}
-{#        });#}
-{#        two.owlCarousel({#}
-{#            loop:true,#}
-{#            autoplay:true,#}
-{#            nav:true,#}
-{#            margin:35,#}
-{#            responsive:{#}
-{#                0:{#}
-{#                    items:1,#}
-{#                    nav:false#}
-{#                },#}
-{#                1000:{#}
-{#                    items:3,#}
-{#                    nav:false#}
-{#                }#}
-{#            }#}
-{#        });#}
-{#        });#}
-{#    </script>#}
+    <script> {% comment %}Настройки слайдеров менять здесь two-это слайдер с товаром, one-слайдер с видео{% endcomment %}
+        $(document).ready(function() {
+            var one = $("#owl-one");
+            var two = $("#owl-two");
+        one.owlCarousel({
+            loop:true,
+            autoplay:true,
+            nav:false,
+            margin:35,
+            video:true,
+            center:true,
+            videoWidth: 335,
+            videoHeight: 200,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:false
+                },
+                1000:{
+                    items:3,
+                    nav:false
+                }
+            }
+        });
+        two.owlCarousel({
+            loop:true,
+            autoplay:true,
+            nav:false,
+            margin:35,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:false
+                },
+                1000:{
+                    items:3,
+                    nav:false
+                }
+            }
+        });
+        });
+    </script>
    <script src="{% static 'js/scripts.js' %}" type="text/javascript"></script>
    <script src="{% static 'js/etimer.js' %}" type="text/javascript"></script>
 
