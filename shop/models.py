@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils import timezone
+
 
 # Модель категории
 class Category(models.Model):
@@ -40,6 +42,7 @@ class Product(models. Model):
     vip = models.BooleanField(default=False, verbose_name='vip товар')
     akciya = models.BooleanField(default=False, verbose_name='Акция')
     timer = models.BooleanField(default=False, verbose_name='Таймер')
+    timer_before = models.DateTimeField(null=True, blank=True, verbose_name='Дата таймера')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     diameter_default = models.IntegerField(default=30, verbose_name='Ø по умолчанию')
@@ -80,6 +83,10 @@ class Product(models. Model):
             return '(Нет изображения)'
     image_img.short_description = 'Картинка'
     image_img.allow_tags = True
+
+    # Функция для вывода таймера
+    def need_timer(self):
+        return self.timer and self.timer_before and timezone.now() < self.timer_before
 
 # Модель категория для страницы каталога
 class Description(models.Model):

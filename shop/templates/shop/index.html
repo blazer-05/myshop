@@ -321,10 +321,15 @@
                                     {% csrf_token %}
                                 <center class="single-item-more-desc">{{ product.get_form.as_p }}</center><br>
                                  <div class="item-action-btn">
-                                       {% if product.timer %}
-                                    {#  Таймер для сайта http://e-timer.ru/#}
-{#                                        {% include 'vidos/etimer.html' %}#}
-                                       {% endif %}
+                                        {% if product.need_timer %}
+                                            <div class="slide-timer">
+                                                <div class="eTimer" data-etDate='{{ product.timer_before|date:"d.m.Y.H.i"}}'></div>
+                                            </div>
+                                        {% else %}
+                                            <div class="slide-else-text">
+                                                На данный момент акции нет.
+                                            </div>
+                                        {% endif %}
 
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>
