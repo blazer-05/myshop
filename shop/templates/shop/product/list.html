@@ -243,7 +243,15 @@
                                     {% csrf_token %}
                                 <center class="single-item-more-desc">{{ product.get_form.as_p }}</center><br>
                                  <div class="item-action-btn">
-                                     <p><script src="http://megatimer.ru/s/4b8eb0c40c36b499d107a6ff7774621a.js"></script></p><br>
+                                        {% if product.need_timer %}
+                                            <div class="slide-timer">
+                                                <div class="eTimer" data-etDate='{{ product.timer_before|date:"d.m.Y.H.i"}}'></div>
+                                            </div>
+                                        {% else %}
+                                            <div class="slide-else-text">
+                                                На данный момент акции нет.
+                                            </div>
+                                        {% endif %}
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
                                  </div>
                             </form>
@@ -356,7 +364,7 @@
                 </section>
         </main>
 
-
+{% include 'vidos/etimer.html' %}
 
 {% endblock %}
 
