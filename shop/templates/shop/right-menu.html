@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+<div class="kn_2">
+    <div class="knopikBut">
+        Меню сайта
+    </div>
+    <div class="knopikCont">
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="{% url 'shop:ProductList' %}">Наши товары</a></li>
+            <li><a href="{% url 'shop:oplata_dostavka' %}">Доставка</a></li>
+            <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+            <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
+            <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
+            <li><a href="{% url 'articles:articles_list' %}">Статьи</a></li>
+            <li><a href="{% url 'articles:oferta' %}">Договор оферты</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+$(function(){
+	$('.kn_1').liKnopik();
+	$('.kn_2').liKnopik({
+		topPos:'center', //'center' или целое число в пикселях
+		sidePos:'right', //'left' или 'right'
+		startVisible:false //если "true" - содержание кнопки по умолчанию открыто
+	});
+	$('.kn_3').liKnopik({
+		topPos:'300px', //'center' или целое число в пикселях
+		sidePos:'right' //'left' или 'right'
+	});
+});
+</script>
+    <link rel="stylesheet" href="{% static 'liKnopik/css/liKnopik.css' %}">
+{#    <link rel="stylesheet" href="{% static 'liKnopik/css/style.css' %}">#}
+    <script src="{% static 'liKnopik/js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'liKnopik/js/jquery.liKnopik.js' %}"></script>
+    <script src="{% static 'liKnopik/js/jQueryRotate.3.1.js' %}"></script>

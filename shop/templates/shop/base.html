@@ -68,10 +68,13 @@ $(document).ready(function() {
 {% block meta %}{% endblock %}
 {% block jquery_scripts %}{% endblock %}
     <footer>
-        <div class="foter-wrap">
+        <div class="foter-wrap" id="contacts">
             <h3>НАШИ КОНТАКТЫ</h3>
             <h4>Хотите посмотреть, как выглядит конус?</h4>
             <h4>Приходите к нам!</h4>
+            <!-- модальное окно с схемой проезда -->
+            {% include 'modal.html' %}
+            <!-- / модальное окно с схемой проезда -->
             <div class="ft-bg">
                 <div class="ft-block" >
                     <div class="ft-contact">
@@ -89,7 +92,7 @@ $(document).ready(function() {
                         <p class="f-text pd-tb">Почта: a8m888@gmail.com</p>
                         <p class="f-text">Адрес завода: Екатеринбург, В-Пышма</p>
                         <p class="f-text">Успенский пр-т, 131</p>
-                        <p class="f-text pd-t65">Винтовые конусные дровоколы 2014-2017 (с)</p><br>
+                        <p class="f-text pd-t65">Винтовые конусные дровоколы 2014-2018 (с)</p><br>
 {#                        <p class="f-text">Копирование сайта преследуется по закону!</p>#}
                     </div>
                 </div>
@@ -150,13 +153,18 @@ $(document).ready(function() {
     </script>
    <script src="{% static 'js/scripts.js' %}" type="text/javascript"></script>
    <script src="{% static 'js/etimer.js' %}" type="text/javascript"></script>
-
+<!-- Снежок :) -->
+{#  <script src="{% static 'js/sneg/sneg.js' %}" charset="utf-8"></script>#}
+<!-- /Снежок -->
 
 <!-- uSocial https://usocial.pro/project/35955/edit заходить через твиттер-->
 <script async src="https://usocial.pro/usocial/usocial.js?v=6.1.4" data-script="usocial" charset="utf-8"></script>
 <div class="uSocial-Share" data-pid="0294f6d47432b337e5912a7ffffb7f0e" data-type="share" data-options="round-rect,style1,default,left,slide-down,size32,eachCounter1,eachCounter-right,counter0" data-social="fb,vk,ok,mail" data-mobile="vi,wa,sms"></div>
 <!-- /uSocial -->
 
+<!-- liKnopik Боковое выдвижное меню -->
+{% include 'shop/right-menu.html' %}
+<!-- / liKnopik-->
   </body>
 </html>
 

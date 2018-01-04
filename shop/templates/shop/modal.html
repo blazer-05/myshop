@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<div align="center">
+<!-- modalwin модальное окно с контактами -->
+    <link rel="stylesheet" href="{% static 'modalwin/css/style-modal.css' %}">
+{#    <link rel="stylesheet" href="{% static 'modalwin/css/demo-page.css' %}">#}
+    <div class="container">
+{#        <h2>Нажмите на любую кнопку</h2>#}
+{#        <!-- блок кнопок на вызов модальных окон -->#}
+{#        <div style="text-align: center;">#}
+{#		    <a href="#win1" class="button button-green">Открыть окно 1</a>#}
+{#		</div>#}
+        <h1>Нажмите на картинку</h1><br>
+        <!-- вызов окна по клику на миниатюре -->
+        <div style="text-align: center;">
+		    <a href="#win5"><img title="Гиперреализм" src="{% static 'modalwin/img/1.jpg' %}" width="250" height="250" alt="Реалистичные Рисунки" /></a>
+		</div>
+        <!-- Модальное окно 1 -->
+{#        <a href="#x" class="overlay" id="win1"></a>#}
+{#        <div class="popup">#}
+{#            <div class="pic-left">#}
+{#                <a href="http://webformyself.com/aff/dobrovoi/practicerubber"><img src="http://dbmast.ru/wp-content/uploads/2012/11/DVD009.jpg" alt="Практический курс резиновой верстки" /></a>#}
+{#            </div>#}
+{#            <h2>Уважаемые друзья!</h2>#}
+{#			<p>Обращаю Ваше внимание, что <strong>27</strong> ноября, мои коллеги из команды <strong>WebForMySelf</strong> запустили абсолютно новый обучающий курс:#}
+{#            <h3>« Практика резиновой верстки »</h3>#}
+{#            <p>Хотите, чтобы ваш сайт отображался красиво и элегантно в широкоформатных мониторах и также красиво, и аккуратно ужимался в узких?#}
+{#            <h3>Тогда не тяните резину !</h3>#}
+{#			<p>Видеокурс "Практика резиновой верстки сайта" - это <strong>37</strong> качественных уроков, более <strong>19</strong> часов видео с подробными инструкциями.#}
+{#			<p>#}
+{#			Без воды. Лишней теории. Убитого времени. Просто взять и сделать!#}
+{#			<p style="text-align: center;">#}
+{#				<a class="button button-green" href="http://webformyself.com/aff/dobrovoi/practicerubber">Получить »</a>#}
+{#			</p>#}
+{#			<a class="close" title="Закрыть" href="#close"></a>#}
+{#        </div>#}
+
+        <!-- Модальное окно №5 -->
+        <a href="#x" class="overlay" id="win5"></a>
+        <div class="popup">
+            <img class="is-image" title="Гипперреализм" src="{% static 'modalwin/img/Animation.gif' %}" alt="Гипперреализм" />
+            <a class="close" title="Закрыть" href="#close"></a>
+        </div>
+    </div>
+<!-- / modalwin модальное окно с контактами -->
+</div>

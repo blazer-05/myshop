@@ -1,0 +1,198 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ post_full.title }}{% endblock %}
+
+{% block content %}
+
+<div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                                <a href="/">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
+                                <li><a href="#contacts">Контакты</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+         <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <a href="/">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
+                   </a>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
+                                <li><a href="#contacts">Контакты</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+
+<main  class="site-main" role="main">
+   <section id="faq-block">
+     <div class="pagination">
+                <ul id="paginate">
+{#                    <li><a href="/">Главная</a></li>#}
+{#                    <li><a href="{% url 'articles:articles_list' %}">/Статьи</a></li>#}
+                </ul>
+             </div>
+   <br>
+
+
+   <div class="content">
+
+      <link type="text/css" media="all" href="{% static 'articles/dmast/css-dmaster-new.css' %}" rel="stylesheet">
+      <link type="text/css" media="all" href="{% static 'articles/dmast/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Exo+2:300,500&amp;subset=cyrillic" rel="stylesheet">
+
+               <div class="block">
+                  <div class="block-title">
+                     <div xmlns:v="">
+                         <span typeof="v:Breadcrumb"><a href="/" rel="v:url" property="v:title">Главная</a> » <a href="{% url 'articles:articles_list' %}">Статьи</a></span><span typeof="v:Breadcrumb"><a href="" rel="v:url" property="v:title"></a> » {{ post_full.title }}</span></div>
+                  </div>
+
+                     <h7 class="title entry-title">{{ post_full.title }}</h7>
+                     <div class="post-info">
+                         <span class="postdate updated">{{ post_full.create }}</span>
+                         <span class="vcard author">
+                             <span class="fn">{{ post_full.autor }}</span></span>
+                           <span class="view">Просмотрели: {{ post_full.count }}</span>
+                         <span class="comment">3 комментария</span>
+                     </div>
+                     <div class="entry">
+                        {{ post_full.text_full|safe }}
+                     <p class="shortlink">&nbsp;</p>
+                    </div>
+               </div>
+               <div class="block">
+                  <div class="block-title">Другие наши статьи</div>
+                  <ul class="yarlist">
+                      {% for five in top_five_articles %}
+                     <li>
+                     <i class="fa fa-plus-circle" aria-hidden="true">
+                         <a href="{% url 'articles:articles_detail' five.slug %}" rel="bookmark" title="{{ five.title }}"><b>{{ five.title }}</b></a>
+                     </i>
+                     </li>
+                      {% endfor %}
+                  </ul>
+               </div>
+     <section class="comments">
+              <div class="cackle-comments">
+                {% include 'shop/cacle.html' %}
+               </div>
+     </section>
+   </div>
+     </section>
+    </main>
+
+
+{% endblock %}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="ru"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="ru"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="ru"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ru"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модальные всплывающие окна с помощью CSS3 без Javascript</title>
+    <meta name="author" content="Dobrovoimaster" />
+    <meta name="keywords" content="CSS, CSS3, модальное окно, всплывающие окна" />
+    <meta name="description" content="Как с помощью CSS3, без использования javascript и изображений, создать всплывающие модальные окна" />
+    <meta name="robots" content="all" />
+    <meta name="copyright" content="Dobrovoimaster" />
+    <!-- стили демо страницы -->
+	<link rel="stylesheet" href="css/demo-page.css" rel="stylesheet">
+	<!-- стили модального окна -->
+	<link rel="stylesheet" href="css/style-modal.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Dobrovoimaster<span>Пример создания модальных всплывающих окон с помощью CSS3, без javascript и дополнительных изаображений</span>
+		</h1>
+        <hr>
+        <h2>Нажмите на любую кнопку</h2>
+        <!-- блок кнопок на вызов модальных окон -->
+        <div style="text-align: center;">
+		    <a href="#win1" class="button button-green">Открыть окно 1</a>
+            <a href="#win2" class="button button-red">Открыть окно 2</a>
+            <a href="#win3" class="button button-blue">Видео в окне 3</a>
+            <a href="#win4" class="button button-orange">Фото в окне 4</a>
+		</div>
+	    <hr>
+        <h2>Нажмите на миниатюру</h2>
+        <!-- вызов окна по клику на миниатюре -->
+        <div style="text-align: center;">
+		    <a href="#win5"><img title="Гиперреализм" src="img/realism_lrg.jpg" width="150" height="150" alt="Реалистичные Рисунки" /></a>
+		</div>
+        <hr>
+        <!-- Модальное окно 1 -->
+        <a href="#x" class="overlay" id="win1"></a>
+        <div class="popup">
+            <div class="pic-left">
+                <a href="http://webformyself.com/aff/dobrovoi/practicerubber"><img src="http://dbmast.ru/wp-content/uploads/2012/11/DVD009.jpg" alt="Практический курс резиновой верстки" /></a>
+            </div>
+            <h2>Уважаемые друзья!</h2>
+			<p>Обращаю Ваше внимание, что <strong>27</strong> ноября, мои коллеги из команды <strong>WebForMySelf</strong> запустили абсолютно новый обучающий курс:
+            <h3>« Практика резиновой верстки »</h3>
+            <p>Хотите, чтобы ваш сайт отображался красиво и элегантно в широкоформатных мониторах и также красиво, и аккуратно ужимался в узких?
+            <h3>Тогда не тяните резину !</h3>
+			<p>Видеокурс "Практика резиновой верстки сайта" - это <strong>37</strong> качественных уроков, более <strong>19</strong> часов видео с подробными инструкциями.
+			<p>
+			Без воды. Лишней теории. Убитого времени. Просто взять и сделать!
+			<p style="text-align: center;">
+				<a class="button button-green" href="http://webformyself.com/aff/dobrovoi/practicerubber">Получить »</a>
+			</p>
+			<a class="close" title="Закрыть" href="#close"></a>
+        </div>
+        <!-- Модальное окно 2 -->
+        <a href="#x" class="overlay" id="win2"></a>
+        <div class="popup">
+            <div class="pic-right">
+		       <img src="http://dbmast.ru/img/afroseo.jpg" />
+            </div>
+            <h2>Доброго дня или ночи!</h2>
+			<p>
+			Цели и стратегии развития блога, а так же понимание того, что предстоит сделать, прочно нарисовались на горизонте. Продолжается планомерное вгрызание в сообщество блогеров, так сказать, отвоевывание места под солнцем. 
+			Надеюсь когда-нибудь сумею определиться с действительным предназначением и полезностью данного ресурса.
+			<p>
+			Если Вы пришли  сюда не по воле случая, а в поисках ответов на вопрос: &laquo;Как сделать сайт  лучше&raquo;, то убежден, Вы найдете много полезной и интересной информации.
+			<p>
+			При написании статей использовались как свои наработки, так и работы сторонних авторов. Ни какого плагиата, &laquo;Боже упаси!&raquo;, все авторские права соблюдены.Каждая перепечатанная статья имеет подпись и ссылку на источник информации.
+			<p>
+			По всем вопросам пишите мне через <a href="http://dbmast.ru/kontakt">контактную форму</a>, или оставляйте вопросы в комментариях к записям, постараюсь ни один вопрос не оставить без ответа.
+			
+            <p style="text-align: right;">
+                <span style="color: #767676;">(Моим ребятам 1ммг Имам Сахиб  1986-1989 гг.)</span>
+			</p>
+            <a class="close" title="Закрыть" href="#close"></a>
+        </div>
+        <!-- Модальное окно 3 -->
+        <a href="#x" class="overlay" id="win3"></a>
+        <div class="popup">
+            <div class="video">
+		    <iframe width="853" height="480" src="https://www.youtube.com/embed/1IrR7l9pGF0" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <a class="close" title="Закрыть" href="demo.html" onclick = "demo.html(); return false;"></a>
+        </div>
+        <!-- Модальное окно 4 -->
+        <a href="#x" class="overlay" id="win4"></a>
+        <div class="popup">
+            <h2>Гиперреализм</h2>
+            <img class="is-image" src="img/realism_lrg3.jpg" alt="Гиперреализм" />
+            <a class="close" title="Закрыть" href="#close"></a>
+        </div>
+        <!-- Модальное окно №5 -->
+        <a href="#x" class="overlay" id="win5"></a>
+        <div class="popup">
+            <img class="is-image" title="Гипперреализм" src="img/realism_lrg.jpg" alt="Гипперреализм" />
+            <a class="close" title="Закрыть" href="#close"></a>
+        </div>
+        <div class="about">
+            <p class="about-links">
+                <a href="http://dbmast.ru/modalnye-vsplyvayushhie-okna-s-pomoshhyu-css3-bez-javascript" target="_parent">Изучить Материал</a>
+                <a href="http://dbmast.ru/files/css3_modalwin/css3_modalwin.zip" target="_parent">Скачать</a>
+            </p>
+            <p class="about-author">
+			    &copy; 2013 <a href="http://dbmast.ru" target="_blank">Dbmast.ru</a>
+			</p>
+        </div>
+    </div>
+</body>
+</html>

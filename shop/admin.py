@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 from shop.models import Category, Product, Description, Albom
 
 # Функции фильтрации для массовой публикации/снятия с публикации новостей.
@@ -26,7 +27,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_editable = ['available']
     prepopulated_fields = {'slug': ('name', )}
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SummernoteModelAdmin):
     date_hierarchy = 'created'
     list_display = ['name', 'image_img', 'slug', 'price', 'discount', 'stock', 'netto', 'massa', 'available', 'new', 'vip', 'akciya', 'timer', 'created', 'updated']
     list_filter = ['available', 'created', 'updated']

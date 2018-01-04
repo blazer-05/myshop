@@ -531,7 +531,7 @@ body {
     padding: 1.5%;
     background: #ffffff;
     border-radius: 5px;
-    min-height:483px;
+    min-height:600px;
 }
 .item-price {
     text-align: center;
@@ -647,7 +647,7 @@ body {
     }
 .slide-title{
     font-size: 21px;
-    text-align: center;
+    text-align: justify;
     font-family: '__Marmelad_5';
     font-weight: 400;
 }

@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^merchant/', include('interkassa_merchant.urls')),
     url(r'^youtube/', include('vidos.urls', namespace='vidos')),
     url(r'^faq/', include('faq.urls', namespace='faq')),
+    url(r'^summernote/', include('django_summernote.urls')),
+    url(r'^articles/', include('articles.urls', namespace='articles')),
 ]
 
 if settings.DEBUG:

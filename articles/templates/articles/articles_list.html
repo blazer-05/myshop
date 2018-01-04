@@ -1,0 +1,220 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div id="header-wrap" class="header-wrap">
+                    <div class="hd-block">
+                        <div class="logo-inner">
+                            <div id="logo">
+                            <a href="/">
+                                <img src="{% static 'img/logo.png' %}" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                            <div class="site-description">
+                                <a href="/">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="hd-block">
+                        <nav id="main-nav">
+                            <ul id="main-menu">
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
+                                <li><a href="#contacts">Контакты</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                     <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Ваша корзина:<br>
+                                        <a href="{% url 'cart:CartDetail' %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
+                                        </a>
+                                     {% else %}
+                                          Корзина пустая
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+                </div>
+         <div id="mobile-wrap" class="m-header-wrap">
+          <div class="m-top-bar">
+              <div class="logo-inner">
+                 <div id="logo">
+                   <a href="/">
+                     <img src="{% static 'img/logo.png' %}" alt="" />
+                   </a>
+                 </div>
+               </div>
+               <div class="site-description">
+                   <a href="/">
+                            <p>Комплектующие для винтового</p>
+                                <p>конусного дровокола.</p>
+                                <p>Конуса для дров</p>
+                   </a>
+                </div>
+                <div id="menu-button">
+                    <div id="hamburger" class="hamburger hamburger--elastic" tabindex="0" aria-label="Menu" role="button" aria-controls="navigation">
+                        <div class="hamburger-box">
+                            <div class="hamburger-inner"></div>
+                            </div>
+                    </div>
+                      <div class="menu-text">меню</div>
+               </div>
+
+            </div>
+            <div class="m-top-bar">
+                <div class="hd-block">
+                        <div class="header-phone">8 922 035 28 87</div>
+                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
+                    </div>
+                    <div class="hd-block cart-widget">
+                        <div class="shop-cart">
+                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
+                        </div>
+                        <div class="shop-cart-summ">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        Корзина:<br>
+                                        <a href="{% url "cart:CartDetail" %}">
+                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} ₽
+                                        </a>
+                                     {% else %}
+                                          Корзина
+                                    {% endif %}
+                                {% endwith %}
+                        </div>
+                    </div>
+
+            </div>
+            <nav class="mobile-navigation">
+               <ul id="mobile-menu">
+                                <li><a href="{% url 'vidos:youtube' %}">Видео</a></li>
+                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Наши товары</a>
+                                <ul class="sub-menu">
+                                  {% for cat in categories %}
+                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                    </li>
+                                  {% endfor %}
+                                    </ul>
+
+                                </li>
+                                <li><a href="{% url 'shop:oplata_dostavka' %}">Доставка</a></li>
+                                <li><a href="{% url 'shop:otzivi' %}">Отзывы</a></li>
+                                <li><a href="{% url 'faq:faq' %}">Вопросы</a></li>
+                                <li><a href="#contacts">Контакты</a></li>
+                            </ul>
+
+              </nav>
+        </div>
+
+<main  class="site-main" role="main">
+   <section id="faq-block">
+     <div class="pagination">
+                <ul id="paginate">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="{% url 'articles:articles_list' %}">/Статьи</a></li>
+                </ul>
+             </div>
+   <br>
+
+        <div class="content">
+
+        <link type="text/css" media="all" href="{% static 'articles/dmast/css-dmaster-new.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Exo+2:300,500&amp;subset=cyrillic" rel="stylesheet">
+
+
+        <div class="block">
+            <div class="block-title">
+            <div xmlns:v="">
+            <span typeof="v:Breadcrumb"><a href="/" rel="v:url" property="v:title">Главная</a> » </span><a href="{% url 'articles:articles_list' %}">Статьи</a></div>
+            </div>
+        {% for post in posts %}
+            <div class="clearfix" id=""><h7 class="title entry-title"><a href="{% url 'articles:articles_detail' post.slug %}" rel="bookmark" title="">Заголовок&nbsp;— {{ post.title }}</a></h7>
+            <br><br>
+            <div class="post-info">
+
+            <span class="postdate updated">{{ post.create }}</span>
+
+            <span class="vcard author"><span class="fn">{{ post.autor }}</span></span>
+
+            <span class="view">Просмотрели: {{ post.count }}</span> <span class="comment">2 - комментария</span></div>
+
+            <div class="entry">
+            {% if post.image %}
+                <a href="/" rel="bookmark" title="">
+                    <img src="{{ post.image.url }}" class="post_thumbnail alignleft" height="150" width="150">
+                </a>
+                {% else %}
+                <img src="{% static 'articles/dmast/img/noimage.jpg' %}" class="post_thumbnail alignleft" height="150" width="150">
+            {% endif %}
+
+            {{ post.text|safe }}
+
+            <div class="clearfix post-2136 post type-post status-publish format-standard hentry category-shablony-sajtov tag-css3 tag-html tag-stranica-404 tag-uroki tag-shablony">
+            <div class="readmore">
+            <a href="{% url 'articles:articles_detail' post.slug %}" class="butmore" rel="bookmark" title="">Читать статью →</a>
+            </div>
+            </div>
+            </div>
+        {% endfor %}
+            </div>
+            </div>
+     </section>
+    </main>
+
+ <section class="pagination-wrap">
+    <ul class="pagination">
+        {% if posts.has_other_pages %}
+              <ul class="pagination">
+                {% if posts.has_previous %}
+                  <li><a href="?page={{ posts.previous_page_number }}">&laquo;Назад</a></li>
+                {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                  {% if posts.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                  <li><a href="?page={{ posts.next_page_number }}">&raquo;Вперед</a></li>
+                {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+              </ul>
+        {% endif %}
+ </section>
+
+{% endblock %}

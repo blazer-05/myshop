@@ -11,6 +11,7 @@ def video(request):
     video = Video_tube.objects.filter(is_active=True)
     paginator = Paginator(video, 4)
     page = request.GET.get('page')
+
     try:
         video = paginator.page(page)
     except PageNotAnInteger:
@@ -19,6 +20,7 @@ def video(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         video = paginator.page(paginator.num_pages)
+
     return render(request, 'vidos/video.html', {'video': video,
                                                 'page': page,
                                                 'products': products})

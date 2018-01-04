@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>liKnopik</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/liKnopik.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js">\x3C/script>')</script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/jQueryRotate.3.1.js"></script>
+<script src="js/jquery.liKnopik.js"></script>
+
+<script>
+$(function(){
+	$('.kn_1').liKnopik();
+	$('.kn_2').liKnopik({
+		topPos:'50px', //'center' или целое число в пикселях
+		sidePos:'right', //'left' или 'right'	
+		startVisible:true //если "true" - содержание кнопки по умолчанию открыто
+	});
+	$('.kn_3').liKnopik({
+		topPos:'300px', //'center' или целое число в пикселях
+		sidePos:'right' //'left' или 'right'
+	});
+});
+</script>
+</head>
+<body>
+
+	<div class="kn_1">
+		<div class="knopikBut">
+			Помощь сайту
+		</div>
+		<div class="knopikCont">
+			<h3>Помощь сайту masscode.ru?</h3>
+			<p>Понравился сайт? Внесите вклад в его развитие, пожертвовав любую сумму на один из кошельков:</p>
+			<p> 
+				ВебМани:    
+				гривны: U878157792792<br>
+				баксы: Z821422743261<br>
+				рублики: R360648948582<br>
+				евры: E298388086680 
+			</p>
+			<p>Деньги пойдут на оплату серверов, зарплату авторам уроков и на развитие сайта.
+	В примечании к платежу укажите Ваш email. </p>
+		</div>
+	</div>
+	<div class="kn_2">
+		<div class="knopikBut">
+			Рубрики
+		</div>
+		<div class="knopikCont">
+			<ul>
+				<li><a href="#">Видеокурсы</a></li>
+				<li><a href="#">Cinema 4D</a></li>
+				<li><a href="#">Boujou</a></li>
+				<li><a href="#">After Effects</a></li>
+				<li><a href="#">SynthEyes</a></li>
+				<li><a href="#">PF Track</a></li>       
+				<li><a href="#">Программы</a></li>
+				<li><a href="#">Плагины</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="kn_3">
+		<div class="knopikBut">
+			Авторизация
+		</div>
+		<div class="knopikCont">
+			<form>
+				<h3>Авторизация</h3>
+				<p>
+					<label>Логин</label><br>
+					<input type="text">
+				</p>
+				<p>
+					<label>Пароль</label><br>
+					<input type="password">
+				</p>
+				<p>
+					<input type="submit" value="Войти">
+				</p>
+				<p>
+					<a href="#">Регистрация</a><br>
+					<a href="#">Забыли пароль?</a>
+				</p>
+			</form>
+		</div>
+	</div>
+
+
+<div class="conteiner">
+	
+    <p class="descr">
+        liKnopik - jQuery Side Button или боковая кнопка на jQuery<br><br>
+        Плагин liKnopik даёт возможность разместить на сайте скользящий выезжающий блок для размещения в нем любого контента. Блок с контентом можно будет скрывать и показывать нажатием на прикрепленную к нему кнопку.<br>
+		Плагин liKnopik работает совместно с плагином jquery cookie (Klaus Hartl), и дает возможность запомнить состояние плавающего блока (закрытое или открытое).<br>
+        Блоков на одной странице можно размещать неограниченное количество, главное чтобы они друг другу не мешали
+    </p>
+
+	
+	<h2>BUG FIX</h2>
+	<p>	
+		28.05.2013 - При использовании jQuery 2.0 отсутствует поддержка IE 7 и 8<br>
+		28.05.2013 - Поддержка IE 10<br>
+		28.05.2013 - Переписана функция определения IE для поддержки jQuery 1.9+<br>
+		26.01.2013 - Плагин доработан под версии IE 7-9
+	</p>
+	
+	<h2>ПОДКЛЮЧЕНИЕ</h2>
+    <h3>Подключаемые файлы</h3>
+    <p>Подключаем CSS "liKnopik"</p>
+    <pre>
+    	&lt;link rel="stylesheet" href="css/liKnopik.css"&gt;
+    </pre>
+    <p>Подключаем библиотеку "jQuery" и плагины "jquery.cookie", "jQueryRotate", и конечно же "liKnopik":</p>
+    <pre>   
+        &lt;script src="/js/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+        &lt;script src="/js/jquery.cookie.js"&gt;&lt;/script&gt;
+        &lt;script src="/js/jQueryRotate.3.1.js"&gt;&lt;/script&gt;
+        &lt;script src="/js/jquery.liKnopik.js"&gt;&lt;/script&gt;
+    </pre>
+    <h3>Структура HTML</h3>
+    <p>На страничку вставляем следующий код:</p>
+    <pre>
+        &lt;div class="anyClass"&gt;
+            &lt;div class="knopikBut"&gt;
+            	&lt;!-- Текст в кнопке --&gt;
+            &lt;/div&gt;
+            &lt;div class="knopikCont"&gt;
+            	&lt;!-- Выезжающий контент --&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    </pre>
+    <h3>Инициализация плагина</h3>
+    <pre>
+    $('.anyClass').liKnopik({
+        topPos:'50px',      //Положение кнопки по вертикали: 'center' или целое число в пикселях
+        sidePos:'right',    //Положение кнопки по горизонтали: 'left' или 'right'	
+        startVisible:true   //true или false, Если "true" - содержание кнопки по умолчанию открыто
+    });
+    </pre>
+
+	
+	
+	
+	
+	<div class="header">
+    <a target="_blank" href="http://masscode.ru"><img width="270" height="69" title="" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAABFCAYAAAHMXjgoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowMTEyNTNGQTQ1REJFMTExQjJBOEYwMDIzRTg3NzczQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxNDc2NjgwNERFRkExMUUxQkM0NDhEMjNCRjRDMjdBMCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxNDc2NjgwM0RFRkExMUUxQkM0NDhEMjNCRjRDMjdBMCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDowMjEyNTNGQTQ1REJFMTExQjJBOEYwMDIzRTg3NzczQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDowMTEyNTNGQTQ1REJFMTExQjJBOEYwMDIzRTg3NzczQyIvPiA8L3JkZjpEZXNjcmlwdGlv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" /></a>
+    </div>
+</div>
+</body>
+</html>
