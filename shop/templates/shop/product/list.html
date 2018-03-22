@@ -199,12 +199,22 @@
                                    </div>
                                     {% endif %}
 
+                                   {% if product.pod_zakaz %}
+                                   <div class="pod_zakaz">
+                                    Товар под заказ
+                                   </div>
+                                   {% endif %}
+
                                <a href="{{ product.get_absolute_url }}">
                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" >
                                </a>
                                </div>
                                <div class="item-title">
+                                   {% if product.pod_zakaz %}
+                                       <a href="{{ product.get_absolute_url }}"><p style="font-size: 21px; color: #B10E10;">Товар изготавливается под заказ. Срок изготовления 10 дней.</p></a>
+                                       {% else %}
                                {{ product.name }}
+                                   {% endif %}
                                </div>
                                <div class="item-price">
                                    <div class="picelabel">
@@ -254,7 +264,10 @@
                                                 На данный момент акции нет.
                                             </div>
                                         {% endif %}
+                                 {% if product.pod_zakaz %}
+                                     {% else %}
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                                 {% endif %}
                                  </div>
                             </form>
                             </div>

@@ -38,6 +38,7 @@ class Product(models. Model):
     massa = models.CharField(max_length=20, blank=True, verbose_name='Масса')
     stock = models.PositiveIntegerField(verbose_name='На складе')
     available = models.BooleanField(default=True, verbose_name='Доступен')
+    pod_zakaz = models.BooleanField(default=False, verbose_name='Товар под заказ')
     new = models.BooleanField(default=False, verbose_name='Новый товар')
     vip = models.BooleanField(default=False, verbose_name='vip товар')
     akciya = models.BooleanField(default=False, verbose_name='Акция')

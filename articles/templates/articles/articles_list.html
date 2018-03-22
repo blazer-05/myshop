@@ -167,11 +167,11 @@
 
             <span class="vcard author"><span class="fn">{{ post.autor }}</span></span>
 
-            <span class="view">Просмотрели: {{ post.count }}</span> <span class="comment">2 - комментария</span></div>
+            <span class="view">Просмотрели: {{ post.count }}</span> <span class="comment">0 - комментария</span></div>
 
             <div class="entry">
             {% if post.image %}
-                <a href="/" rel="bookmark" title="">
+                <a href="{% url 'articles:articles_detail' post.slug %}" rel="bookmark" title="">
                     <img src="{{ post.image.url }}" class="post_thumbnail alignleft" height="150" width="150">
                 </a>
                 {% else %}

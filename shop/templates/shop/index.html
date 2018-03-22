@@ -100,7 +100,7 @@
                     <p class="form-desc">для лёгкой колки дров</p>
                     <p class="form-desc">по цене всего</p>
                     <p class="form-desc-price">
-                        <span class="form-desc-price-1">3</span>
+                        <span class="form-desc-price-1">5</span>
                         <span class="form-desc-price-2">000</span>
                         <span class="form-desc-price-3"> руб.</span>
                     </p>
@@ -219,7 +219,7 @@
                     <p class="form-desc">для лёгкой колки дров</p>
                     <p class="form-desc">по цене всего</p>
                     <p class="form-desc-price">
-                        <span class="form-desc-price-1">3</span>
+                        <span class="form-desc-price-1">5</span>
                         <span class="form-desc-price-2">000</span>
                         <span class="form-desc-price-3"> руб.</span>
                     </p>
@@ -388,22 +388,22 @@
                                                 <div class="eTimer" data-etDate='{{ slider.timer_before|date:"d.m.Y.H.i"}}'></div>
                                             </div>
                                         {% else %}
-                                            <div class="slide-else-text">
-                                                На данный момент акции нет.
-                                            </div>
+{#                                            <div class="slide-else-text">#}
+{#                                                На данный момент акции нет.#}
+{#                                            </div>#}
                                         {% endif %}
                                         <div class="slide-btn">
                                             <a href="/"> Заказать</a>
                                         </div>
-                                        <div class="slide-link">
-                                            {% if slider.link_tovar %}
-                                            <a href="{{ slider.link_tovar }}">Смотреть товар</a>
-                                                {% else %}
-                                                <div class="slide-else-text">
-                                                Подробней о товаре
-                                                </div>
-                                            {% endif %}
-                                        </div>
+{#                                        <div class="slide-link">#}
+{#                                            {% if slider.link_tovar %}#}
+{#                                            <a href="{{ slider.link_tovar }}">Смотреть товар</a>#}
+{#                                                {% else %}#}
+{#                                                <div class="slide-else-text">#}
+{#                                                Подробней о товаре#}
+{#                                                </div>#}
+{#                                            {% endif %}#}
+{#                                        </div>#}
                                     </div>
                                 {% endfor %}
                                 </div>

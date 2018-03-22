@@ -168,11 +168,12 @@ p.form-desc-price{line-height:22px;color:#ffffff;font-size:18px;text-align:cente
 .grid-item .item-thum{width:100%;height:13em;position:relative;}
 .item-thum .more{position:absolute;left:0;top:0;background:blue;padding:3px 5px;border-radius:0 0 7px 0;}
 .item-thum .more a{color:#fff;text-decoration:none;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;}
-.item-thum .sale{position:absolute;right:0;top:0;background:red;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;border-radius:0 0 0 7px;}
+.item-thum .sale{position:absolute;right:67px;top:0;background:red;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;border-radius:0 0 0 7px;}
 .price-sale{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-pack:distribute;justify-content:space-around;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}
 .item-thum .new{position:absolute;right:0;top:0;background:green;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;border-radius:0 0 0 7px;}
 .item-thum .vip{position:absolute;right:0;top:0;background:#F9D222;padding:3px 5px;color:#000;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:normal;border-radius:0 0 0 7px;}
 .item-thum .akciya{position:absolute;right:0;top:0;background:red;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:normal;border-radius:0 0 0 7px;}
+.item-thum .pod_zakaz{position:absolute;right:0;top:0;background:#000000;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:normal;border-radius:0 0 0 7px;}
 .old-price{width:30%;color:#000000;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;text-decoration:line-through;}
 .form-single-new-price-1{font-size:36px;color:red;line-height:43px;}
 .form-single-new-price-2{font-size:33px;color:red;line-height:40px;}
@@ -531,7 +532,7 @@ body {
     padding: 1.5%;
     background: #ffffff;
     border-radius: 5px;
-    min-height:600px;
+    min-height: 565px;
 }
 .item-price {
     text-align: center;
@@ -616,6 +617,8 @@ body {
 }
 .slide-timer{
     text-align: center;
+    bottom: 11%;
+    right: 7%;
 }
 .slide-link{
     width: 80%;
@@ -635,7 +638,9 @@ body {
         line-height: 45px;
         border-radius: 15px;
         text-align:center;
-
+        position: absolute;
+        bottom: 2%;
+        right: 10%;
     }
     .slide-btn a{
         text-align: center;
@@ -648,8 +653,10 @@ body {
 .slide-title{
     font-size: 21px;
     text-align: justify;
-    font-family: '__Marmelad_5';
+    color: #444;
+    font-family: 'Exo 2',Tahoma,Verdana,Segoe,sans-serif;
     font-weight: 400;
+    min-height: 120px;
 }
 .slide-link  a{
         font-size: 21px;
@@ -681,3 +688,4 @@ body {
             padding: 1.5%!important;
         }
     }
+

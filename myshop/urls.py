@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^faq/', include('faq.urls', namespace='faq')),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^articles/', include('articles.urls', namespace='articles')),
+    url(r'^w1/', include('walletone.urls')),
 ]
 
 if settings.DEBUG:

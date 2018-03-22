@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
+
+from shop.models import Product
 from .models import *
 
 def articles_list(request):
@@ -26,9 +28,13 @@ def articles_list(request):
 def articles_detail(request, slug):
     context = {}
     post_full = get_object_or_404(Articles, slug=slug)
+    post_full.count += 1
+    post_full.save()
     top_five_articles = Articles.objects.all().exclude(slug=slug).order_by()[:3]
+    products = Product.objects.filter(available=True)
     context['post_full'] = post_full
     context['top_five_articles'] = top_five_articles
+    context['products'] = products
     return render(request, 'articles/articles_detail.html', context)
 
 def oferta(request):

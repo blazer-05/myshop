@@ -164,7 +164,13 @@
                    </ul>
                  </div>
                 <div class="item-info">
-                    <h1>{{ product.name }}</h1>
+                    <h1>
+                        {% if product.pod_zakaz %}
+                            <p>Данный товар доступен под заказ. Срок изготовления 10 дней.</p>
+                        {% else %}
+                            {{ product.name }}
+                        {% endif %}
+                    </h1>
               <div class="single-item-price">
                  <div class="single-picelabel">
                  <img src="{% static 'img/price-label.png' %}" alt=""/>
@@ -207,7 +213,10 @@
                         <p>{{ cart_product_form.as_p }}</p>
                      </div>
                      <div class="single-item-more-action">
-                        <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                         {% if product.pod_zakaz %}
+                         {% else %}
+                             <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                         {% endif %}
                      </div>
                      </form>
                   </div>
@@ -230,11 +239,11 @@
                                                 На данный момент акции нет.
                                             </div>
                                       {% endif %}
-                                          <p><span><strong>{{ product.description | linebreaks}}</strong></span></p>
+                                          <p><span><strong>{{ product.description | safe}}</strong></span></p>
                                         </div>
                                         <div class="tab-content">
                                             {% if product.description_two %}
-                                                <p>{{ product.description_two | linebreaks }}</p>
+                                                <p>{{ product.description_two | safe}}</p>
                                                     {% else %}
                                                 <p>Пока нет дополнительной информации.</p>
                                             {% endif %}
