@@ -191,10 +191,16 @@
                         <input type="text" id="postal_code" name="postal_code" placeholder="Ваш почтовый индекс" required />
                         <input type="text" id="addres" name="addres" placeholder="Ваш адрес" required />
 
+                        <ul class="checkbox_dannye">
+                            <input type="checkbox" checked>Разрешаю обработку, хранение и любые операции с персональными данными
+                        </ul>
+
+
                         <ul class="flat-radio-wrapper">
                             <li><input id="payment_method_nal" type="radio" class="flat-input-radio" name="payment_method" value="nal" checked ><label for="payment_method_nal" >Оплата<br> при получении</label></li>
                             <li><input id="payment_method_bank" type="radio" class="flat-input-radio" name="payment_method" value="bank"><label for="payment_method_bank">Перевод на карту<br> или кошелек</label></li>
-                            <li><input id="payment_method_interkassa" type="radio" class="flat-input-radio" name="payment_method" value="interkassa"><label for="payment_method_interkassa">Interkassa <br>(Онлайн)</label></li>
+{#                            <li><input id="payment_method_interkassa" type="radio" class="flat-input-radio" name="payment_method" value="interkassa"><label for="payment_method_interkassa">Interkassa <br>(Онлайн)</label></li>#}
+                            <li><input id="payment_method_walletone" type="radio" class="flat-input-radio" name="payment_method" value="walletone"><label for="payment_method_walletone">walletone <br>(Онлайн)</label></li>
                         </ul>
                         <div class="cart-oder-action-wrap">
                         <input type="image" src="{% static 'img/item-action-btn.png' %}">

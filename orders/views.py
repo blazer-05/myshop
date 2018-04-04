@@ -10,15 +10,16 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 
 from g_recaptcha.validate_recaptcha import validate_captcha
+from walletone.forms import WalletOnePaymentForm
+from walletone.models import WalletOneSuccessPayment
 
 from interkassa_merchant.forms import PaymentRequestForm
-from .models import OrderItem, Order, MailBox
-from .forms import OrderCreateForm, ContactForm
+from .models import OrderItem, Order, MailBox, PostOrder
+from .forms import OrderCreateForm, ContactForm, PostOrderForm
 from cart.cart import Cart
 from .tasks import OrderCreated
 from interkassa_merchant.models import *
 # import weasyprint
-
 
 def OrderCreate(request):
     cart = Cart(request)
@@ -71,17 +72,37 @@ def OrderCreate(request):
 def kassa(request):
     form = None
     order = Order.objects.get(id=request.session['order_id'])
-    if order.payment_method == 'interkassa':
+    if order.payment_method == 'walletone':
         if not order.invoice:
             amount = order.get_total_cost()
             defaults = {'user': User.objects.first(), 'payment_info': 'Заказ номер %s' % order.id, 'amount': amount}
             order.invoice = Invoice.objects.create(**defaults)
             order.save()
         if not order.invoice.is_payed:
-            initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=order.invoice.payment_no, ik_am=order.invoice.amount, ik_desc=order.invoice.payment_info)
-            form = PaymentRequestForm(initial=initial)
+            # initial = dict(ik_co_id=settings.INTERKASSA_ID, ik_pm_no=order.invoice.payment_no, ik_am=order.invoice.amount, ik_desc=order.invoice.payment_info)
+            # form = PaymentRequestForm(initial=initial)
+            initial = {
+                'WMI_PAYMENT_AMOUNT': str(order.invoice.amount),
+                'WMI_DESCRIPTION': order.invoice.payment_info,
+                'WMI_PAYMENT_NO': str(order.id)
+            }
+            form = WalletOnePaymentForm(initial=initial)
     return render(request, 'orders/order/created.html', {'order': order, 'form': form})
 
+# Эта функция тоже рабочая.
+# def kassa(request):
+#     form = None
+#     order = Order.objects.get(id=request.session['order_id'])
+#     if order.payment_method == 'walletone':
+#         is_payed = WalletOneSuccessPayment.objects.filter(WMI_ORDER_ID=str(order.pk)).first()
+#         if not is_payed:
+#             initial = {
+#                 'WMI_PAYMENT_AMOUNT': str(order.get_total_cost()),
+#                 'WMI_DESCRIPTION': 'Заказ номер %s' % order.id,
+#                 'WMI_PAYMENT_NO': str(order.id)
+#             }
+#             form = WalletOnePaymentForm(initial=initial)
+#     return render(request, 'orders/order/created.html', {'order': order, 'form': form})
 
 @staff_member_required
 def AdminOrderDetail(request, order_id):

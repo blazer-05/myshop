@@ -9,6 +9,8 @@
   <title>Комплектующие для винтового конусного дровокола - {% block title %}{% endblock %}</title>
 <link rel="stylesheet" id='style-css' href="{% static "css/style.css" %}">
 
+<link rel="stylesheet" href="{% static 'modalwin/css/style-modal.css' %}">
+
 <link rel="stylesheet" href='{% static 'plugins/owl/owl.carousel.css' %}'>
 <link rel="stylesheet" href='{% static 'plugins/owl/owl.theme.default.css' %}'>
 
@@ -59,6 +61,9 @@ $(document).ready(function() {
          <input type="text" id="adress" name="adress" placeholder="Адрес доставки посылки"/>
          <input type="text" id="diametr" name="diament" placeholder="Ваш диаметр Ø вала мм" />
          <textarea id="description" name="description" placeholder="Примечание"></textarea>
+         <ul class="checkbox_base">
+            <input type="checkbox" checked>Разрешаю обработку, хранение и любые операции с персональными данными
+         </ul>
          <div class="g-recaptcha" data-sitekey="6Ldq9jEUAAAAAM0bqU7rOTTtsCKVJbope4LPfHQQ"></div>
          <input type="submit" value="Отправить" class="action-btn" />
             </form>
@@ -75,6 +80,11 @@ $(document).ready(function() {
             <!-- модальное окно с схемой проезда -->
             {% include 'modal.html' %}
             <!-- / модальное окно с схемой проезда -->
+
+{#            <!-- модальное окно с формой заказа в один клик -->#}
+{#            {% include 'orders/order/post_order.html' %}#}
+{#            <!-- / модальное окно с формой заказа в один клик -->#}
+
             <div class="ft-bg">
                 <div class="ft-block" >
                     <div class="ft-contact">
@@ -107,7 +117,7 @@ $(document).ready(function() {
 
         </div>
     </footer>
-    </div>
+
     <script src="{% static 'plugins/owl/owl.carousel.min.js' %}"></script>
     <script> {% comment %}Настройки слайдеров менять здесь two-это слайдер с товаром, one-слайдер с видео{% endcomment %}
         $(document).ready(function() {
@@ -116,6 +126,7 @@ $(document).ready(function() {
         one.owlCarousel({
             loop:true,
             autoplay:true,
+            autoplayTimeout:5000,
             nav:false,
             margin:35,
             video:true,
@@ -136,6 +147,7 @@ $(document).ready(function() {
         two.owlCarousel({
             loop:true,
             autoplay:true,
+            autoplayTimeout:5000,
             nav:false,
             margin:35,
             responsive:{
@@ -167,172 +179,3 @@ $(document).ready(function() {
 <!-- / liKnopik-->
   </body>
 </html>
-
-{% comment %}
-
-            <form class="form-pop" action="{% url 'orders:contact' %}" method="post">
-                {% csrf_token %}
-            <p>Заказать колун</p>
-         <input type="text" id="fio" name="subject" placeholder="Введите Ваше фио для заказа"/>
-         <input type="text" id="phone" name="phone" placeholder="Ваш телефон"/>
-         <input type="text" id="mail" name="sender" placeholder="Ваш e-mail"/>
-         <input type="text" id="adress" name="adress" placeholder="Адрес доставки посылки"/>
-         <input type="text" id="diametr" name="diament" placeholder="Ваш диаметр Ø вала мм" />
-         <textarea id="description" name="description" placeholder="Примечание"></textarea>
-         <input name="md5" id="md5" type="hidden" value="">
-         <span id="aspm"></span>
-                    <script language="javascript">
-
-                    // функция для генерации случайных чисел в диапазоне от m до n
-                    function randomNumber(m,n){
-                        m = parseInt(m);
-                        n = parseInt(n);
-                        return Math.floor( Math.random() * (n - m + 1) ) + m;
-                    };
-
-                    var aspmA = randomNumber(1,23); // генерируем число
-                    var aspmB = randomNumber(1,23); // генерируем число
-                    var sumAB = aspmA + aspmB;  // вычисляем сумму
-                    document.getElementById('aspm').innerHTML = aspmA + ' + ' + aspmB + ' = ';  // показываем пользователю выражение
-                    document.formName.md5.value = md5(sumAB);  // присваиваем скрытому полю name="md5" контрольную сумму
-
-                    </script>
-         <input name="md5" type="text" style="width:120px;">Антиспам<font color="#cc0000">*</font>
-         <input type="submit" value="Отправить" class="action-btn" onclick="document.getElementById('md5').value = 'stopSpam';" />
-            </form>
-
-
-
-
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="ru-RU">
-<head>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<link rel="icon" type="img/ico" href="{% static 'img/favicon.ico' %}"/>
-  <title>Комплектующие для винтового конусного дровокола {% block title %}{% endblock %}</title>
-<link rel="stylesheet" id='style-css' href="{% static "css/style.css" %}">
-<link rel="stylesheet" href='{% static 'plugins/owl/owl.carousel.css' %}'>
-<link rel="stylesheet" href='{% static 'plugins/owl/owl.theme.default.css' %}'>
-<link rel="stylesheet" href="https://cdn.envybox.io/widget/cbk.css">
-<script src="{% static 'js/jquery-3.1.1.min.js' %}" type="text/javascript"></script>
-<script type="text/javascript" src="https://cdn.callbackkiller.com/widget/cbk.js?wcb_code=29199" charset="UTF-8" async=""></script>
-</head>
-    <body>
-
-        <div class="overlay"></div>
-        <div class="form-pop-up">
-            <form action="" class="form-pop">
-            <p>Заказать колун</p>
-         <input type="text" id="fio" name="fio" placeholder="Введите Ваше фио для заказа" required/>
-         <input type="text" id="phone" name="phone" placeholder="Ваш телефон" required/>
-         <input type="text" id="mail" name="mail" placeholder="Ваш e-mail" required/>
-         <input type="text" id="adress" name="adress" placeholder="дрес доставки посылки" required/>
-         <input type="text" id="diametr" name="diametr" placeholder="Диаметр посадочного отверстия" />
-            <input type="submit" value="Отправить">
-            </form>
-        </div>
-<section id="home-top">
-    <header>
-                <div id="header-wrap" class="header-wrap">
-                    <div class="hd-block">
-                        <div class="logo-inner">
-                            <div id="logo">
-                            <a href="/">
-                                <img src="{% static 'img/logo.png' %}" alt="" />
-                                </a>
-                            </div>
-                        </div>
-                            <div class="site-description">
-                            <p>Комплектующие для винтового</p>
-                                <p>конусного дровокола</p>
-                            </div>
-                    </div>
-                    <div class="hd-block">
-                        <nav id="main-nav">
-                            <ul id="main-menu">
-                                <li><a href="video.html">Видео</a></li>
-                                <li {% if not category %} class="has-children" {% endif %}><a href="{% url "shop:ProductList" %}">Каталог</a>
-                                <ul class="sub-menu">
-                                  {% for cat in categories %}
-                                    <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
-                                      <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-                                    </li>
-                                  {% endfor %}
-                                </ul>
-
-                                </li>
-                                <li><a href="oplata_dostavka.html">Оплата и доставка</a></li>
-                                <li><a href="otzivi.html">Отзывы</a></li>
-                                <li><a href="faq.html">Вопрос-Ответ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="hd-block">
-                        <div class="header-phone">8 922 035 28 87</div>
-                        <div class="btn "><a href="#callbackwidget"><img src="{% static 'img/h-btn-contact.png' %}" alt=""/></a></div>
-                    </div>
-                     <div class="hd-block cart-widget">
-                        <div class="shop-cart">
-                            <img src="{% static 'img/shopping-cart.png' %}" alt=""/>
-                        </div>
-                        <div class="shop-cart-summ">
-                                {% with total_items=cart|length %}
-                                    {% if cart|length > 0 %}
-                                        Ваша корзина:<br>
-                                        <a href="{% url 'cart:CartDetail' %}">
-                                            {{ total_items }} тов. {{ cart.get_total_price|floatformat }} руб.
-                                        </a>
-                                     {% else %}
-                                          Корзина пустая
-                                    {% endif %}
-                                {% endwith %}
-                        </div>
-                    </div>
-                </div>
-    </header>
-                {% block content %}{% endblock %}
-
-    <footer>
-        <div class="foter-wrap">
-            <h3>НАШИ КОНТАКТЫ</h3>
-            <h4>Хотите посмотреть, как выглядит конус?</h4>
-            <h4>Приходите к нам!</h4>
-            <div class="ft-bg">
-                <div class="ft-block" >
-                    <div class="ft-contact">
-                        <p class="f-text f-t">Для заказа звоните:</p>
-                        <p class="f-numb">
-                            <span class="ft-contact-phone">+7 (922) 035-28-87</span>
-                            <span class="ft-contact-i"><img src="{% static 'img/ft-contact-i.png' %}" alt="" /></span>
-                        </p>
-                        <p class="f-text pd-t65">Или обратитесь с помощью формы:</p>
-                        <p class="f-btn"><img src="{% static 'img/f-btn-contact.png' %}" alt=" "/></p>
-                        <p class="f-text pd-tb">Почта: a8m888@gmail.com</p>
-                        <p class="f-text">Адрес завода: Екатеринбург, В-Пышма</p>
-                        <p class="f-text">Успенский пр-т, 131</p>
-                        <p class="f-text pd-t65">Дрова и комплектующие, 2017 (с)</p>
-                        <p class="f-text">Копирование сайта преследуется по закону!</p>
-                    </div>
-                </div>
-                <div class="ft-block" >
-                    <div class="footer-widget">
-                    <img src="{% static 'img/f-widget.png' %}" alt="" />
-                        <iframe class="actAsDiv" style="" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;q=%D0%95%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%BD%D0%B1%D1%83%D1%80%D0%B3%2C%20%D0%92-%D0%9F%D1%8B%D1%88%D0%BC%D0%B0%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80-%D1%82%2C%20131&amp;aq=0&amp;ie=UTF8&amp;t=m&amp;z=16&amp;iwloc=A&amp;output=embed" frameborder="0"></iframe>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </footer>
-    <script src="{% static 'plugins/owl/owl.carousel.min.js' %}"></script>
-   <script src="{% static 'js/scripts.js' %}" type="text/javascript"></script>
-  </body>
-</html>
-
-
-
-{% endcomment %}

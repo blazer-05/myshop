@@ -191,11 +191,15 @@
                             </table>
 
                 {% if form %}
-                    <form role="form" method="post" action="https://sci.interkassa.com/"
-                          accept-charset="UTF-8" name="payment" id="merchant-form">
-                        {% csrf_token %}
-                        {{ form }}
+{#                    <form role="form" method="post" action="https://sci.interkassa.com/"#}
+{#                          accept-charset="UTF-8" name="payment" id="merchant-form">#}
+{#                        {% csrf_token %}#}
+{#                        {{ form }}#}
 {#                        <br><button type="submit" ><img src="{% static 'img/payment.jpg' %}" width="200" ></button>#}
+{#                    <input type="image" src="{% static 'img/payment.jpg' %}" width="200">#}
+{#                    </form>#}
+                    <form action="{{ form.action_url }}" method="POST" accept-charset="UTF-8">
+                        <p>{{ form.as_p }}</p>
                     <input type="image" src="{% static 'img/payment.jpg' %}" width="200">
                     </form>
                 {% endif %}
