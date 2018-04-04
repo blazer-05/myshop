@@ -371,9 +371,15 @@
                     <h2>Форма быстрого заказа</h2>
                     <form class="quick_order_button" action="" method="post" id="contact">
                         {% csrf_token %}
+                        <fieldset>
                         <input type='hidden' name='product' id='id_product'>
+                        </fieldset>
+                        <fieldset>
                         <input type='hidden' name='quantity' id='id_quantity'>
+                        </fieldset>
+                        <fieldset>
                         <input type='hidden' name='diameter' id='id_diameter'>
+                        </fieldset>
                         <fieldset>
                             <input type="text" id="post_name" name="post_name" tabindex="1" placeholder="Фамилия Имя Отчество" required autofocus />
                         </fieldset>
@@ -435,14 +441,14 @@
 <script type="text/javascript">
 $('a.quick_order_button').click(function(){
     var parent = $(this).closest('div.grid-item');
-    var id_product = parent.find('form').attr('action').match(/^\/cart\/add\/(\d+)\//)[1]
-    var id_quantity = parent.find('#id_quantity').val()
-    var id_diameter = parent.find('#id_diameter').val()
+    var id_product = parent.find('form').attr('action').match(/^\/cart\/add\/(\d+)\//)[1];
+    var id_quantity = parent.find('#id_quantity').val();
+    var id_diameter = parent.find('#id_diameter').val();
 
-    var quick_form = $('.quick_order_form')
-    quick_form.find('#id_product').val(id_product)
-    quick_form.find('#id_quantity').val(id_quantity)
-    quick_form.find('#id_diameter').val(id_diameter)
+    var quick_form = $('.quick_order_form');
+    quick_form.find('#id_product').val(id_product);
+    quick_form.find('#id_quantity').val(id_quantity);
+    quick_form.find('#id_diameter').val(id_diameter);
 })
 </script>
     <!-- / Конец Модальное окно для кнопки "Купить в 1 клик" -->
