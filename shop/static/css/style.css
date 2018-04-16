@@ -66,7 +66,7 @@ p.more{display:-webkit-inline-box;display:-ms-inline-flexbox;display:-webkit-box
 .text-center{text-align:center;}
 .mt1-form{min-height:340px;padding-top:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-ms-flex-line-pack:center;align-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding-left:10%;margin-bottom:25%;}
 p.form-desc{color:#FFFFFF;text-align:center;line-height:29px;font-size:30px;text-align:center;font-family:'IsadoraCyr_5';font-weight:400;}
-p.form-desc:nth-child(1){margin-top:-5px;}
+p.form-desc:nth-child(1){margin-top:30px;}
 p.form-desc:nth-child(2), p.form-desc:nth-child(3){padding-bottom:25px;}
 p.form-desc-price{line-height:22px;color:#ffffff;font-size:18px;text-align:center;font-family:'BeauSansPro_5';font-weight:400;padding-bottom:30px;}
 .form-desc-price-1{font-size:36px;color:#FFF343;line-height:43px;}
@@ -168,7 +168,7 @@ p.form-desc-price{line-height:22px;color:#ffffff;font-size:18px;text-align:cente
 .grid-item .item-thum{width:100%;height:13em;position:relative;}
 .item-thum .more{position:absolute;left:0;top:0;background:blue;padding:3px 5px;border-radius:0 0 7px 0;}
 .item-thum .more a{color:#fff;text-decoration:none;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;}
-.item-thum .sale{position:absolute;right:68px;top:0;background:red;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;border-radius:0 0 0 7px;}
+.item-thum .sale{position:absolute;right:60px;top:0;background:red;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;border-radius:0 0 0 7px;}
 .price-sale{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-pack:distribute;justify-content:space-around;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}
 .item-thum .new{position:absolute;right:0;top:0;background:green;padding:3px 5px;color:#fff;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:400;border-radius:0 0 0 7px;}
 .item-thum .vip{position:absolute;right:0;top:0;background:#F9D222;padding:3px 5px;color:#000;font-size:16px;text-align:center;font-family:'BeauSansPro_4';font-weight:normal;border-radius:0 0 0 7px;}
@@ -707,3 +707,12 @@ body {
     margin-top: 5px;
 }
 
+.form-desc1{
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 20px;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'IsadoraCyr_5';
+    padding-bottom: 20px;
+}

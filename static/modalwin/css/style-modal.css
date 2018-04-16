@@ -151,12 +151,12 @@ padding: 10px;
 	}
 }
 /* изображения внутри окна */
-.popup img {
-display: block;
-border: none;
-width: 100%;
-height: auto;
-}
+/*.popup img {*/
+/*display: block;*/
+/*border: none;*/
+/*width: 100%;*/
+/*height: auto;*/
+/*}*/
 /* миниатюры слева/справа */
 .pic-left, 
 .pic-right {
@@ -228,7 +228,7 @@ height: 100%;
 #contact {
   width: 330px;
   /*height: 745px;*/
-  margin-left: 300px;
+  margin-left: 450px;
   margin-top: 10px;
   background: #F9F9F9;
   padding: 25px;
@@ -337,5 +337,6 @@ fieldset {
   color: #888;
 }
 
-
+#quick_order_product .more {display: none}
+#quick_order_product .item-action-btn {display: none}
 /* /Форма заказа в один клик в модальном окне*/

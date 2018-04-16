@@ -19,7 +19,61 @@ from .forms import OrderCreateForm, ContactForm, PostOrderForm
 from cart.cart import Cart
 from .tasks import OrderCreated
 from interkassa_merchant.models import *
+
+from shop.models import Product
+
 # import weasyprint
+'''
+@validate_captcha
+def PostOrderCreate(request):
+    product = Product.objects.all()
+    if request.method == 'POST':
+        form = PostOrderForm(request.POST)
+        if form.is_valid():
+            post_name = form.cleaned_data['post_name']
+            post_email = form.cleaned_data['post_email']
+            post_phone = form.cleaned_data['post_phone']
+            post_adres = form.cleaned_data['post_adres']
+            post_delivery = form.cleaned_data['post_delivery']
+            payment_method = form.cleaned_data['payment_method']
+            post_comments = form.cleaned_data['post_comments']
+            recepients = ['blazer-05@mail.ru']
+
+            base = PostOrder.objects.create(
+                post_name=post_name,
+                post_email=post_email,
+                post_phone=post_phone,
+                post_adres=post_adres,
+                post_delivery=post_delivery,
+                payment_method=payment_method,
+                post_comments=post_comments,
+            )
+            context = {
+                'post_name': post_name,
+                'post_email': post_email,
+                'post_phone': post_phone,
+                'post_adres': post_adres,
+                'post_delivery': post_delivery,
+                'payment_method': payment_method,
+                'post_comments': post_comments,
+                'base': base,
+            }
+            message = render_to_string('orders/mailbox/email_post_order.html', context)
+            email = EmailMessage('Поступил быстрый заказ', message, 'blazer-05@mail.ru', recepients)
+            email.content_subtype = 'html'
+            email.send()
+            # Переходим на другую страницу, если сообщение отправлено
+            return HttpResponseRedirect('/order/thanks/')
+    else:
+        form = PostOrderForm()
+    return render(request, 'orders/order/post_order_create.html', {
+        'form': form,
+        'product': product,
+        'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY,
+    })
+
+'''
+
 
 def OrderCreate(request):
     cart = Cart(request)

@@ -5,16 +5,17 @@ from django.conf import settings
 
 from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import render_to_string
 
-from orders.forms import PostOrderForm
-from orders.models import PostOrder
+from cart.cart import Cart
+from orders.forms import OrderCreateForm
+from orders.models import OrderItem
 
 from shop.models import Category, Product, Description, Albom
 from cart.forms import CartAddProductForm
-from vidos.models import Video_slider
+from vidos.models import Video_slider, Video_tube
 
 from g_recaptcha.validate_recaptcha import validate_captcha
 
@@ -31,7 +32,7 @@ def ProductList(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
 
-    paginator = Paginator(products, 3)
+    paginator = Paginator(products, 20)
     page = request.GET.get('page')
     try:
         products = paginator.page(page)
@@ -71,56 +72,66 @@ def index(request, category_slug=None):
     cart_product_form = CartAddProductForm()
     products = Product.objects.filter(available=True)
     v_slider = Video_slider.objects.filter(is_activ=True)
+    video = Video_tube.objects.filter(is_active=True)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
         v_slider = v_slider.filter(is_activ=True)
+        video = video.filter(is_active=True)
 
     if request.method == 'POST':
-        form = PostOrderForm(request.POST)
+        cart = Cart(request)
+        form = OrderCreateForm(request.POST)
         if form.is_valid():
-            post_name = form.cleaned_data['post_name']
-            post_email = form.cleaned_data['post_email']
-            post_phone = form.cleaned_data['post_phone']
-            post_adres = form.cleaned_data['post_adres']
-            post_delivery = form.cleaned_data['post_delivery']
+            myname = form.cleaned_data['myname']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            addres = form.cleaned_data['addres']
+            postal_code = form.cleaned_data['postal_code']
             payment_method = form.cleaned_data['payment_method']
-            post_comments = form.cleaned_data['post_comments']
+            post_delivery = form.changed_data['post_delivery']
+            post_comments = form.changed_data['post_comments']
             recepients = ['blazer-05@mail.ru']
-
-            base = PostOrder.objects.create(
-                post_name=post_name,
-                post_email=post_email,
-                post_phone=post_phone,
-                post_adres=post_adres,
-                post_delivery=post_delivery,
-                payment_method=payment_method,
-                post_comments=post_comments,
-            )
+            order = form.save()
+            for item in cart:
+                OrderItem.objects.create(order=order, product=item['product'],
+                                         price=item['price'],
+                                         quantity=item['quantity'],
+                                         diameter=item['diameter'],
+                                         )
             context = {
-                'post_name': post_name,
-                'post_email': post_email,
-                'post_phone': post_phone,
-                'post_adres': post_adres,
-                'post_delivery': post_delivery,
+                'myname': myname,
+                'email': email,
+                'addres': addres,
+                'postal_code': postal_code,
+                'order': order,
+                'cart': cart,
+                'form': form,
+                'phone': phone,
                 'payment_method': payment_method,
+                'post_delivery': post_delivery,
                 'post_comments': post_comments,
-                'base': base,
             }
+
             message = render_to_string('orders/mailbox/email_post_order.html', context)
-            email = EmailMessage('Поступил быстрый заказ', message, 'blazer-05@mail.ru', recepients)
+            email = EmailMessage((myname), message, 'blazer-05@mail.ru', recepients)
             email.content_subtype = 'html'
             email.send()
-            # Переходим на другую страницу, если сообщение отправлено
-            return HttpResponseRedirect('/order/thanks/')
+
+            cart.clear()
+            # Асинхронная отправка сообщения
+            #OrderCreated.delay(order.id)
+            request.session['order_id'] = order.id
+            return redirect('/order/success/')
     else:
-        form = PostOrderForm()
+        form = OrderCreateForm()
     return render(request, 'shop/index.html', {
         'category': category,
         'categories': categories,
         'products': products,
         'cart_product_form': cart_product_form,
         'v_slider': v_slider,
+        'video': video,
         'form': form,
         'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY,
     })

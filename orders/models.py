@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.urls import reverse
 
 from interkassa_merchant.models import Invoice
 from shop.models import Product
@@ -49,7 +50,9 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     update = models.DateTimeField(auto_now=True, verbose_name='Обновлен')
     paid = models.BooleanField(default=False, verbose_name='Оплачен')
+    post_delivery = models.CharField(max_length=150, verbose_name='Служба доставки', choices=POST_CHOICES)
     payment_method = models.CharField(max_length=100, verbose_name='Способ оплаты', choices=PAYMENT_CHOICES)
+    post_comments = models.TextField(verbose_name='Комментарий', blank=True)
     invoice = models.OneToOneField(Invoice, blank=True, null=True, related_name='order', verbose_name='Invoice')
 
     class Meta:

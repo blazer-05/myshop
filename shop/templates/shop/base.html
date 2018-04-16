@@ -119,13 +119,13 @@ $(document).ready(function() {
     </footer>
 
     <script src="{% static 'plugins/owl/owl.carousel.min.js' %}"></script>
-    <script> {% comment %}Настройки слайдеров менять здесь two-это слайдер с товаром, one-слайдер с видео{% endcomment %}
+    <script> {% comment %}Настройки слайдеров менять здесь two-это слайдер с товаром, one-слайдер с видео https://owlcarousel2.github.io/OwlCarousel2/docs/api-options.html{% endcomment %}
         $(document).ready(function() {
             var one = $("#owl-one");
             var two = $("#owl-two");
         one.owlCarousel({
             loop:true,
-            autoplay:true,
+            autoplay:false,
             autoplayTimeout:5000,
             nav:false,
             margin:35,
@@ -146,7 +146,7 @@ $(document).ready(function() {
         });
         two.owlCarousel({
             loop:true,
-            autoplay:true,
+            autoplay:false,
             autoplayTimeout:5000,
             nav:false,
             margin:35,

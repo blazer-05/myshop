@@ -1,0 +1,114 @@
+{% load staticfiles %}
+
+
+
+
+
+<link rel="stylesheet" href="{% static 'modalwin/css/style-modal.css' %}">
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<!-- Вызов модального окна для кнопки "Купить в 1 клик" -->
+<div style="text-align: center;">
+    <a href="#win1" class="quick_order_button"><img src="{% static 'img/f-btn-contact-1.png' %}" /></a>
+</div>
+<!-- / Вызов модального окна для кнопки "Купить в 1 клик" -->
+
+    <!-- Модальное окно для кнопки "Купить в 1 клик" -->
+
+    <div align="center">
+
+        <div class="container">
+
+            <a href="#x" class="overlay" id="win1"></a>
+            <div class="popup">
+                <div class="pic-left">
+                    <a href="http://webformyself.com/aff/dobrovoi/practicerubber"><img
+                            src="http://dbmast.ru/wp-content/uploads/2012/11/DVD009.jpg"
+                            alt="Практический курс резиновой верстки"/></a>
+                </div>
+
+                    <h2>Форма быстрого заказа</h2>
+                    <form class="quick_order_form" action="{% url 'orders:one_click' %}" method="post" id="contact">
+                        {% csrf_token %}
+                        <fieldset>
+                        <input type='hidden' name='product' id='id_product'>
+                        </fieldset>
+                        <fieldset>
+                        <input type='hidden' name='quantity' id='id_quantity'>
+                        </fieldset>
+                        <fieldset>
+                        <input type='hidden' name='diameter' id='id_diameter'>
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="post_name" name="post_name" tabindex="1" placeholder="Фамилия Имя Отчество" required autofocus />
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="post_email" name="post_email" tabindex="2" placeholder="Ваш e-mail" required />
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="post_phone" name="post_phone" tabindex="3" placeholder="Ваш телефон" required />
+                        </fieldset>
+                        <fieldset>
+                            <input type="text" id="post_adres" name="post_adres" tabindex="4" placeholder="Ваш адрес" required />
+                        </fieldset>
+                        <fieldset>
+                            <select type="select" name="post_delivery" id="post_delivery" tabindex="5" required>
+                                <option value="" selected="">Выберите грузоперевозчика:</option>
+
+                                <option value="post_russia">Почта России</option>
+
+                                <option value="post_cdek">Служба доставки СДЭК</option>
+
+                                <option value="post_dpd">Служба доставки DPD</option>
+
+                                <option value="post_kit">Служба доставки KIT</option>
+
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <select type="select" name="payment_method" id="id_payment_method" tabindex="6" required>
+                                <option value="" selected="">Выберите способ оплаты:</option>
+
+                                <option value="nal">Наличными при получении</option>
+
+                                <option value="bank">Оплата картой банка</option>
+
+                                <option value="walletone">Онлайн оплата(walletone)</option>
+
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <textarea name="post_comments" placeholder="Примечание" tabindex="7" required></textarea>
+                        </fieldset>
+                        <ul class="checkbox_base">
+                            <input type="checkbox" checked>Разрешаю обработку, хранение и любые операции с персональными
+                            данными
+                        </ul>
+                        <div class="g-recaptcha" data-sitekey="6Ldq9jEUAAAAAM0bqU7rOTTtsCKVJbope4LPfHQQ"></div><br>
+                        <fieldset>
+                            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Отправить
+                            </button>
+                        </fieldset>
+
+                    </form>
+                    <a class="close" title="Закрыть" href="#close"></a>
+
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$('a.quick_order_button').click(function(){
+    var parent = $(this).closest('div.grid-item');
+    var id_product = parent.find('form').attr('action').match(/^\/cart\/add\/(\d+)\//)[1];
+    var id_quantity = parent.find('#id_quantity').val();
+    var id_diameter = parent.find('#id_diameter').val();
+
+    var quick_form = $('.quick_order_form');
+    quick_form.find('#id_product').val(id_product);
+    quick_form.find('#id_quantity').val(id_quantity);
+    quick_form.find('#id_diameter').val(id_diameter);
+})
+</script>
+    <!-- / Конец Модальное окно для кнопки "Купить в 1 клик" -->
+{##}

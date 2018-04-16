@@ -362,35 +362,29 @@
 
             <a href="#x" class="overlay" id="win1"></a>
             <div class="popup">
-                <div class="pic-left">
-                    <a href="http://webformyself.com/aff/dobrovoi/practicerubber"><img
-                            src="http://dbmast.ru/wp-content/uploads/2012/11/DVD009.jpg"
-                            alt="Практический курс резиновой верстки"/></a>
-                </div>
+
 
                     <h2>Форма быстрого заказа</h2>
-                    <form class="quick_order_form" action="" method="post" id="contact">
+                <form action="" method="post">
+                <div class="pic-left">
+                    <div id="quick_order_product"></div>
+                </div>
+                    <div class="quick_order_form" id="contact">
                         {% csrf_token %}
                         <fieldset>
                         <input type='hidden' name='product' id='id_product'>
                         </fieldset>
                         <fieldset>
-                        <input type='hidden' name='quantity' id='id_quantity'>
+                            <input type="text" id="myname" name="myname" tabindex="1" placeholder="Фамилия Имя Отчество" required autofocus />
                         </fieldset>
                         <fieldset>
-                        <input type='hidden' name='diameter' id='id_diameter'>
+                            <input type="text" id="email" name="email" tabindex="2" placeholder="Ваш e-mail" required />
                         </fieldset>
                         <fieldset>
-                            <input type="text" id="post_name" name="post_name" tabindex="1" placeholder="Фамилия Имя Отчество" required autofocus />
+                            <input type="text" id="phone" name="phone" tabindex="3" placeholder="Ваш телефон" required />
                         </fieldset>
                         <fieldset>
-                            <input type="text" id="post_email" name="post_email" tabindex="2" placeholder="Ваш e-mail" required />
-                        </fieldset>
-                        <fieldset>
-                            <input type="text" id="post_phone" name="post_phone" tabindex="3" placeholder="Ваш телефон" required />
-                        </fieldset>
-                        <fieldset>
-                            <input type="text" id="post_adres" name="post_adres" tabindex="4" placeholder="Ваш адрес" required />
+                            <input type="text" id="addres" name="addres" tabindex="4" placeholder="Ваш адрес" required />
                         </fieldset>
                         <fieldset>
                             <select type="select" name="post_delivery" id="post_delivery" tabindex="5" required>
@@ -431,7 +425,8 @@
                             </button>
                         </fieldset>
 
-                    </form>
+                    </div>
+                </form>
                     <a class="close" title="Закрыть" href="#close"></a>
 
             </div>
@@ -447,8 +442,22 @@ $('a.quick_order_button').click(function(){
 
     var quick_form = $('.quick_order_form');
     quick_form.find('#id_product').val(id_product);
-    quick_form.find('#id_quantity').val(id_quantity);
-    quick_form.find('#id_diameter').val(id_diameter);
+
+    var els = ['.item-thum', '.item-title', '.item-price', 'form'];
+    var quick_order_product = $('#quick_order_product');
+    var width = parent.closest('div.owl-item').width();
+    quick_order_product.css('width', width);
+    quick_order_product.html('');
+    for(var i in els) {
+        var e = parent.find(els[i]);
+        if(els[i] === 'form') {
+            e = $("<div></div>").html(e.html())
+        }
+        quick_order_product.append(e.clone())
+    }
+    quick_order_product.find('#id_quantity').val(id_quantity);
+    quick_order_product.find('#id_diameter').val(id_diameter);
+
 })
 </script>
     <!-- / Конец Модальное окно для кнопки "Купить в 1 клик" -->

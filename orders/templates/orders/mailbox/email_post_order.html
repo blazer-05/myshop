@@ -272,14 +272,14 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 					<td>
 					  <h1>Поступил быстрый заказ ! </h1>
 					  <p class="callout">
-										ФИО: {{ post_name }}<br />
-										Адрес: {{ post_adres }}<br />
-										Почта: {{ post_email }}<br />
-										Телефон: {{ post_phone }}<br />
+										ФИО: {{ myname }}<br />
+										Адрес: {{ addres }}<br />
+										Почта: {{ email }}<br />
+										Телефон: {{ phone }}<br />
 										Служба доставки: {{ post_delivery }}<br />
                                         Метод оплаты: {{ payment_method }}<br />
 										Примечание: {{ post_comments }}<br />
-										Дата заказа: {{ base.post_created }}
+										Дата заказа: {{ OrderItem.created }}
 					</p>
 
 					  <!-- /Callout Panel -->
