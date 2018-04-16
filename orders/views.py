@@ -74,6 +74,8 @@ def PostOrderCreate(request):
 
 '''
 
+def FormView(request, product_pk):
+    pass
 
 def OrderCreate(request):
     cart = Cart(request)

@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^admin/order/(?P<order_id>\d+)/$', views.AdminOrderDetail, name='AdminOrderDetail'),
     # url(r'^admin/order/(?P<order_id>\d+)/pdf/$', views.AdminOrderPDF, name='AdminOrderPDF'),
     url(r'^contact/$', views.contact, name='contact'),
-    #url(r'^one_click/$', views.PostOrderCreate, name='one_click'),
+    url(r'^orders/quick/(?P<product_pk>\d+)/$', views.FormView),
     url(r'^thanks/$', views.thanks, name='thanks'),
     url(r'^success/$', views.kassa, name='success'),
 ]

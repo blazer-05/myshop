@@ -64,6 +64,9 @@ class Product(models. Model):
     def get_absolute_url(self):
         return reverse('shop:ProductDetail', args=[self.id, self.slug])
 
+    def get_quick_order_url(self):
+        return reverse('orders:quick', kwargs={'product_pk': self.pk})
+
     # Расчет скидки
     def get_sale(self):
         '''Расчитать стоимость со скидкой'''
