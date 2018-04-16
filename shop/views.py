@@ -89,8 +89,8 @@ def index(request, category_slug=None):
             addres = form.cleaned_data['addres']
             postal_code = form.cleaned_data['postal_code']
             payment_method = form.cleaned_data['payment_method']
-            post_delivery = form.changed_data['post_delivery']
-            post_comments = form.changed_data['post_comments']
+            post_delivery = form.cleaned_data['post_delivery']
+            post_comments = form.cleaned_data['post_comments']
             recepients = ['blazer-05@mail.ru']
             order = form.save()
             for item in cart:
@@ -122,7 +122,7 @@ def index(request, category_slug=None):
             # Асинхронная отправка сообщения
             #OrderCreated.delay(order.id)
             request.session['order_id'] = order.id
-            return redirect('/order/success/')
+            return redirect('/order/thanks/')
     else:
         form = OrderCreateForm()
     return render(request, 'shop/index.html', {

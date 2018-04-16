@@ -387,7 +387,10 @@
                             <input type="text" id="addres" name="addres" tabindex="4" placeholder="Ваш адрес" required />
                         </fieldset>
                         <fieldset>
-                            <select type="select" name="post_delivery" id="post_delivery" tabindex="5" required>
+                            <input type="text" id="postal_code" name="postal_code" tabindex="5" placeholder="Почтовый индекс" required />
+                        </fieldset>
+                        <fieldset>
+                            <select type="select" name="post_delivery" id="post_delivery" tabindex="6" required>
                                 <option value="" selected="">Выберите грузоперевозчика:</option>
 
                                 <option value="post_russia">Почта России</option>
@@ -401,7 +404,7 @@
                             </select>
                         </fieldset>
                         <fieldset>
-                            <select type="select" name="payment_method" id="id_payment_method" tabindex="6" required>
+                            <select type="select" name="payment_method" id="id_payment_method" tabindex="7" required>
                                 <option value="" selected="">Выберите способ оплаты:</option>
 
                                 <option value="nal">Наличными при получении</option>
@@ -413,7 +416,7 @@
                             </select>
                         </fieldset>
                         <fieldset>
-                            <textarea name="post_comments" placeholder="Примечание" tabindex="7" required></textarea>
+                            <textarea name="post_comments" placeholder="Примечание" tabindex="8" required></textarea>
                         </fieldset>
                         <ul class="checkbox_base">
                             <input type="checkbox" checked>Разрешаю обработку, хранение и любые операции с персональными
