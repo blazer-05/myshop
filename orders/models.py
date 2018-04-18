@@ -21,25 +21,6 @@ PAYMENT_CHOICES = (
 ("walletone", "Онлайн оплата(walletone)")
 )
 
-class PostOrder(models.Model):
-    post_name = models.CharField(max_length=150, verbose_name='ФИО')
-    post_email = models.EmailField(max_length=100, verbose_name='e-mail', blank=True)
-    post_phone = models.CharField(max_length=100, verbose_name='Телефон')
-    post_adres = models.CharField(max_length=150, verbose_name='Адрес')
-    post_delivery = models.CharField(max_length=150, verbose_name='Служба доставки', choices=POST_CHOICES)
-    payment_method = models.CharField(max_length=100, verbose_name='Способ оплаты', choices=PAYMENT_CHOICES)
-    post_comments = models.TextField(verbose_name='Комментарий')
-    post_created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
-    post_update = models.DateTimeField(auto_now=True, verbose_name='Изменен')
-
-    class Meta:
-        verbose_name = 'Быстрый заказ'
-        verbose_name_plural = 'Быстрые заказы'
-        ordering = ('-post_created',)
-
-    def __unicode__(self):
-        return self.post_name
-
 class Order(models.Model):
     name_tems = models.CharField(max_length=150, verbose_name='Заголовок темы', blank=True)
     myname = models.CharField(max_length=150, verbose_name='ФИО')

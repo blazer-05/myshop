@@ -7,7 +7,7 @@ import six
 import codecs
 import datetime
 from django.contrib import admin
-from orders.models import Order, OrderItem, MailBox, PostOrder
+from orders.models import Order, OrderItem, MailBox
 
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
@@ -61,9 +61,6 @@ class OrderAdmin(admin.ModelAdmin):
 class MailBoxAdmin(admin.ModelAdmin):
     list_display = ['subject', 'sender', 'phone', 'diament', 'adress', 'description', 'datetime']
 
-class PostOrderAdmin(admin.ModelAdmin):
-    list_display = ['post_name', 'post_email', 'post_phone', 'post_adres', 'post_delivery', 'payment_method', 'post_comments', 'post_created', 'post_update']
 
 admin.site.register(Order, OrderAdmin)
 admin.site.register(MailBox, MailBoxAdmin)
-admin.site.register(PostOrder, PostOrderAdmin)

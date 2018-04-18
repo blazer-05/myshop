@@ -227,13 +227,17 @@ height: 100%;
 
 #contact {
   width: 330px;
-  /*height: 745px;*/
+  height: 740px;
   margin-left: 450px;
-  margin-top: 10px;
+  margin-top: 2px;
   background: #F9F9F9;
   padding: 25px;
   /*margin: 150px 0;*/
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.popup{
+  height: 795px;
 }
 
 #contact h3 {
@@ -337,6 +341,13 @@ fieldset {
   color: #888;
 }
 
-#quick_order_product .more {display: none}
+/*Эти стили убирают лейблы в модальном окне в левом правом углу*/
+#quick_order_product .more,
+#quick_order_product .sale,
+#quick_order_product .new,
+#quick_order_product .vip,
+#quick_order_product .pod_zakaz,
+#quick_order_product .akciya {display: none}
 #quick_order_product .item-action-btn {display: none}
+
 /* /Форма заказа в один клик в модальном окне*/

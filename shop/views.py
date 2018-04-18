@@ -4,13 +4,14 @@ from __future__ import unicode_literals
 from django.conf import settings
 
 from django.core.mail import EmailMessage
+from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import render_to_string
 
 from cart.cart import Cart
-from orders.forms import OrderCreateForm
+from orders.forms import OrderCreateForm, OrderItemForm
 from orders.models import OrderItem
 
 from shop.models import Category, Product, Description, Albom
@@ -66,6 +67,7 @@ def ProductDetail(request, id, slug):
 
 # Главная страница
 @validate_captcha
+@transaction.atomic
 def index(request, category_slug=None):
     category = None
     categories = Category.objects.all()
@@ -82,39 +84,29 @@ def index(request, category_slug=None):
     if request.method == 'POST':
         cart = Cart(request)
         form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            myname = form.cleaned_data['myname']
-            email = form.cleaned_data['email']
-            phone = form.cleaned_data['phone']
-            addres = form.cleaned_data['addres']
-            postal_code = form.cleaned_data['postal_code']
-            payment_method = form.cleaned_data['payment_method']
-            post_delivery = form.cleaned_data['post_delivery']
-            post_comments = form.cleaned_data['post_comments']
-            recepients = ['blazer-05@mail.ru']
+        order_item_form = OrderItemForm(request.POST)
+        if form.is_valid() and order_item_form.is_valid():
             order = form.save()
-            for item in cart:
-                OrderItem.objects.create(order=order, product=item['product'],
-                                         price=item['price'],
-                                         quantity=item['quantity'],
-                                         diameter=item['diameter'],
-                                         )
+            order_item_form.instance.order = order
+            order_item_form.save()
+
             context = {
-                'myname': myname,
-                'email': email,
-                'addres': addres,
-                'postal_code': postal_code,
+                'myname': order.myname,
+                'email': order.email,
+                'addres': order.addres,
+                'postal_code': order.postal_code,
                 'order': order,
                 'cart': cart,
                 'form': form,
-                'phone': phone,
-                'payment_method': payment_method,
-                'post_delivery': post_delivery,
-                'post_comments': post_comments,
+                'phone': order.phone,
+                'payment_method': order.payment_method,
+                'post_delivery': order.post_delivery,
+                'post_comments': order.post_comments,
             }
 
+            recepients = ['blazer-05@mail.ru']
             message = render_to_string('orders/mailbox/email_post_order.html', context)
-            email = EmailMessage((myname), message, 'blazer-05@mail.ru', recepients)
+            email = EmailMessage((order.myname), message, 'blazer-05@mail.ru', recepients)
             email.content_subtype = 'html'
             email.send()
 

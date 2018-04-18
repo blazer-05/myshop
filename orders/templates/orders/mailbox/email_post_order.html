@@ -279,20 +279,22 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
                             Телефон: {{ phone }}<br/>
                             Индекс: {{ postal_code }}<br/>
 
-                        <p class="callout">{% for item in cart %}<br>
-                            Товар: {{ item.product.name }}<br>
-                            Диаметр: {{ item.diameter }}<br>
-                            Количество: {{ item.quantity }} шт.<br>
-                            Итого: {{ item.total_price|floatformat }} руб<br>
-                        {% endfor %}&nbsp;</p>
+                        <p class="callout">
+                            {% for item in order.Items.all %}
+                                <br>
+                                Товар: {{ item.product.name }}<br>
+                                Диаметр: {{ item.diameter }}<br>
+                                Количество: {{ item.quantity }} шт.<br>
+                                Итого: {{ item.get_cost|floatformat }} руб<br>
+                            {% endfor %}
+                            &nbsp;
+                        </p>
 
-                        <p class="callout">На сумму всего: {{ cart.get_total_price|floatformat }} руб<br>
+                        <p class="callout">
+                            На сумму всего: {{ order.get_total_cost|floatformat }} руб<br>
                             Способ оплаты: <b>{{ order.get_payment_method_display }}</b><br>
-                            Дата заказа: {{ order.created }}<br>
-
-                            Служба доставки: {{ post_delivery }}<br/>
-                            Метод оплаты: {{ payment_method }}<br/>
-                            Примечание: {{ post_comments }}<br/>
+                            Служба доставки: {{ order.get_post_delivery_display }}<br/>
+                            Примечание: {{ order.get_post_comments_display }}<br/>
                             Дата заказа: {{ order.created }}
                         </p>
 

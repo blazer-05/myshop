@@ -1,8 +1,17 @@
 # -*- coding: UTF-8 -*-
 from django import forms
 from django.forms import ModelForm
-from .models import Order, MailBox, PostOrder
+from .models import Order, MailBox, OrderItem
 
+class OrderItemForm(forms.ModelForm):
+    class Meta:
+        model = OrderItem
+        fields = 'product', 'quantity', 'diameter'
+
+    def save(self, commit=True):
+        product = self.cleaned_data.get('product')
+        self.instance.price = product.get_sale()
+        return super(OrderItemForm, self).save(commit)
 
 class OrderCreateForm(forms.ModelForm):
     class Meta:
@@ -14,7 +23,7 @@ class OrderCreateForm(forms.ModelForm):
                   'postal_code',
                   'payment_method',
                   'post_delivery',
-                  'post_comments'
+                  'post_comments',
                   ]
 
 class ContactForm(ModelForm):
@@ -28,14 +37,3 @@ class ContactForm(ModelForm):
                   'description'
                   ]
 
-class PostOrderForm(forms.ModelForm):
-    class Meta:
-        model = PostOrder
-        fields = ['post_name',
-                  'post_email',
-                  'post_phone',
-                  'post_adres',
-                  'post_delivery',
-                  'payment_method',
-                  'post_comments',
-                  ]

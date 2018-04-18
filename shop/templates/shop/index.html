@@ -278,6 +278,12 @@
                                    </div>
                                     {% endif %}
 
+                                    {% if product.pod_zakaz %}
+                                   <div class="pod_zakaz">
+                                    Товар под заказ
+                                   </div>
+                                   {% endif %}
+
                                <a href="{{ product.get_absolute_url }}">
                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image-icon-4.png"%}{% endif %}" >
                                </a>
@@ -365,7 +371,7 @@
 
 
                     <h2>Форма быстрого заказа</h2>
-                <form action="" method="post">
+                <form action="{% url 'shop:index' %}" method="post">
                 <div class="pic-left">
                     <div id="quick_order_product"></div>
                 </div>

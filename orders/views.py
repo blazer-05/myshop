@@ -14,68 +14,14 @@ from walletone.forms import WalletOnePaymentForm
 from walletone.models import WalletOneSuccessPayment
 
 from interkassa_merchant.forms import PaymentRequestForm
-from .models import OrderItem, Order, MailBox, PostOrder
-from .forms import OrderCreateForm, ContactForm, PostOrderForm
+from .models import OrderItem, Order, MailBox
+from .forms import OrderCreateForm, ContactForm
 from cart.cart import Cart
 from .tasks import OrderCreated
 from interkassa_merchant.models import *
 
-from shop.models import Product
 
 # import weasyprint
-'''
-@validate_captcha
-def PostOrderCreate(request):
-    product = Product.objects.all()
-    if request.method == 'POST':
-        form = PostOrderForm(request.POST)
-        if form.is_valid():
-            post_name = form.cleaned_data['post_name']
-            post_email = form.cleaned_data['post_email']
-            post_phone = form.cleaned_data['post_phone']
-            post_adres = form.cleaned_data['post_adres']
-            post_delivery = form.cleaned_data['post_delivery']
-            payment_method = form.cleaned_data['payment_method']
-            post_comments = form.cleaned_data['post_comments']
-            recepients = ['blazer-05@mail.ru']
-
-            base = PostOrder.objects.create(
-                post_name=post_name,
-                post_email=post_email,
-                post_phone=post_phone,
-                post_adres=post_adres,
-                post_delivery=post_delivery,
-                payment_method=payment_method,
-                post_comments=post_comments,
-            )
-            context = {
-                'post_name': post_name,
-                'post_email': post_email,
-                'post_phone': post_phone,
-                'post_adres': post_adres,
-                'post_delivery': post_delivery,
-                'payment_method': payment_method,
-                'post_comments': post_comments,
-                'base': base,
-            }
-            message = render_to_string('orders/mailbox/email_post_order.html', context)
-            email = EmailMessage('Поступил быстрый заказ', message, 'blazer-05@mail.ru', recepients)
-            email.content_subtype = 'html'
-            email.send()
-            # Переходим на другую страницу, если сообщение отправлено
-            return HttpResponseRedirect('/order/thanks/')
-    else:
-        form = PostOrderForm()
-    return render(request, 'orders/order/post_order_create.html', {
-        'form': form,
-        'product': product,
-        'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY,
-    })
-
-'''
-
-def FormView(request, product_pk):
-    pass
 
 def OrderCreate(request):
     cart = Cart(request)
@@ -121,7 +67,8 @@ def OrderCreate(request):
             # return render(request, 'orders/order/created.html', {'order': order,
             #                                                      'cart': cart,
             #                                                      'form': form,})
-    form = OrderCreateForm()
+    else:
+        form = OrderCreateForm()
     return render(request, 'orders/order/create.html', {'cart': cart,
                                                         'form': form,})
 
@@ -222,72 +169,3 @@ def contact(request):
 def thanks(request):
     thanks = 'thanks'
     return render(request, 'orders/mailbox/thanks.html', {'thanks': thanks})
-
-
-'''
-
-def OrderCreate(request):
-    cart = Cart(request)
-    if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            order = form.save()
-            for item in cart:
-                OrderItem.objects.create(order=order, product=item['product'],
-                                         price=item['price'],
-                                         quantity=item['quantity'],)
-
-            cart.clear()
-            # Асинхронная отправка сообщения
-            OrderCreated.delay(order.id)
-            request.session['order_id'] = order.id
-            return redirect(reverse('payment:process'))
-
-    form = OrderCreateForm()
-    return render(request, 'orders/order/create.html', {'cart': cart,
-                                                        'form': form})
-
-
-def OrderCreate(request):
-    cart = Cart(request)
-    if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            addres = form.cleaned_data['addres']
-            postal_code = form.cleaned_data['first_name']
-            city = form.cleaned_data['city']
-            order = form.save()
-            for item in cart:
-                OrderItem.objects.create(order=order, product=item['product'],
-                                         price=item['price'],
-                                         quantity=item['quantity'],
-                                         first_name = first_name,
-                                         last_name = last_name,
-                                         email = email,
-                                         addres = addres,
-                                         postal_code = postal_code,
-                                         city = city,
-                                         )
-            context = {
-                'first_name': first_name,
-                'last_name': last_name,
-                'email': email,
-                'addres': addres,
-                'postal_code': postal_code,
-                'city': city,
-            }
-
-            cart.clear()
-            # Асинхронная отправка сообщения
-            OrderCreated.delay(order.id)
-            request.session['order_id'] = order.id
-            return redirect(reverse('payment:process'))
-
-    form = OrderCreateForm()
-    return render(request, 'orders/order/create.html', {'cart': cart,
-                                                        'form': form,})
-
-'''
