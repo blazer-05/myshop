@@ -339,14 +339,19 @@
                                                 На данный момент акции нет.
                                             </div>
                                         {% endif %}
-
+                                 {% if product.pod_zakaz %}
+                                    {% else %}
                                     <input type="image" src="{% static 'img/item-action-btn.png' %}">
+                                 {% endif %}
                                  </div>
                             </form>
                                 <!-- Вызов модального окна для кнопки "Купить в 1 клик" -->
+                            {% if product.pod_zakaz %}
+                            {% else %}
                                 <div style="text-align: center;">
                                     <a href="#win1" class="quick_order_button"><img src="{% static 'img/f-btn-contact-1.png' %}" /></a>
                                 </div>
+                            {% endif %}
                                 <!-- / Вызов модального окна для кнопки "Купить в 1 клик" -->
                             </div>
                             {% endfor %}
@@ -417,7 +422,7 @@
 
                                 <option value="bank">Оплата картой банка</option>
 
-                                <option value="walletone">Онлайн оплата(walletone)</option>
+                                <option type="wall" value="walletone">Онлайн оплата(walletone)</option>
 
                             </select>
                         </fieldset>
@@ -428,7 +433,7 @@
                             <input type="checkbox" checked>Разрешаю обработку, хранение и любые операции с персональными
                             данными
                         </ul>
-                        <div class="g-recaptcha" data-sitekey="6Ldq9jEUAAAAAM0bqU7rOTTtsCKVJbope4LPfHQQ"></div><br>
+{#                        <div class="g-recaptcha" data-sitekey="6Ldq9jEUAAAAAM0bqU7rOTTtsCKVJbope4LPfHQQ"></div><br>#}
                         <fieldset>
                             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Отправить
                             </button>

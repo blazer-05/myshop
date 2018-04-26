@@ -25,7 +25,9 @@ class Category(models.Model):
 
 # Модель продукта
 class Product(models. Model):
-    category = models.ForeignKey(Category, related_name='product', verbose_name='Категория')
+    category = models.ForeignKey(Category, related_name='product', verbose_name='Категория',
+                                 on_delete=models.CASCADE)# Если указать параметр on_delete=models.SET_NULL, null=True, то при удалении категории будет удалена сама категория.
+                                 # Если указать параметр on_delete=models.CASCADE, то будет удалена категория и все что с ней связано(посты) и связанные объекты. Можно этот параметр не прописывать - это по умолчанию в джанго.
     name = models.CharField(max_length=200, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=200, db_index=True, verbose_name='Транслит')
     image = models.ImageField(upload_to='products/%y/%m/%d/', blank=True, verbose_name='Изображение товара')

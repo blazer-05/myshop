@@ -190,6 +190,21 @@
                         <input type="text" id="email" name="email" placeholder="Ваш email" required />
                         <input type="text" id="postal_code" name="postal_code" placeholder="Ваш почтовый индекс" required />
                         <input type="text" id="addres" name="addres" placeholder="Ваш адрес" required />
+                        <fieldset>
+                            <select type="select" name="post_delivery" id="post_delivery" tabindex="6" required>
+                                <option value="" selected="">Выберите грузоперевозчика:</option>
+
+                                <option value="post_russia">Почта России</option>
+
+                                <option value="post_cdek">Служба доставки СДЭК</option>
+
+                                <option value="post_dpd">Служба доставки DPD</option>
+
+                                <option value="post_kit">Служба доставки KIT</option>
+
+                            </select>
+                        </fieldset>
+                        <textarea name="post_comments" placeholder="Примечание" tabindex="8" required></textarea>
 
                         <ul class="checkbox_dannye">
                             <input type="checkbox" checked>Разрешаю обработку, хранение и любые операции с персональными данными

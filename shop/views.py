@@ -23,6 +23,8 @@ from g_recaptcha.validate_recaptcha import validate_captcha
 # Выводим товары
 
 # Страница с товарами - каталог
+#@validate_captcha
+@transaction.atomic
 def ProductList(request, category_slug=None):
     category = None
     categories = Category.objects.all()
@@ -44,11 +46,56 @@ def ProductList(request, category_slug=None):
         # If page is out of range (e.g. 9999), deliver last page of results.
         products = paginator.page(paginator.num_pages)
 
+    if request.method == 'POST':
+        cart = Cart(request)
+        form = OrderCreateForm(request.POST)
+        order_item_form = OrderItemForm(request.POST)
+        if form.is_valid() and order_item_form.is_valid():
+            order = form.save()
+            order_item_form.instance.order = order
+            order_item_form.save()
+
+            context = {
+                'myname': order.myname,
+                'email': order.email,
+                'addres': order.addres,
+                'postal_code': order.postal_code,
+                'order': order,
+                'cart': cart,
+                'form': form,
+                'phone': order.phone,
+                'payment_method': order.payment_method,
+                'post_delivery': order.post_delivery,
+                'post_comments': order.post_comments,
+            }
+
+            recepients = ['blazer-05@mail.ru']
+            message = render_to_string('orders/mailbox/email_post_order.html', context)
+            email = EmailMessage((order.myname), message, 'blazer-05@mail.ru', recepients)
+            email.content_subtype = 'html'
+            email.send()
+
+            cart.clear()
+            # Асинхронная отправка сообщения
+            #OrderCreated.delay(order.id)
+            request.session['order_id'] = order.id
+
+            if order.payment_method == 'walletone':
+                return redirect('/order/success/')
+            else:
+                return redirect('/order/thanks/')
+
+    else:
+        form = OrderCreateForm()
+
     return render(request, 'shop/product/list.html', {'category': category,
                                                       'categories': categories,
                                                       'products': products,
                                                       'cart_product_form': cart_product_form,
-                                                      'desc': desc,})
+                                                      'desc': desc,
+                                                      'form': form,
+                                                      #'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY,
+                                                      })
 
 
 # Страница товара
@@ -66,13 +113,13 @@ def ProductDetail(request, id, slug):
                                                          })
 
 # Главная страница
-@validate_captcha
+#@validate_captcha
 @transaction.atomic
 def index(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     cart_product_form = CartAddProductForm()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.filter(available=True).order_by()[0:20]
     v_slider = Video_slider.objects.filter(is_activ=True)
     video = Video_tube.objects.filter(is_active=True)
     if category_slug:
@@ -114,7 +161,11 @@ def index(request, category_slug=None):
             # Асинхронная отправка сообщения
             #OrderCreated.delay(order.id)
             request.session['order_id'] = order.id
-            return redirect('/order/thanks/')
+
+            if order.payment_method == 'walletone':
+                return redirect('/order/success/')
+            else:
+                return redirect('/order/thanks/')
     else:
         form = OrderCreateForm()
     return render(request, 'shop/index.html', {
@@ -125,7 +176,7 @@ def index(request, category_slug=None):
         'v_slider': v_slider,
         'video': video,
         'form': form,
-        'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY,
+        #'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY,
     })
 
 def video(request):

@@ -33,8 +33,10 @@ def OrderCreate(request):
             phone = form.cleaned_data['phone']
             addres = form.cleaned_data['addres']
             postal_code = form.cleaned_data['postal_code']
-            recepients = ['blazer-05@mail.ru']
             payment_method = form.cleaned_data['payment_method']
+            post_delivery = form.cleaned_data['post_delivery']
+            post_comments = form.cleaned_data['post_comments']
+            recepients = ['blazer-05@mail.ru']
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'],
@@ -52,6 +54,8 @@ def OrderCreate(request):
                 'form': form,
                 'phone': phone,
                 'payment_method': payment_method,
+                'post_delivery': post_delivery,
+                'post_comments': post_comments,
             }
 
             message = render_to_string('orders/mailbox/email-2.html', context)
